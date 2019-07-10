@@ -20,6 +20,8 @@
             <button routerLink="/register" mat-button color="warn">Register</button>
         </form>
     </div>
+    <particles [height]="this.dataservice.particles.height" [params]="this.dataservice.particles.params"
+               [style]="this.dataservice.particles.style" [width]="this.dataservice.particles.width"></particles>
     <svg fill="none" height="280" id="deco_leftBot" viewBox="0 0 329 280" width="329"
          xmlns="http://www.w3.org/2000/svg">
         <path d="M140.5 133C111.337 55.2325 42.9639 23.7908 0 0V280H329C261.629 276.007 169 209 140.5 133Z"
