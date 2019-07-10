@@ -8,12 +8,17 @@ import {AppComponent} from './app.component';
 import {ClientAreaComponent} from './components/client-area/client-area.component';
 import {LoginComponent} from './components/login/login.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RegisterComponent } from './components/register/register.component';
+import { DashboardComponent } from './components/client-area/dashboard/dashboard.component';
+import {AuthGuard} from './services/auth.guard';
 
 @NgModule({
     declarations: [
         AppComponent,
         ClientAreaComponent,
-        LoginComponent
+        LoginComponent,
+        RegisterComponent,
+        DashboardComponent
     ],
     imports: [
         BrowserModule,
@@ -22,7 +27,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
         MaterialModule,
         BrowserAnimationsModule
     ],
-    providers: [],
+    providers: [AuthGuard],
     bootstrap: [AppComponent]
 })
 export class AppModule {

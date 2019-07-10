@@ -1,3 +1,7 @@
+/* GLOBAL VARIABLES */
+$gradient_start: #f5b042; // AD00FF
+$gradient_end: #FF0000;
+
 @import '~@angular/material/theming';
 @include mat-core();
 
@@ -7,6 +11,10 @@ $instantGrade-warn:    mat-palette($mat-deep-orange);
 $instantGrade-theme: mat-light-theme($instantGrade-primary, $instantGrade-accent, $instantGrade-warn);
 @include angular-material-theme($instantGrade-theme);
 
+$dark-primary: mat-palette($mat-blue-grey);
+$dark-accent:  mat-palette($mat-amber, A200, A100, A400);
+$dark-warn:    mat-palette($mat-deep-orange);
+$dark-theme:   mat-dark-theme($dark-primary, $dark-accent, $dark-warn);
 
 /* GLOBAL STYLE */
 @import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
@@ -16,4 +24,9 @@ body, html {
   height: 100%;
   margin: 0;
   font-family: Roboto;
+}
+.dark{
+  @include angular-material-theme($dark-theme);
+  background-color: #1C1C1C;
+  color: white;
 }

@@ -1,5 +1,5 @@
-<div id="pageWrapper">
-    <div id="loginContainer">
+<div id="pageWrapper" [class.dark]="this.dataservice.darkmode">
+    <div id="authContainer">
         <div class="title">
             <span>Login</span>
             <div class="gradientUnderline"></div>
@@ -17,7 +17,7 @@
             </mat-form-field>
             <button mat-raised-button color="primary">Login</button>
             <br>
-            <button mat-button color="warn" routerLink="register">Register</button>
+            <button routerLink="/register" mat-button color="warn">Register</button>
         </form>
     </div>
     <svg fill="none" height="280" id="deco_leftBot" viewBox="0 0 329 280" width="329"

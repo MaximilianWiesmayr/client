@@ -7,7 +7,7 @@
 /* Auth Section */
 #authContainer {
   width: 25vw;
-  height: 40vh;
+  height: 65vh;
   margin: 0;
   position: absolute;
   top: 50%;
@@ -35,6 +35,7 @@
   height: 7%;
   background: linear-gradient(to right, $gradient_start, $gradient_end);
 }
+
 .info {
   width: 100%;
   text-align: center;
@@ -72,6 +73,11 @@
   bottom: 0;
   width: 329px;
   height: 280px;
+
+  /*
+  width: 329px;
+  height: 280px;
+   */
 }
 
 #deco_leftBot, #deco_rightTop, .gradient.stop1 {
