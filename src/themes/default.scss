@@ -13,7 +13,7 @@ $instantGrade-theme: mat-light-theme($instantGrade-primary, $instantGrade-accent
 
 $dark-primary: mat-palette($mat-blue-grey);
 $dark-accent:  mat-palette($mat-amber, A200, A100, A400);
-$dark-warn:    mat-palette($mat-deep-orange);
+$dark-warn:    mat-palette($mat-deep-orange, 400);
 $dark-theme:   mat-dark-theme($dark-primary, $dark-accent, $dark-warn);
 
 /* GLOBAL STYLE */
@@ -25,8 +25,13 @@ body, html {
   margin: 0;
   font-family: Roboto;
 }
+/* DARK MODE SETTINGS */
 .dark{
   @include angular-material-theme($dark-theme);
   background-color: #1C1C1C;
   color: white;
+}
+
+.dark .highlight{
+  color: #ff7357;
 }

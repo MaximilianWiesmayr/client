@@ -58,11 +58,11 @@
 #authContainer mat-form-field{
   width: 100%;
 }
-#authContainer button{
-  left: 50%;
-  transform: translate(-50%, 0);
+#authContainer button, .loginBtn{
+  left: 50%!important;
+  transform: translate(-50%, 0)!important;
 }
-#authContainer button:not(:first-of-type){
+#authContainer button{
   margin-top: 3%;
 }
 

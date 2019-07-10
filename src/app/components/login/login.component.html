@@ -15,7 +15,7 @@
             <mat-form-field>
                 <input type="password" matInput placeholder="Password">
             </mat-form-field>
-            <button mat-raised-button color="primary">Login</button>
+            <mat-spinner-button class = "loginBtn" (click)="login()" [options]="this.btnOpts"></mat-spinner-button>
             <br>
             <button routerLink="/register" mat-button color="warn">Register</button>
         </form>

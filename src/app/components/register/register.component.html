@@ -23,7 +23,7 @@
       <mat-form-field>
         <input type="password" matInput placeholder="Confirm Password">
       </mat-form-field>
-      <button mat-raised-button color="primary">Register</button>
+      <mat-spinner-button class = "regBtn" (click)="register()" [options]="this.btnOpts"></mat-spinner-button>
       <br>
       <button routerLink="/login" mat-button color="warn">Back</button>
     </form>
