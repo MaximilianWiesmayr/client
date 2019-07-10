@@ -4,7 +4,7 @@ import {Injectable} from '@angular/core';
     providedIn: 'root'
 })
 export class DataService {
-    public darkmode = false;
+    public darkmode = true;
 
     public particles: object = {
         style: {
