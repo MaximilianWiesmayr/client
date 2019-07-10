@@ -1,0 +1,19 @@
+@import '~@angular/material/theming';
+@include mat-core();
+
+$instantGrade-primary: mat-palette($mat-blue-grey, 800);
+$instantGrade-accent:  mat-palette($mat-red, 400);
+$instantGrade-warn:    mat-palette($mat-deep-orange);
+$instantGrade-theme: mat-light-theme($instantGrade-primary, $instantGrade-accent, $instantGrade-warn);
+@include angular-material-theme($instantGrade-theme);
+
+
+/* GLOBAL STYLE */
+@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+body, html {
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  font-family: Roboto;
+}

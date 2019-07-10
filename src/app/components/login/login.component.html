@@ -6,12 +6,18 @@
         </div>
         <div class="info">
 		<span>Welcome to <b>InstantGrade</b>!<br>
-			Did you <span routerLink="reset" class="highlight">forget you password?</span></span>
+			Did you <a routerLink="/reset" class="highlight">forget you password?</a></span>
         </div>
-        <form id = "loginForm">
+        <form>
             <mat-form-field>
-                <input matInput placeholder="Username">
+                <input type="text" matInput placeholder="Username">
             </mat-form-field>
+            <mat-form-field>
+                <input type="password" matInput placeholder="Password">
+            </mat-form-field>
+            <button mat-raised-button color="primary">Login</button>
+            <br>
+            <button mat-button color="warn" routerLink="register">Register</button>
         </form>
     </div>
     <svg fill="none" height="280" id="deco_leftBot" viewBox="0 0 329 280" width="329"

@@ -2,26 +2,28 @@ $gradient_start: #AD00FF;
 $gradient_end: #FF0000;
 
 /* Login Section */
-#loginContainer{
+#loginContainer {
   width: 25vw;
-  height: calc(100vw / 3);
+  height: 40vh;
   margin: 0;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  /*border: 1px solid black;*/
 }
-#loginContainer .title{
+
+#loginContainer .title {
   position: relative;
   width: 100%;
   text-align: center;
   height: 6vh;
 }
-#loginContainer .title span{
+
+#loginContainer .title span {
   font-size: 4vh;
 }
-.gradientUnderline{
+
+.gradientUnderline {
   position: absolute;
   bottom: 0;
   left: 50%;
@@ -30,10 +32,38 @@ $gradient_end: #FF0000;
   height: 7%;
   background: linear-gradient(to right, $gradient_start, $gradient_end);
 }
-.info{width: 100%; text-align: center; margin-top: 7%;}
-.highlight{
-  color: $gradient_end;
+
+.info {
+  width: 100%;
+  text-align: center;
+  margin-top: 7%;
 }
+
+.highlight {
+  color: $gradient_end;
+  cursor: pointer;
+  text-decoration: none;
+}
+.highlight:hover{
+  text-decoration: underline;
+}
+
+#loginContainer form{
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, 10%);
+}
+#loginContainer mat-form-field{
+  width: 100%;
+}
+#loginContainer button{
+  left: 50%;
+  transform: translate(-50%, 0);
+}
+#loginContainer button:not(:first-of-type){
+  margin-top: 3%;
+}
+
 /* CSS for the left Gradient corner */
 #deco_leftBot {
   position: absolute;
