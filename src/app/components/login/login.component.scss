@@ -1,0 +1,59 @@
+$gradient_start: #AD00FF;
+$gradient_end: #FF0000;
+
+/* Login Section */
+#loginContainer{
+  width: 25vw;
+  height: calc(100vw / 3);
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  /*border: 1px solid black;*/
+}
+#loginContainer .title{
+  position: relative;
+  width: 100%;
+  text-align: center;
+  height: 6vh;
+}
+#loginContainer .title span{
+  font-size: 4vh;
+}
+.gradientUnderline{
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%, 0);
+  width: 20%;
+  height: 7%;
+  background: linear-gradient(to right, $gradient_start, $gradient_end);
+}
+.info{width: 100%; text-align: center; margin-top: 7%;}
+.highlight{
+  color: $gradient_end;
+}
+/* CSS for the left Gradient corner */
+#deco_leftBot {
+  position: absolute;
+  bottom: 0;
+  width: 329px;
+  height: 280px;
+}
+
+#deco_leftBot, #deco_rightTop, .gradient.stop1 {
+  stop-color: $gradient_start;
+}
+
+#deco_leftBot, #deco_rightTop, .gradient.stop2 {
+  stop-color: $gradient_end;
+  stop-opacity: 0.78;
+}
+
+/* CSS for the right Gradient corner */
+#deco_rightTop {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
