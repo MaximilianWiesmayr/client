@@ -10,7 +10,7 @@
 /* Auth Section */
 .authContainer {
   width: 25vw;
-  height: 65vh;
+  height: 75vh;
   margin: 0;
   position: absolute;
   top: 50%;
@@ -21,7 +21,7 @@
   /* Responsive format (Small devices) */
   @include sm {
     width: 100vw;
-    height: 85vh;
+    height: 90vh;
   }
 }
 
@@ -52,7 +52,7 @@
   transform: translate(-50%, 10%);
   /* Responsive format (Small devices) */
   @include sm {
-    transform: translate(-50%, 5%);
+    transform: translate(-50%, 3%);
     width: 90vw;
   }
 }

@@ -30,7 +30,7 @@
 .authContainer .mailBox {
   position: relative;
   text-align: center;
-  height: calc(100% - 270px);
+  height: calc(100% - 3vh);
   margin-top: 3vh;
   overflow: hidden;
   @include sm {
