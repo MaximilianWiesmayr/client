@@ -14,6 +14,7 @@ import {DashboardComponent} from './components/client-area/dashboard/dashboard.c
 import {AuthGuard} from './services/auth.guard';
 import {MailSuccessComponent} from './components/register/mail-success/mail-success.component';
 import {RegisterWrapperComponent} from './components/register/register-wrapper/register-wrapper.component';
+import {MailFailedComponent} from './components/register/mail-failed/mail-failed.component';
 
 @NgModule({
     declarations: [
@@ -23,7 +24,8 @@ import {RegisterWrapperComponent} from './components/register/register-wrapper/r
         RegisterComponent,
         DashboardComponent,
         MailSuccessComponent,
-        RegisterWrapperComponent
+        RegisterWrapperComponent,
+        MailFailedComponent
     ],
     imports: [
         BrowserModule,

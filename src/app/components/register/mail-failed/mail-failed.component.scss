@@ -32,12 +32,21 @@
   text-align: center;
   height: calc(100% - 270px);
   margin-top: 3vh;
-  overflow: hidden;
   @include sm {
     width: 90vw;
     margin: 3vh auto 0 auto;
     height: 100%
   }
+
+}
+
+.body a {
+  color: #FF0000;
+  text-decoration: none;
+}
+
+.body a:hover {
+  text-decoration: underline;
 }
 
 .authContainer .mailBox .header {

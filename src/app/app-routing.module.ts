@@ -7,6 +7,7 @@ import {DashboardComponent} from './components/client-area/dashboard/dashboard.c
 import {AuthGuard} from './services/auth.guard';
 import {MailSuccessComponent} from './components/register/mail-success/mail-success.component';
 import {RegisterWrapperComponent} from './components/register/register-wrapper/register-wrapper.component';
+import {MailFailedComponent} from './components/register/mail-failed/mail-failed.component';
 
 const routes: Routes = [
     {path: '', redirectTo: 'login', pathMatch: 'full'}, // Later on the redirect is replaced by the Landingpage-Component
@@ -15,6 +16,7 @@ const routes: Routes = [
         path: 'register', component: RegisterWrapperComponent, children: [
             {path: '', component: RegisterComponent},
             {path: 'success', component: MailSuccessComponent},
+            {path: 'failed', component: MailFailedComponent},
             {path: '**', redirectTo: ''}
         ]
     },
