@@ -12,6 +12,8 @@ import {LoginComponent} from './components/login/login.component';
 import {RegisterComponent} from './components/register/register.component';
 import {DashboardComponent} from './components/client-area/dashboard/dashboard.component';
 import {AuthGuard} from './services/auth.guard';
+import {MailSuccessComponent} from './components/register/mail-success/mail-success.component';
+import {RegisterWrapperComponent} from './components/register/register-wrapper/register-wrapper.component';
 
 @NgModule({
     declarations: [
@@ -19,7 +21,9 @@ import {AuthGuard} from './services/auth.guard';
         ClientAreaComponent,
         LoginComponent,
         RegisterComponent,
-        DashboardComponent
+        DashboardComponent,
+        MailSuccessComponent,
+        RegisterWrapperComponent
     ],
     imports: [
         BrowserModule,

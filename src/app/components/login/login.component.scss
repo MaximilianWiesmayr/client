@@ -4,8 +4,9 @@
   width: 100%;
   height:100%;
 }
+
 /* Auth Section */
-#authContainer {
+.authContainer {
   width: 25vw;
   height: 40vh;
   margin: 0;
@@ -15,16 +16,20 @@
   transform: translate(-50%, -50%);
   background-color: rgba(255, 255, 255, 1);
   z-index: 300;
+  @include sm {
+    width: 100vw;
+    height: 50vh;
+  }
 }
 
-#authContainer .title {
+.authContainer .title {
   position: relative;
   width: 100%;
   text-align: center;
   height: 6vh;
 }
 
-#authContainer .title span {
+.authContainer .title span {
   font-size: 4vh;
 }
 
@@ -52,30 +57,40 @@
   text-decoration: underline;
 }
 
-#authContainer form{
+.authContainer form {
   position: absolute;
   left: 50%;
   transform: translate(-50%, 10%);
+  @include sm {
+    width: 90vw;
+  }
 
 }
-#authContainer mat-form-field{
+
+.authContainer mat-form-field {
   width: 100%;
 }
-#authContainer button, .loginBtn{
+
+.authContainer button, .loginBtn {
   left: 50%!important;
   transform: translate(-50%, 0)!important;
 }
-#authContainer button{
+
+.authContainer button {
   margin-top: 3%;
 }
 
 /* CSS for the left Gradient corner */
 #deco_leftBot {
-  position: absolute;
+  position: fixed;
   bottom: 0;
   width: 329px;
   height: 280px;
   z-index: 300;
+  @include sm {
+    opacity: 0;
+    z-index: -1;
+  }
 }
 
 #deco_leftBot, #deco_rightTop, .gradient.stop1 {
@@ -89,8 +104,12 @@
 
 /* CSS for the right Gradient corner */
 #deco_rightTop {
-  position: absolute;
+  position: fixed;
   top: 0;
   right: 0;
   z-index: 300;
+  @include sm {
+    width: 150px;
+    height: 130px;
+  }
 }

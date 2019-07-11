@@ -1,0 +1,79 @@
+<div [class.dark]="this.dataservice.darkmode" id="pageWrapper">
+    <div class="authContainer">
+        <div class="mailicon">
+            <svg fill="none" height="264" viewBox="0 0 280 264" width="280" xmlns="http://www.w3.org/2000/svg">
+                <path d="M28.7628 185.502C41.1203 212.944 62.5399 235.301 89.4277 248.822C116.316 262.343 147.036 266.205 176.434 259.76C205.831 253.316 232.118 236.956 250.884 213.427C269.649 189.897 279.751 160.63 279.495 130.535C279.239 100.44 268.64 71.3486 249.477 48.1422C230.313 24.9357 203.752 9.02613 174.248 3.08277C144.745 -2.86059 114.095 1.52392 87.4414 15.5007C60.7876 29.4774 39.7518 52.1959 27.8633 79.8444"
+                      stroke="url(#paint0_radial)" stroke-opacity="0.75"/>
+                <path class="mailicon circle"
+                      d="M28.7628 185.502C41.1203 212.944 62.5399 235.301 89.4277 248.822C116.316 262.343 147.036 266.205 176.434 259.76C205.831 253.316 232.118 236.956 250.884 213.427C269.649 189.897 279.751 160.63 279.495 130.535C279.239 100.44 268.64 71.3486 249.477 48.1422C230.313 24.9357 203.752 9.02613 174.248 3.08277C144.745 -2.86059 114.095 1.52392 87.4414 15.5007C60.7876 29.4774 39.7518 52.1959 27.8633 79.8444"/>
+                <g filter="url(#filter0_d)">
+                    <path d="M228.542 78.8571V175.777C228.542 180.195 224.961 183.777 220.542 183.777H80.833C76.4148 183.777 72.833 180.195 72.833 175.777V78.8571M228.542 78.8571H72.833M228.542 78.8571L157.012 151.626C153.896 154.796 148.794 154.818 145.65 151.675L72.833 78.8571"
+                          stroke="url(#paint1_linear)" stroke-width="2"/>
+                    <path class="mailicon lines" d="M59.1332 110.266H31.3995M59.1332 131.651H4M59.1332 153.37H31.3995"/>
+                </g>
+                <defs>
+                    <filter color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse" height="114.92"
+                            id="filter0_d" width="233.542" x="0" y="77.8571">
+                        <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+                        <feColorMatrix in="SourceAlpha" type="matrix"
+                                       values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"/>
+                        <feOffset dy="4"/>
+                        <feGaussianBlur stdDeviation="2"/>
+                        <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"/>
+                        <feBlend in2="BackgroundImageFix" mode="normal" result="effect1_dropShadow"/>
+                        <feBlend in="SourceGraphic" in2="effect1_dropShadow" mode="normal" result="shape"/>
+                    </filter>
+                    <radialGradient cx="0" cy="0" gradientTransform="translate(148.349) rotate(90) scale(263.303)"
+                                    gradientUnits="userSpaceOnUse" id="paint0_radial" r="1">
+                        <stop class="mailicon gradient start" offset="0.433406"/>
+                        <stop class="mailicon gradient end" offset="1" stop-opacity="0.78"/>
+                    </radialGradient>
+                    <linearGradient gradientUnits="userSpaceOnUse" id="paint1_linear" x1="150.688" x2="150.354"
+                                    y1="78.8571" y2="183.777">
+                        <stop class="mailicon gradient start" offset="0.098673"/>
+                        <stop class="mailicon gradient end" offset="0.624493" stop-opacity="0.78"/>
+                    </linearGradient>
+                </defs>
+            </svg>
+        </div>
+        <div class="mailBox">
+            <div class="header">
+                <span>Mail successfully sent!</span>
+            </div>
+            <div class="body">
+                <span>Click the Link provided by the Email to activate your account!</span>
+                <div class="actions">
+                    <button color="accent" mat-raised-button routerLink="/login">Login</button>
+                    <button color="primary" mat-raised-button>Retry</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <particles [height]="this.dataservice.particles.height" [params]="this.dataservice.particles.params"
+               [style]="this.dataservice.particles.style" [width]="this.dataservice.particles.width"></particles>
+    <svg fill="none" height="280" id="deco_leftBot" viewBox="0 0 329 280" width="329"
+         xmlns="http://www.w3.org/2000/svg">
+        <path d="M140.5 133C111.337 55.2325 42.9639 23.7908 0 0V280H329C261.629 276.007 169 209 140.5 133Z"
+              fill="url(#paint0_linear)"/>
+        <defs>
+            <linearGradient gradientUnits="userSpaceOnUse" id="paint0_linear" x1="-11.5351" x2="251.825" y1="0.499103"
+                            y2="302.223">
+                <stop class="gradient stop1"/>
+                <stop class="gradient stop2" offset="1"/>
+            </linearGradient>
+        </defs>
+    </svg>
+    <svg fill="none" height="364" id="deco_rightTop" viewBox="0 0 423 364" width="423"
+         xmlns="http://www.w3.org/2000/svg">
+        <path d="M199.001 184C148.804 82.073 72.0006 14.3333 0.000549316 -6.00815e-05L428.001 -4.00006L424.001 364C344.5 342.5 264.5 317 199.001 184Z"
+              fill="url(#paint0_linear)"/>
+        <defs>
+            <linearGradient gradientUnits="userSpaceOnUse" id="paint0_linear" x1="56.0006" x2="456.001" y1="-4.00005"
+                            y2="447.5">
+                <stop class="gradient stop1"/>
+                <stop class="gradient stop2" offset="1"/>
+            </linearGradient>
+        </defs>
+    </svg>
+
+</div>

@@ -4,8 +4,9 @@ import {Injectable} from '@angular/core';
     providedIn: 'root'
 })
 export class DataService {
-    public darkmode = true;
-
+    // Toggles the darkmode on the Page, later on it will replaced by the Userconfiguration
+    public darkmode = false;
+    // Settings for the particles on the Login & Register Page
     public particles: object = {
         style: {
             'position': 'fixed',

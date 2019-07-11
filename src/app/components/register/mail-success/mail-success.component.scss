@@ -1,0 +1,58 @@
+@import "../register.component";
+
+.authContainer {
+  border: 1px solid white;
+  min-width: 280px;
+  padding: 50px;
+}
+
+.authContainer .mailicon {
+  position: relative;
+}
+
+.authContainer .mailicon svg {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, 0);
+}
+
+.authContainer .mailBox {
+  position: relative;
+  text-align: center;
+  height: calc(100% - 270px);
+  margin-top: 310px;
+
+}
+
+.authContainer .mailBox .header {
+  margin-top: 5%;
+  font-weight: lighter;
+  font-size: 3vh;
+}
+
+.authContainer .mailBox .actions {
+  position: absolute;
+  bottom: 2%;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+
+.authContainer .actions button {
+  float: left;
+  left: 0;
+  max-width: 50%;
+  transform: translate(0);
+}
+
+.mailicon.circle, .mailicon.lines {
+  stroke: black;
+}
+
+.mailicon.gradient.start {
+  stop-color: $gradient_start;
+}
+
+.mailicon.gradient.end {
+  stop-color: $gradient_end;
+}
