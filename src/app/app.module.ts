@@ -1,6 +1,6 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MaterialModule} from './modules/material/material.module';
 import {AppRoutingModule} from './app-routing.module';
 import {ParticlesModule} from 'angular-particle';
@@ -15,6 +15,7 @@ import {AuthGuard} from './services/auth.guard';
 import {MailSuccessComponent} from './components/register/mail-success/mail-success.component';
 import {RegisterWrapperComponent} from './components/register/register-wrapper/register-wrapper.component';
 import {MailFailedComponent} from './components/register/mail-failed/mail-failed.component';
+import {MatPasswordStrengthModule} from '@angular-material-extensions/password-strength';
 
 @NgModule({
     declarations: [
@@ -31,9 +32,11 @@ import {MailFailedComponent} from './components/register/mail-failed/mail-failed
         BrowserModule,
         AppRoutingModule,
         FormsModule,
+        ReactiveFormsModule,
         MaterialModule,
         BrowserAnimationsModule,
-        ParticlesModule
+        ParticlesModule,
+        MatPasswordStrengthModule
     ],
     providers: [AuthGuard],
     bootstrap: [AppComponent]
