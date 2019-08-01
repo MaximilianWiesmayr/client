@@ -1,11 +1,11 @@
 <div class="wrapper">
-    <div [class.collapsed]="this.dataservice.settings.navBarCollapsed" id="sidebar">
+    <div [class.collapsed]="this.dataservice.user.settings.navBarCollapsed" id="sidebar">
         <div id="header">{{this.dataservice.settings.title}}</div>
         <div class="profile">
             <div class="avatar"></div>
             <div class="usernameAndCredits">
-                <span>Sebastian Schiefermayr</span><br>
-                <span>25000 {{this.dataservice.settings.virtualCurrency}}</span>
+                <span>{{this.dataservice.user.firstname}} {{this.dataservice.user.lastname}}</span><br>
+                <span>{{this.dataservice.user.credits}} {{this.dataservice.settings.virtualCurrency}}</span>
             </div>
         </div>
         <div id="navList">
@@ -19,9 +19,17 @@
                 </li>
             </ul>
         </div>
-        <div id="credits">
-            {{this.dataservice.settings.title}} - Version {{this.dataservice.settings.version}} <br>
-            &copy; by {{this.dataservice.settings.title}} 2019
+        <div id="sidebarBottom">
+            <div id="collapseSettings">
+                <abbr title="Toggle collapsing Sidebar">
+                    <mat-icon (click)="toggleCollapse()"
+                              class="collapseToggle">{{toggleIcon()}}</mat-icon>
+                </abbr>
+            </div>
+            <div id="credits">
+                {{this.dataservice.settings.title}} - Version {{this.dataservice.settings.version}} <br>
+                &copy; by {{this.dataservice.settings.title}} 2019
+            </div>
         </div>
     </div>
     <div [class.dark]="this.dataservice.darkmode" id="pageContent">

@@ -1,9 +1,13 @@
 import {Injectable} from '@angular/core';
+import {User} from '../entities/User';
+import {Settings} from '../entities/Settings';
 
 @Injectable({
     providedIn: 'root'
 })
 export class DataService {
+    // Receives a Value from App Component if the device is a Mobile device
+    public isMobile: boolean = false;
     // Toggles the darkmode on the Page, later on it will replaced by the Userconfiguration
     public darkmode = false;
     // Settings for the particles on the Login & Register Page
@@ -76,13 +80,30 @@ export class DataService {
         height: 100
     };
     // The Settings Object let you change for instance the title of the whole project
-    public settings: object = {
+    public settings = {
         title: 'InstantGrade',
         version: '1.0',
-        virtualCurrency: 'Credits',
-        navBarCollapsed: false
+        virtualCurrency: 'Credits'
     };
+    // The dummyUser
+    public user: User = new User(
+        'BastiArts',
+        'Sebastian',
+        'Schiefermayr',
+        'basti@bastiarts.com',
+        new Settings(false, false), // Wird noch überlegt, ob nötig
+        25000);
 
     constructor() {
     }
+
+    // Method for making the initials of the Name
+    makeInitials(): string {
+        return this.user.firstname.charAt(0) + this.user.lastname.charAt(0);
+    }
+
+    makeInitialsFromWord(word: string): string {
+        return word.replace(/[^A-Z]/g, '');
+    }
+
 }

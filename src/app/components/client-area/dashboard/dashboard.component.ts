@@ -38,6 +38,34 @@ export class DashboardComponent implements OnInit {
     constructor(public dataservice: DataService) {
     }
 
+    // Toggles the Sidebar
+    toggleCollapse() {
+        this.dataservice.user.settings.navBarCollapsed = !this.dataservice.user.settings.navBarCollapsed;
+        document.getElementsByClassName('usernameAndCredits')[0].getElementsByTagName('span')[0].innerText =
+            this.dataservice.user.settings.navBarCollapsed ?
+                this.dataservice.makeInitials() :
+                this.dataservice.user.firstname + ' ' + this.dataservice.user.lastname;
+        document.getElementById('header').innerText =
+            this.dataservice.user.settings.navBarCollapsed ?
+                this.dataservice.makeInitialsFromWord(this.dataservice.settings.title) :
+                this.dataservice.settings.title;
+    }
+
+    // Toggles the toggle icon
+    toggleIcon(): string {
+        if (this.dataservice.isMobile) {
+            if (this.dataservice.user.settings.navBarCollapsed) {
+                return 'keyboard_arrow_up';
+            } else {
+                return 'menu';
+            }
+        } else if (this.dataservice.user.settings.navBarCollapsed) {
+            return 'keyboard_arrow_right';
+        } else {
+            return 'keyboard_arrow_left';
+        }
+    }
+
     ngOnInit() {
     }
 
