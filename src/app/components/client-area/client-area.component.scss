@@ -119,6 +119,11 @@
     width: 100%;
     height: calc(100vh - 10vh);
   }
+  -webkit-transition: all .3s;
+  -moz-transition: all .3s;
+  -ms-transition: all .3s;
+  -o-transition: all .3s;
+  transition: all .3s;
 }
 
 #sidebarBottom {
@@ -211,4 +216,10 @@
     left: 5%;
     top: 20%;
   }
+}
+
+#sidebar.collapsed + #pageContent {
+  width: calc(100vw - 5vw) !important;
+  height: 100vh;
+  float: left;
 }
