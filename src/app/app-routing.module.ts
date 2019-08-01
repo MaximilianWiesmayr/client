@@ -15,7 +15,7 @@ const routes: Routes = [
     {
         path: 'register', component: RegisterWrapperComponent, children: [
             {path: '', component: RegisterComponent},
-            {path: 'success', component: MailSuccessComponent},
+            {path: 'success', component: MailSuccessComponent, canActivate: [AuthGuard]},
             {path: 'failed', component: MailFailedComponent},
             {path: '**', redirectTo: ''}
         ]

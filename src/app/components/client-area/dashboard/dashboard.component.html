@@ -1,3 +1,30 @@
-<p>
-  dashboard works!
-</p>
+<div class="wrapper">
+    <div [class.collapsed]="this.dataservice.settings.navBarCollapsed" id="sidebar">
+        <div id="header">{{this.dataservice.settings.title}}</div>
+        <div class="profile">
+            <div class="avatar"></div>
+            <div class="usernameAndCredits">
+                <span>Sebastian Schiefermayr</span><br>
+                <span>25000 {{this.dataservice.settings.virtualCurrency}}</span>
+            </div>
+        </div>
+        <div id="navList">
+            <ul>
+                <li *ngFor="let i of this.navItems" [class.active]="i.active" class="navItem">
+                    <mat-icon>
+                        {{i.icon}}
+                    </mat-icon>
+                    <div class="navText">{{i.title}}</div>
+                    <div class="activeIndicator"></div>
+                </li>
+            </ul>
+        </div>
+        <div id="credits">
+            {{this.dataservice.settings.title}} - Version {{this.dataservice.settings.version}} <br>
+            &copy; by {{this.dataservice.settings.title}} 2019
+        </div>
+    </div>
+    <div [class.dark]="this.dataservice.darkmode" id="pageContent">
+
+    </div>
+</div>

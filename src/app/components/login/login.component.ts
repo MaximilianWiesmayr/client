@@ -13,6 +13,7 @@ export class LoginComponent implements OnInit {
     constructor(private router: Router, public dataservice: DataService) {
     }
 
+
     // Button Options
     btnOpts: MatProgressButtonOptions = {
         active: false,
@@ -27,6 +28,7 @@ export class LoginComponent implements OnInit {
         mode: 'indeterminate',
     };
 
+    // Mehtod, which sends a REST Request to our Back-end
     login() {
         this.btnOpts.active = true;
         setTimeout(() => {

@@ -33,6 +33,7 @@ export class RegisterComponent implements OnInit {
     };
 
     constructor(public dataservice: DataService, private router: Router, private formBuilder: FormBuilder) {
+        // Build the validation Pattern for our Form
         this.registerform = this.formBuilder.group({
             username: ['', Validators.required],
             email: ['', [Validators.required, Validators.email]],

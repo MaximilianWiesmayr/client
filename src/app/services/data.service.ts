@@ -75,7 +75,13 @@ export class DataService {
         width: 100,
         height: 100
     };
-
+    // The Settings Object let you change for instance the title of the whole project
+    public settings: object = {
+        title: 'InstantGrade',
+        version: '1.0',
+        virtualCurrency: 'Credits',
+        navBarCollapsed: false
+    };
 
     constructor() {
     }
