@@ -1,1 +1,214 @@
 @import "~src/themes/default";
+
+.wrapper {
+  width: 100%;
+  height: 100%;
+}
+
+#sidebar {
+  position: relative;
+  height: 100%;
+  width: 15vw;
+  background-color: #1C1C1C;
+  text-align: center;
+  color: white;
+  float: left;
+  -webkit-transition: all .3s;
+  -moz-transition: all .3s;
+  -ms-transition: all .3s;
+  -o-transition: all .3s;
+  transition: all .3s;
+
+  @include sm {
+    width: 100%;
+    height: auto;
+  }
+}
+
+#sidebar #header {
+  width: 100%;
+  padding: 1vh 0 1vh 0;
+  font-family: 'Quattrocento', serif;
+  font-size: 200%;
+}
+
+.profile {
+  width: 100%;
+  padding: 2vh 0 2vh 0;
+
+  @include sm {
+    display: none;
+  }
+}
+
+.profile .avatar {
+  background-image: url("~src/assets/pb.jpg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  border-radius: 100%;
+  width: 128px;
+  height: 128px;
+  max-width: 256px;
+  max-height: 256px;
+  margin: 0 auto 3vh auto;
+}
+
+.profile .usernameAndCredits span:nth-of-type(1) {
+  font-size: large;
+}
+
+.profile .usernameAndCredits span:nth-of-type(2) {
+  font-weight: 300;
+  opacity: .5;
+}
+
+#navList {
+  @include sm {
+    display: none;
+  }
+}
+
+#navList ul {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  list-style-type: none;
+}
+
+#navList .navItem {
+  position: relative;
+  cursor: pointer;
+  transition: all .3s;
+}
+
+#navList .navItem mat-icon {
+  position: absolute;
+  top: 27%;
+  left: 20%;
+}
+
+#navList .navText {
+  padding: 2vh 0 2vh 0;
+}
+
+#navList .navItem.active, .navItem:hover {
+  background-color: black;
+}
+
+#navList .navItem.active .navText {
+  width: 98%;
+  font-weight: 700;
+}
+
+#navList .navItem.active .activeIndicator, .navItem:hover .activeIndicator {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 2%;
+  height: 100%;
+  background: linear-gradient(to bottom, $gradient_start, $gradient_end);
+  transition: all .3s;
+}
+
+#pageContent {
+  width: calc(100vw - 15vw);
+  height: 100vh;
+  float: right;
+  @include sm {
+    width: 100%;
+    height: calc(100vh - 10vh);
+  }
+}
+
+#sidebarBottom {
+  position: absolute;
+  bottom: 0;
+  padding: 2vh 0;
+  width: 100%;
+  @include sm {
+    padding: 0;
+    height: 7vh;
+  }
+}
+
+#credits {
+  position: relative;
+  font-weight: 300;
+  font-size: x-small;
+  opacity: .5;
+  width: 100%;
+  text-align: center;
+  @include sm {
+    display: none;
+  }
+}
+
+#collapseSettings {
+  position: relative;
+  bottom: 30%;
+  padding: 2vh 0;
+  text-align: center;
+
+  @include sm {
+    position: absolute;
+    top: 0;
+    left: 2vw;
+    padding: 0;
+  }
+}
+
+#collapseSettings mat-icon {
+  cursor: pointer;
+  font-size: xx-large;
+}
+
+/* -= COLLAPSED =- */
+#sidebar.collapsed {
+  width: 5vw !important;
+  @include sm { // Collapsed for mobile means full width
+    width: 100vw !important;
+    height: 100vh;
+  }
+}
+
+#sidebar.collapsed .profile {
+  @include sm {
+    display: block;
+  }
+}
+
+#sidebar.collapsed .profile .avatar {
+  width: 64px;
+  height: 64px;
+  @include sm {
+    width: 128px;
+    height: 128px;
+  }
+}
+
+
+#sidebar.collapsed .usernameAndCredits span:nth-of-type(1) {
+  // display: none;
+}
+
+#sidebar.collapsed #navList {
+  @include sm {
+    display: block;
+  }
+}
+
+#sidebar.collapsed #navList .navItem .navText {
+  visibility: hidden;
+  @include sm {
+    visibility: visible;
+  }
+}
+
+#sidebar.collapsed #navList .navItem mat-icon {
+  left: 35%;
+  @include sm {
+    left: 5%;
+    top: 20%;
+  }
+}
