@@ -10,7 +10,8 @@
         </div>
         <div id="navList">
             <ul>
-                <li *ngFor="let i of this.navItems" [class.active]="i.active" class="navItem">
+                <li (click)="performRouting(i)" *ngFor="let i of this.navItems" [class.active]="i.active"
+                    class="navItem">
                     <mat-icon>
                         {{i.icon}}
                     </mat-icon>

@@ -69,4 +69,19 @@ export class DashboardComponent implements OnInit {
     ngOnInit() {
     }
 
+    performRouting(item) {
+        if (this.dataservice.isMobile) {
+            this.dataservice.user.settings.navBarCollapsed = false;
+        }
+        this.navItems.forEach(i => {
+            /* tslint:disable:no-string-literal */
+            i['active'] = false;
+            if (i === item) {
+                i['active'] = true;
+            }
+            /* tslint:enable:no-string-literal */
+        });
+        // this.router.navigate([item.route]);
+        // ROUTE HERE
+    }
 }
