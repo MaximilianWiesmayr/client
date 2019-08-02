@@ -112,12 +112,12 @@
 }
 
 #pageContent {
-  width: calc(100vw - 15vw);
+  width: calc(100% - 15vw);
   height: 100vh;
   float: right;
   @include sm {
     width: 100%;
-    height: calc(100vh - 10vh);
+    height: 100%; // calc(100% - 10vh)
   }
   -webkit-transition: all .3s;
   -moz-transition: all .3s;
@@ -222,4 +222,19 @@
   width: calc(100vw - 5vw) !important;
   height: 100vh;
   float: left;
+}
+
+#sidebar.collapsed #collapseSettings {
+  @include sm {
+    position: absolute;
+    top: 1vh;
+    left: 2vw;
+    padding: 0;
+  }
+}
+
+#sidebar.collapsed #sidebarBottom {
+  @include sm {
+    top: 0 !important;
+  }
 }

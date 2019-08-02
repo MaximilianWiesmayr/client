@@ -54,7 +54,7 @@ export class ClientAreaComponent implements OnInit {
     toggleIcon(): string {
         if (this.dataservice.isMobile) {
             if (this.dataservice.user.settings.navBarCollapsed) {
-                return 'keyboard_arrow_up';
+                return 'close';
             } else {
                 return 'menu';
             }

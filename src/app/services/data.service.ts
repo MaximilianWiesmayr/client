@@ -91,7 +91,7 @@ export class DataService {
         'Sebastian',
         'Schiefermayr',
         'basti@bastiarts.com',
-        new Settings(false, false), // Wird noch überlegt, ob nötig
+        new Settings(false, false),
         25000);
 
     constructor() {
@@ -102,6 +102,7 @@ export class DataService {
         return this.user.firstname.charAt(0) + this.user.lastname.charAt(0);
     }
 
+    // Method for making initials out of one word like InstantGrade
     makeInitialsFromWord(word: string): string {
         return word.replace(/[^A-Z]/g, '');
     }

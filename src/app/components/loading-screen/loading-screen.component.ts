@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {DataService} from '../../services/data.service';
 
 @Component({
     // tslint:disable-next-line:component-selector
@@ -8,7 +9,7 @@ import {Component, OnInit} from '@angular/core';
 })
 export class LoadingScreenComponent implements OnInit {
 
-    constructor() {
+    constructor(public dataservice: DataService) {
     }
 
     ngOnInit() {

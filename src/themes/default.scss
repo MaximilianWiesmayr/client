@@ -9,6 +9,8 @@ $gradient_start: #f5b042; // AD00FF
 $gradient_end: #FF0000;
 // Loading Screen color
 $color-loader: #ce4233;
+// Dashboard OverviewBox Height
+$overviewBox_height: 10vh;
 
 
 @include mat-core();
@@ -32,12 +34,16 @@ body, html {
   margin: 0;
   font-family: Roboto;
   overflow: hidden;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 /* -= DARK MODE SETTINGS =- */
 .dark {
   @include angular-material-theme($dark-theme);
-  background-color: #1C1C1C;
+  background-color: #1C1C1C !important;
   color: white;
 }
 

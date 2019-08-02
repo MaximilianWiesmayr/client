@@ -17,6 +17,7 @@ import {RegisterWrapperComponent} from './components/register/register-wrapper/r
 import {MailFailedComponent} from './components/register/mail-failed/mail-failed.component';
 import {MatPasswordStrengthModule} from '@angular-material-extensions/password-strength';
 import {LoadingScreenComponent} from './components/loading-screen/loading-screen.component';
+import {OverviewItemComponent} from './components/client-area/dashboard/overview-item/overview-item.component';
 
 @NgModule({
     declarations: [
@@ -28,7 +29,8 @@ import {LoadingScreenComponent} from './components/loading-screen/loading-screen
         MailSuccessComponent,
         RegisterWrapperComponent,
         MailFailedComponent,
-        LoadingScreenComponent
+        LoadingScreenComponent,
+        OverviewItemComponent
     ],
     imports: [
         BrowserModule,

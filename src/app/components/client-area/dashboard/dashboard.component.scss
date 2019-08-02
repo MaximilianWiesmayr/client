@@ -1,0 +1,31 @@
+@import "~src/themes/default";
+
+#wrapper {
+  position: relative;
+  width: calc(100% - 4vw);
+  height: calc(100% - 4vh);
+  padding: 2vh 2vw;
+  margin: 0 !important;
+}
+
+#overviewContainer {
+  display: flex;
+  flex-flow: row wrap;
+  @include sm {
+    flex-flow: column wrap;
+  }
+  -webkit-justify-content: space-around;
+  justify-content: space-around;
+  -webkit-flex-flow: row wrap;
+  flex-flow: row wrap;
+  -webkit-align-items: stretch;
+  align-items: stretch;
+}
+
+overview-item {
+  flex-grow: 1;
+  margin: 0 1vw 1vh 1vw;
+  @include sm {
+    margin: 1vh 0;
+  }
+}

@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {DataService} from '../../../services/data.service';
 
 
 @Component({
@@ -7,6 +8,8 @@ import {Component, OnInit} from '@angular/core';
     styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
+    constructor(public dataservice: DataService) {
+    }
 
     ngOnInit(): void {
     }

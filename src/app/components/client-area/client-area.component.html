@@ -5,6 +5,7 @@
             <div class="avatar"></div>
             <div class="usernameAndCredits">
                 <span>{{this.dataservice.user.firstname}} {{this.dataservice.user.lastname}}</span><br>
+                <p></p>
                 <span>{{this.dataservice.user.credits}} {{this.dataservice.settings.virtualCurrency}}</span>
             </div>
         </div>
@@ -29,11 +30,11 @@
             </div>
             <div id="credits">
                 {{this.dataservice.settings.title}} - Version {{this.dataservice.settings.version}} <br>
-                &copy; by {{this.dataservice.settings.title}} 2019
+                &copy; by Sebastian Schiefermayr 2019
             </div>
         </div>
     </div>
-    <div [class.dark]="this.dataservice.darkmode" id="pageContent">
+    <div [class.dark]="this.dataservice.user.settings.darkmode" id="pageContent">
         <router-outlet></router-outlet>
     </div>
 </div>
