@@ -1,0 +1,45 @@
+@import "~src/themes/default";
+
+.itemContainer {
+  width: 100%;
+  height: $overviewBox_height;
+  border-radius: 5px;
+  border: 2px solid rgba(0, 0, 0, 0.2);
+}
+
+.itemIcon {
+  height: $overviewBox_height;
+  width: $overviewBox_height;
+  text-align: center;
+  line-height: $overviewBox_height;
+  float: left;
+}
+
+.itemIcon mat-icon {
+  font-size: calc(#{$overviewBox_height} - 5vh);
+  line-height: $overviewBox_height;
+  height: $overviewBox_height;
+  width: $overviewBox_height;
+}
+
+.itemInfo {
+  display: table;
+  width: calc(100% - #{$overviewBox_height});
+  height: 100%;
+  float: right;
+  text-align: center;
+}
+
+.bigInfo {
+  font-size: xx-large;
+  opacity: .75;
+}
+
+.textInfo {
+
+}
+
+.textwrapper {
+  display: table-cell;
+  vertical-align: middle;
+}
