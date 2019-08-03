@@ -5,6 +5,18 @@
   height: $overviewBox_height;
   border-radius: 5px;
   border: 2px solid rgba(0, 0, 0, 0.2);
+  -webkit-transition: all .3s;
+  -moz-transition: all .3s;
+  -ms-transition: all .3s;
+  -o-transition: all .3s;
+  transition: all .3s;
+  @include sm {
+    width: inherit !important;
+  }
+}
+
+.itemContainer:hover {
+  background-color: rgba(0, 0, 0, 0.1);
 }
 
 .itemIcon {
@@ -43,3 +55,4 @@
   display: table-cell;
   vertical-align: middle;
 }
+

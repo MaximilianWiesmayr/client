@@ -1,6 +1,8 @@
 import {Injectable} from '@angular/core';
 import {User} from '../entities/User';
 import {Settings} from '../entities/Settings';
+import {AccountType} from '../enums/account-type.enum';
+import {DashboardInfoItem} from '../entities/dashboard-info-item';
 
 @Injectable({
     providedIn: 'root'
@@ -79,12 +81,6 @@ export class DataService {
         width: 100,
         height: 100
     };
-    // The Settings Object let you change for instance the title of the whole project
-    public settings = {
-        title: 'InstantGrade',
-        version: '1.0',
-        virtualCurrency: 'Credits'
-    };
     // The dummyUser
     public user: User = new User(
         'BastiArts',
@@ -92,7 +88,37 @@ export class DataService {
         'Schiefermayr',
         'basti@bastiarts.com',
         new Settings(false, false),
-        25000);
+        25000,
+        AccountType.PRO);
+    // The Settings Object let you change for instance the title of the whole project
+    public settings = {
+        title: 'InstantGrade',
+        version: '1.0',
+        virtualCurrency: 'Credits',
+        dashboardOverviewItems: [
+            new DashboardInfoItem(
+                'photo',
+                'Photos',
+                '20'
+            ),
+            new DashboardInfoItem(
+                'storage',
+                'Space available',
+                '12GB / 15GB'
+            ),
+            new DashboardInfoItem(
+                'account_box',
+                'Current Subscription',
+                '<span class = "' + this.user.accountType.toString() + '">' + this.user.accountType.toString() + '</span>'
+            ),
+            new DashboardInfoItem(
+                'notification_important',
+                'Notifications',
+                '0'
+            )
+
+        ]
+    };
 
     constructor() {
     }

@@ -40,6 +40,24 @@ body, html {
   user-select: none;
 }
 
+/* SUBSCRIPTION STYLES*/
+.PRO {
+  color: blueviolet;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.EXPERT {
+  color: goldenrod;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.BASIC {
+  color: gray;
+  text-transform: uppercase;
+}
+
 /* -= DARK MODE SETTINGS =- */
 .dark {
   @include angular-material-theme($dark-theme);
@@ -72,4 +90,13 @@ body, html {
 /* Loading Screen */
 .dark .loadingWrapper {
   background-color: #1C1C1C;
+}
+
+/* Dashboard Overview Icon*/
+.dark .itemContainer {
+  border: 2px solid rgba(255, 255, 255, 0.2) !important;
+}
+
+.dark .itemContainer:hover {
+  background-color: rgba(255, 255, 255, 0.1) !important;
 }

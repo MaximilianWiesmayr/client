@@ -1,11 +1,11 @@
 <div class="itemContainer">
     <div class="itemIcon">
-        <mat-icon>home</mat-icon>
+        <mat-icon>{{item.icon}}</mat-icon>
     </div>
     <div class="itemInfo">
         <div class="textwrapper">
-            <div class="bigInfo">2000000</div>
-            <div class="textInfo">Credits</div>
+            <div [innerHTML]="item.value" class="bigInfo"></div>
+            <div class="textInfo">{{item.info}}</div>
         </div>
     </div>
 </div>
