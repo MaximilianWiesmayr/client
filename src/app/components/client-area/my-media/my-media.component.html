@@ -1,12 +1,13 @@
 <div [class.dark]="this.dataservice.user.settings.darkmode" [class.infoOpen]="isInfoOpen" id="mediaBox">
-    <div class="headline">My Photos</div>
+    <div class="headline gradientText">My Photos</div>
     <div id="controlBar">
         <mat-icon>format_list_bulleted</mat-icon>
         <mat-icon class="active">grid_on</mat-icon>
     </div>
     <div id="mediaContainer">
         <div *ngFor="let image of this.images" class="mediaItem"><img
-                (click)="openInfo(image)" [src]="image.path + image.factoryTitle + '.' + image.extension"></div>
+                (click)="openInfo(image)" [src]="image.path + image.factoryTitle + '.' + image.extension"
+                ondragstart="return false;"></div>
 
     </div>
     <div [class.dark]="this.dataservice.user.settings.darkmode" id="detailMenu">

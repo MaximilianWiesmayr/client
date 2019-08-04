@@ -6,7 +6,7 @@
 }
 
 #sidebar {
-  position: relative;
+  position: fixed;
   height: 100%;
   width: 15vw;
   background-color: #1C1C1C;
@@ -18,7 +18,7 @@
   -ms-transition: all .3s;
   -o-transition: all .3s;
   transition: all .3s;
-
+  z-index: 9999;
   @include sm {
     width: 100%;
     height: auto;
