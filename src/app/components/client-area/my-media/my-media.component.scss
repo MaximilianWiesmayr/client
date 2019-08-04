@@ -1,0 +1,144 @@
+@import "~src/themes/default";
+
+#mediaBox {
+  width: 100%;
+  height: 100%;
+  float: left;
+  transition: all .3s;
+}
+
+.headline {
+  width: calc(100% - 4vw);
+  padding: 2vh 2vw;
+  text-align: center;
+  font-size: 5vh;
+}
+
+#controlBar {
+  width: 85%;
+  height: 5vh;
+  text-align: right;
+}
+
+#controlBar mat-icon {
+  cursor: pointer;
+  opacity: .5;
+}
+
+#controlBar mat-icon.active {
+  opacity: 1;
+}
+
+#controlBar mat-icon:first-of-type {
+  margin-right: 1vw;
+}
+
+#mediaContainer {
+  width: 100%;
+  min-height: calc(100% - 18vh);
+  height: auto;
+  overflow-y: auto;
+  display: flex;
+  flex-flow: row wrap;
+  @include sm {
+    flex-flow: column wrap;
+  }
+  flex-wrap: wrap;
+  margin: 0 auto;
+  padding: 3vh 0 0 0;
+  align-content: flex-start
+}
+
+.mediaItem {
+  position: relative;
+  cursor: pointer;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: $imageItem_W;
+  height: auto;
+  max-height: $imageItem_H;
+  margin: 0 0 5vh 0;
+  @include sm {
+    margin: 1vh 0;
+  }
+}
+
+.mediaItem img {
+  max-width: $imageItem_W;
+  max-height: $imageItem_H;
+  display: block;
+  margin: 0 auto;
+}
+
+#detailMenu {
+  display: none;
+  float: right;
+  height: calc(100% - 4vh);
+  transition: all .3s;
+  padding: 2vh;
+}
+
+#mediaBox.infoOpen {
+  width: calc(100% - 27vw) !important;
+  padding-right: 2vw;
+}
+
+#mediaBox.infoOpen #detailMenu {
+  display: block;
+  position: absolute;
+  width: 25vw;
+  right: 0;
+  top: 0;
+}
+
+#detailMenu #detailWrapper {
+  position: relative;
+}
+
+#detailMenu #closeDetail {
+  position: absolute;
+  left: 0;
+  top: 0;
+  cursor: pointer;
+}
+
+#detailMenu #imagePreview {
+  max-width: 22vw;
+  height: 35vh;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  margin: 1vh auto 0 auto;
+}
+
+#specsBox {
+  width: calc(100% - 4vw);
+  height: calc(100vh - 44vh);
+  padding: 2vh;
+  margin: 0 auto;
+  overflow-y: auto;
+}
+
+#specsBox table {
+  width: 100%;
+  font-size: 130%;
+}
+
+#specsBox table tr {
+  padding: 10vh 0;
+  transition: all .3s;
+  height: 5vh;
+}
+
+#specsBox table tr td:nth-of-type(1) {
+  width: 10%;
+  opacity: .5;
+}
+
+#specsBox table tr td:nth-of-type(2) {
+  opacity: .5;
+}
+
+#specsBox table tr td:nth-of-type(3) {
+  text-align: right;
+}

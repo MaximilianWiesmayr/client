@@ -18,6 +18,7 @@ import {MailFailedComponent} from './components/register/mail-failed/mail-failed
 import {MatPasswordStrengthModule} from '@angular-material-extensions/password-strength';
 import {LoadingScreenComponent} from './components/loading-screen/loading-screen.component';
 import {OverviewItemComponent} from './components/client-area/dashboard/overview-item/overview-item.component';
+import {MyMediaComponent} from './components/client-area/my-media/my-media.component';
 
 @NgModule({
     declarations: [
@@ -30,7 +31,8 @@ import {OverviewItemComponent} from './components/client-area/dashboard/overview
         RegisterWrapperComponent,
         MailFailedComponent,
         LoadingScreenComponent,
-        OverviewItemComponent
+        OverviewItemComponent,
+        MyMediaComponent
     ],
     imports: [
         BrowserModule,

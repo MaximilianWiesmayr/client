@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {DataService} from '../../services/data.service';
 import {AccountType} from '../../enums/account-type.enum';
+import {Router} from '@angular/router';
 
 @Component({
     selector: 'app-client-area',
@@ -12,30 +13,30 @@ export class ClientAreaComponent implements OnInit {
         {
             title: 'Dashboard',
             icon: 'dashboard',
-            route: '',
+            route: '/dashboard',
             active: true
         },
         {
             title: 'My Photos',
             icon: 'folder', // photo_library
-            route: '',
+            route: '/dashboard/photos',
             active: false
         },
         {
             title: 'Browse',
             icon: 'cloud_circle',
-            route: '',
+            route: '/browse',
             active: false
         },
         {
             title: 'Logout',
             icon: 'logout',
-            route: '',
+            route: '/logout',
             active: false
         }
     ];
 
-    constructor(public dataservice: DataService) {
+    constructor(public dataservice: DataService, public router: Router) {
     }
 
     // Toggles the Sidebar
@@ -84,6 +85,16 @@ export class ClientAreaComponent implements OnInit {
                 document.getElementById('accountType').hidden = true;
                 break;
         }
+        // Switch the selection of the Sidebar-Navigation regarding the URL
+        this.navItems.forEach(n => {
+            /* tslint:disable:no-string-literal */
+            if (this.router.url.endsWith(n['route'])) {
+                n['active'] = true;
+            } else {
+                n['active'] = false;
+            }
+            /* tslint:enable:no-string-literal */
+        });
     }
 
     performRouting(item) {
@@ -98,7 +109,7 @@ export class ClientAreaComponent implements OnInit {
             }
             /* tslint:enable:no-string-literal */
         });
-        // this.router.navigate([item.route]);
+        this.router.navigate([item.route]);
         // ROUTE HERE
     }
 }

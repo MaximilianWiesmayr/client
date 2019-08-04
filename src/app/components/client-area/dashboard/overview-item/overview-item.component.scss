@@ -48,7 +48,9 @@
 }
 
 .textInfo {
-
+  background-image: linear-gradient(90deg, $gradient_start, $gradient_end);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .textwrapper {
