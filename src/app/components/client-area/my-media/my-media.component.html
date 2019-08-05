@@ -8,15 +8,15 @@
                   [class.active]="dataservice.user.settings.myPhotosGridView">grid_on
         </mat-icon>
     </div>
-    <div id="mediaContainer">
+    <div [class.dark]="this.dataservice.user.settings.darkmode" id="mediaContainer">
         <div (click)="openInfo(image)" *ngFor="let image of this.images"
              [class.list]="!this.dataservice.user.settings.myPhotosGridView"
              class="mediaItem "><img
                 [src]="image.path + image.factoryTitle + '.' + image.extension"
                 ondragstart="return false;">
             <div *ngIf="!dataservice.user.settings.myPhotosGridView" class="listSpecs">
-                <span class="listSpecsTitle">Test</span>
-                <span class="listSpecsFileSize">3.25MB</span>
+                <span class="listSpecsTitle">{{image.title != '' ? image.title : image.factoryTitle}}</span>
+                <span class="listSpecsFileSize">{{image.fileSize}}</span>
             </div>
         </div>
 

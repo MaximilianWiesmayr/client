@@ -221,7 +221,7 @@
 #sidebar.collapsed + #pageContent {
   width: calc(100vw - 5vw) !important;
   height: 100vh;
-  float: left;
+  float: right;
 }
 
 #sidebar.collapsed #collapseSettings {
@@ -237,11 +237,4 @@
   @include sm {
     top: 0 !important;
   }
-}
-
-/* == SUBSCRIPTION STATUS == */
-.pro {
-  color: purple !important;
-  font-weight: bold !important;
-  text-transform: uppercase !important;
 }
