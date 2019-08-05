@@ -106,7 +106,7 @@
 
 #mediaBox.infoOpen #detailMenu {
   display: block;
-  position: absolute;
+  position: fixed;
   width: 25vw;
   right: 0;
   top: 0;
@@ -185,4 +185,49 @@
   @include sm {
     padding-right: 5vw;
   }
+}
+
+/* LIST VIEW */
+.mediaItem.list {
+  width: 70% !important;
+  height: 10vh !important;
+  margin: 0 auto;
+  padding: 2vh 0;
+  transition: all .3s;
+  @include sm {
+    width: 90% !important;
+    padding: 0 5%;
+  }
+}
+
+.mediaItem.list:hover {
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.mediaItem.list img {
+  max-height: 10vh;
+  float: left;
+}
+
+.mediaItem.list .listSpecs {
+  float: right;
+  width: calc(100% - 10vw);
+  height: 10vh;
+  line-height: 10vh;
+  text-align: center;
+  @include sm {
+    width: calc(100% - 30vw);
+  }
+}
+
+.mediaItem.list:not(:first-of-type) {
+  margin-top: 2vh;
+}
+
+.mediaItem.list .listSpecsTitle {
+  margin: 0 auto;
+}
+
+.mediaItem.list .listSpecsFileSize {
+  float: right;
 }

@@ -1,13 +1,24 @@
 <div [class.dark]="this.dataservice.user.settings.darkmode" [class.infoOpen]="isInfoOpen" id="mediaBox">
     <div class="headline gradientText">My Photos</div>
     <div id="controlBar">
-        <mat-icon>format_list_bulleted</mat-icon>
-        <mat-icon class="active">grid_on</mat-icon>
+        <mat-icon (click)="this.dataservice.user.settings.myPhotosGridView = false"
+                  [class.active]="!dataservice.user.settings.myPhotosGridView">format_list_bulleted
+        </mat-icon>
+        <mat-icon (click)="this.dataservice.user.settings.myPhotosGridView = true"
+                  [class.active]="dataservice.user.settings.myPhotosGridView">grid_on
+        </mat-icon>
     </div>
     <div id="mediaContainer">
-        <div *ngFor="let image of this.images" class="mediaItem"><img
-                (click)="openInfo(image)" [src]="image.path + image.factoryTitle + '.' + image.extension"
-                ondragstart="return false;"></div>
+        <div (click)="openInfo(image)" *ngFor="let image of this.images"
+             [class.list]="!this.dataservice.user.settings.myPhotosGridView"
+             class="mediaItem "><img
+                [src]="image.path + image.factoryTitle + '.' + image.extension"
+                ondragstart="return false;">
+            <div *ngIf="!dataservice.user.settings.myPhotosGridView" class="listSpecs">
+                <span class="listSpecsTitle">Test</span>
+                <span class="listSpecsFileSize">3.25MB</span>
+            </div>
+        </div>
 
     </div>
     <div [class.dark]="this.dataservice.user.settings.darkmode" id="detailMenu">
