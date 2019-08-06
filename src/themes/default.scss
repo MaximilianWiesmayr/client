@@ -114,3 +114,11 @@ body, html {
 .dark .mediaItem:hover img {
   border: 2px solid white;
 }
+
+.dark .socialIcon svg {
+  fill: white !important;
+}
+
+.dark .socialIcon.staticImage {
+  filter: invert(1);
+}

@@ -87,7 +87,7 @@ export class DataService {
         'Sebastian',
         'Schiefermayr',
         'basti@bastiarts.com',
-        new Settings(false, false),
+        new Settings(true, false),
         25000,
         AccountType.PRO);
     // The Settings Object let you change for instance the title of the whole project

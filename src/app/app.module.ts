@@ -18,7 +18,9 @@ import {MailFailedComponent} from './components/register/mail-failed/mail-failed
 import {MatPasswordStrengthModule} from '@angular-material-extensions/password-strength';
 import {LoadingScreenComponent} from './components/loading-screen/loading-screen.component';
 import {OverviewItemComponent} from './components/client-area/dashboard/overview-item/overview-item.component';
-import {MyMediaComponent} from './components/client-area/my-media/my-media.component';
+import {MyMediaComponent, SocialSharingSheetComponent} from './components/client-area/my-media/my-media.component';
+import {MatBottomSheetModule} from '@angular/material';
+import {CreditsComponent} from './components/credits/credits.component';
 
 @NgModule({
     declarations: [
@@ -32,7 +34,9 @@ import {MyMediaComponent} from './components/client-area/my-media/my-media.compo
         MailFailedComponent,
         LoadingScreenComponent,
         OverviewItemComponent,
-        MyMediaComponent
+        MyMediaComponent,
+        SocialSharingSheetComponent,
+        CreditsComponent
     ],
     imports: [
         BrowserModule,
@@ -42,10 +46,12 @@ import {MyMediaComponent} from './components/client-area/my-media/my-media.compo
         MaterialModule,
         BrowserAnimationsModule,
         ParticlesModule,
-        MatPasswordStrengthModule
+        MatPasswordStrengthModule,
+        MatBottomSheetModule
     ],
     providers: [AuthGuard],
-    bootstrap: [AppComponent]
+    bootstrap: [AppComponent],
+    entryComponents: [SocialSharingSheetComponent]
 })
 export class AppModule {
 }

@@ -9,6 +9,7 @@ import {MailSuccessComponent} from './components/register/mail-success/mail-succ
 import {RegisterWrapperComponent} from './components/register/register-wrapper/register-wrapper.component';
 import {MailFailedComponent} from './components/register/mail-failed/mail-failed.component';
 import {MyMediaComponent} from './components/client-area/my-media/my-media.component';
+import {CreditsComponent} from './components/credits/credits.component';
 
 const routes: Routes = [
     {path: '', redirectTo: 'login', pathMatch: 'full'}, // Later on the redirect is replaced by the Landingpage-Component
@@ -25,6 +26,7 @@ const routes: Routes = [
             {path: '', component: DashboardComponent},
             {path: 'photos', component: MyMediaComponent}
         ]},
+    {path: 'credits', component: CreditsComponent},
     {path: '**', redirectTo: 'login'}
 ];
 

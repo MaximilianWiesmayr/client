@@ -25,6 +25,14 @@
         <div id="detailWrapper">
             <mat-icon (click)="isInfoOpen = false" id="closeDetail">close</mat-icon>
             <div id="imagePreview"></div>
+            <div id="actionMenu">
+                <button (click)="openSharingFeed()" color="primary" mat-button>
+                    <mat-icon>share</mat-icon>
+                    <span class="buttonTitle">Share</span></button>
+                <button color="warn" mat-stroked-button>
+                    <mat-icon>delete</mat-icon>
+                    <span class="buttonTitle">Delete</span></button>
+            </div>
             <div id="specsBox">
                 <table>
                     <tr>

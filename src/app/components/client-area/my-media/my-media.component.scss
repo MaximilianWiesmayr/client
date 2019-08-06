@@ -96,6 +96,7 @@
   margin: 0 auto;
 }
 
+/* Detail Menu*/
 #detailMenu {
   display: none;
   float: right;
@@ -106,6 +107,19 @@
     padding: 2vh 0 2vh 0;
     overflow-y: hidden;
   }
+}
+
+#actionMenu {
+  display: flex;
+  flex-wrap: wrap;
+  flex-flow: row wrap;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.buttonTitle {
+  margin-left: .5vw;
+  font-size: large;
 }
 
 #mediaBox.infoOpen {
@@ -243,3 +257,10 @@
 .mediaItem.list .listSpecsFileSize {
   float: right;
 }
+
+/* Social Sheet */
+.socialIcon, .socialIcon svg {
+  max-width: 64px;
+  float: left;
+}
+
