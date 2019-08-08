@@ -115,10 +115,31 @@ body, html {
   border: 2px solid white;
 }
 
+// Sharing Popup
 .dark .socialIcon svg {
   fill: white !important;
 }
 
 .dark .socialIcon.staticImage {
   filter: invert(1);
+}
+
+.dark .socialText {
+  color: white;
+}
+
+.dark .socialDescription {
+  color: white;
+}
+
+a[mat-list-item]:hover svg.facebook {
+  fill: #3C5A99 !important;
+}
+
+a[mat-list-item]:hover svg.instagram {
+  fill: url(#rg) !important;
+}
+
+a[mat-list-item]:hover .staticImage.twitter {
+  filter: opacity(.1) drop-shadow(0 0 0 #1DA1F2);
 }

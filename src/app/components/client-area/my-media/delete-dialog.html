@@ -1,0 +1,8 @@
+<h1 mat-dialog-title>Delete Image</h1>
+<div mat-dialog-content>
+    <p>Are you sure to delete this image <b>permanently</b>?</p>
+</div>
+<div mat-dialog-actions>
+    <button (click)="onNoClick()" mat-button>No</button>
+    <button [mat-dialog-close]="!data.delete" cdkFocusInitial color="warn" mat-raised-button>Yes</button>
+</div>

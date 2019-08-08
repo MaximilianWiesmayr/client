@@ -18,8 +18,8 @@ import {MailFailedComponent} from './components/register/mail-failed/mail-failed
 import {MatPasswordStrengthModule} from '@angular-material-extensions/password-strength';
 import {LoadingScreenComponent} from './components/loading-screen/loading-screen.component';
 import {OverviewItemComponent} from './components/client-area/dashboard/overview-item/overview-item.component';
-import {MyMediaComponent, SocialSharingSheetComponent} from './components/client-area/my-media/my-media.component';
-import {MatBottomSheetModule} from '@angular/material';
+import {DeleteDialogComponent, MyMediaComponent, SocialSharingSheetComponent} from './components/client-area/my-media/my-media.component';
+import {MatBottomSheetModule, MatDialogModule} from '@angular/material';
 import {CreditsComponent} from './components/credits/credits.component';
 
 @NgModule({
@@ -36,6 +36,7 @@ import {CreditsComponent} from './components/credits/credits.component';
         OverviewItemComponent,
         MyMediaComponent,
         SocialSharingSheetComponent,
+        DeleteDialogComponent,
         CreditsComponent
     ],
     imports: [
@@ -47,11 +48,12 @@ import {CreditsComponent} from './components/credits/credits.component';
         BrowserAnimationsModule,
         ParticlesModule,
         MatPasswordStrengthModule,
-        MatBottomSheetModule
+        MatBottomSheetModule,
+        MatDialogModule
     ],
     providers: [AuthGuard],
     bootstrap: [AppComponent],
-    entryComponents: [SocialSharingSheetComponent]
+    entryComponents: [SocialSharingSheetComponent, DeleteDialogComponent]
 })
 export class AppModule {
 }
