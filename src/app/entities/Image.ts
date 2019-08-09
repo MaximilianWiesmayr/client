@@ -6,7 +6,7 @@ export class Image {
         public factoryTitle: string = '', // DSG00151 bla bla
         public path: string = '', // Storage Path
         public extension: ImageExtension = ImageExtension.JPG, // ImageExtension
-        public fileSize: string = '0MB'
+        public fileSize: string = '0 MB'
 
     ) {
     }

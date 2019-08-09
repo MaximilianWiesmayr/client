@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {DataService} from '../../services/data.service';
-import {AccountType} from '../../enums/account-type.enum';
 import {Router} from '@angular/router';
+import {SubscriptionStatus} from '../../enums/subscription-status.enum';
 
 @Component({
     selector: 'app-client-area',
@@ -69,17 +69,18 @@ export class ClientAreaComponent implements OnInit {
 
     ngOnInit() {
         // Display the current subscription status of the user
-        switch (this.dataservice.user.accountType) {
-            case AccountType.BASIC:
+        switch (this.dataservice.user.subscriptionType) {
+            case SubscriptionStatus.BASIC:
                 document.getElementById('accountType').hidden = true;
                 break;
-            case AccountType.PRO:
+            case SubscriptionStatus.PRO:
                 document.getElementById('accountType').innerHTML =
-                    '<span style="color: blueviolet; font-weight: bold; text-transform: uppercase;">' + AccountType.PRO + '</span>';
+                    '<span style="color: blueviolet; font-weight: bold; text-transform: uppercase;">' + SubscriptionStatus.PRO + '</span>';
                 break;
-            case AccountType.EXPERT:
+            case SubscriptionStatus.EXPERT:
                 document.getElementById('accountType').innerHTML =
-                    '<span style="color: goldenrod; font-weight: bold; text-transform: uppercase;">' + AccountType.EXPERT + '</span>';
+                    '<span style="color: goldenrod; font-weight: bold; text-transform: uppercase;">' + SubscriptionStatus.EXPERT +
+                    '</span>';
                 break;
             default:
                 document.getElementById('accountType').hidden = true;
