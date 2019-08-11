@@ -3,6 +3,7 @@ import {User} from '../entities/User';
 import {Settings} from '../entities/Settings';
 import {DashboardInfoItem} from '../entities/dashboard-info-item';
 import {SubscriptionStatus} from '../enums/subscription-status.enum';
+import {AccountType} from '../enums/account-type.enum';
 
 @Injectable({
     providedIn: 'root'
@@ -87,9 +88,11 @@ export class DataService {
         'Sebastian',
         'Schiefermayr',
         'basti@bastiarts.com',
+        '123',
         new Settings(true, false),
         25000,
-        SubscriptionStatus.PRO);
+        SubscriptionStatus.PRO,
+        AccountType.INACTIVE);
     // The Settings Object let you change for instance the title of the whole project
     public settings = {
         title: 'InstantGrade',
@@ -109,7 +112,7 @@ export class DataService {
             new DashboardInfoItem(
                 'account_box',
                 'Current Subscription',
-                '<span class = "' + this.user.subscriptionType.toString() + '">' + this.user.subscriptionType.toString() + '</span>'
+                '<span class = "' + this.user.subscriptionStatus.toString() + '">' + this.user.subscriptionStatus.toString() + '</span>'
             ),
             new DashboardInfoItem(
                 'notification_important',

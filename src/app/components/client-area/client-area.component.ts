@@ -69,7 +69,7 @@ export class ClientAreaComponent implements OnInit {
 
     ngOnInit() {
         // Display the current subscription status of the user
-        switch (this.dataservice.user.subscriptionType) {
+        switch (this.dataservice.user.subscriptionStatus) {
             case SubscriptionStatus.BASIC:
                 document.getElementById('accountType').hidden = true;
                 break;

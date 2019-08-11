@@ -10,6 +10,7 @@ import {RegisterWrapperComponent} from './components/register/register-wrapper/r
 import {MailFailedComponent} from './components/register/mail-failed/mail-failed.component';
 import {MyMediaComponent} from './components/client-area/my-media/my-media.component';
 import {CreditsComponent} from './components/credits/credits.component';
+import {VerifyComponent} from './components/verify/verify.component';
 
 const routes: Routes = [
     {path: '', redirectTo: 'login', pathMatch: 'full'}, // Later on the redirect is replaced by the Landingpage-Component
@@ -22,6 +23,7 @@ const routes: Routes = [
             {path: '**', redirectTo: ''}
         ]
     },
+    {path: 'verify', component: VerifyComponent},
     {path: 'dashboard', component: ClientAreaComponent, canActivate: [AuthGuard], children: [
             {path: '', component: DashboardComponent},
             {path: 'photos', component: MyMediaComponent}

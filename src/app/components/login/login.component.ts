@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {DataService} from '../../services/data.service';
 import {MatProgressButtonOptions} from 'mat-progress-buttons';
+import {HttpService} from '../../services/http.service';
+import {MatSnackBar} from '@angular/material';
 
 @Component({
     selector: 'app-login',
@@ -10,7 +12,12 @@ import {MatProgressButtonOptions} from 'mat-progress-buttons';
 })
 export class LoginComponent implements OnInit {
 
-    constructor(private router: Router, public dataservice: DataService) {
+    constructor(
+        private router: Router,
+        public dataservice: DataService,
+        private http: HttpService,
+        private snackBar: MatSnackBar
+    ) {
     }
 
 
@@ -31,9 +38,19 @@ export class LoginComponent implements OnInit {
     // Mehtod, which sends a REST Request to our Back-end
     login() {
         this.btnOpts.active = true;
-        setTimeout(() => {
+        this.http.login(this.dataservice.user).subscribe(res => {
             this.btnOpts.active = false;
-        }, 3350);
+            /* tslint:disable:no-string-literal */
+            if (res['status'] === 'success') {
+                this.router.navigate(['dashboard']);
+            } else {
+                this.snackBar.open('ERROR: ' + res['exception'], 'Try again');
+            }
+            /* tslint:enable:no-string-literal */
+        });
+        /*  setTimeout(() => {
+              this.btnOpts.active = false;
+          }, 3350); */
     }
 
     ngOnInit() {

@@ -6,19 +6,19 @@
         </div>
         <form [formGroup]="registerform">
             <mat-form-field>
-                <input formControlName="username" matInput placeholder="Username" required type="text">
+                <input formControlName="username" matInput name="username" placeholder="Username" required type="text">
             </mat-form-field>
             <mat-form-field>
-                <input matInput placeholder="Firstname" type="text">
+                <input formControlName="firstname" matInput name="firstname" placeholder="Firstname" type="text">
             </mat-form-field>
             <mat-form-field>
-                <input matInput placeholder="Lastname" type="text">
+                <input formControlName="lastname" matInput name="lastname" placeholder="Lastname" type="text">
             </mat-form-field>
             <mat-form-field>
-                <input formControlName="email" matInput placeholder="Email" required type="email">
+                <input formControlName="email" matInput name="email" placeholder="Email" required type="email">
             </mat-form-field>
             <mat-form-field>
-                <input [type]="hide ? 'password' : 'text'" formControlName="password" matInput
+                <input [type]="hide ? 'password' : 'text'" formControlName="password" matInput name="password"
                        placeholder="Password" required>
                 <button (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide"
                         mat-icon-button
@@ -30,7 +30,7 @@
                 </mat-error>
             </mat-form-field>
             <mat-form-field>
-                <input [errorStateMatcher]="matcher" formControlName="confirmPassword" matInput
+                <input [errorStateMatcher]="matcher" formControlName="confirmPassword" matInput name="passwordConfirm"
                        placeholder="Confirm Password"
                        type="password">
                 <mat-error *ngIf="registerform.hasError('notmatching')">

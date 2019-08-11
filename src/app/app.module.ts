@@ -21,6 +21,9 @@ import {OverviewItemComponent} from './components/client-area/dashboard/overview
 import {DeleteDialogComponent, MyMediaComponent, SocialSharingSheetComponent} from './components/client-area/my-media/my-media.component';
 import {MatBottomSheetModule, MatDialogModule} from '@angular/material';
 import {CreditsComponent} from './components/credits/credits.component';
+import {VerifyComponent} from './components/verify/verify.component';
+import {HttpClientModule} from '@angular/common/http';
+import {HttpService} from './services/http.service';
 
 @NgModule({
     declarations: [
@@ -37,7 +40,8 @@ import {CreditsComponent} from './components/credits/credits.component';
         MyMediaComponent,
         SocialSharingSheetComponent,
         DeleteDialogComponent,
-        CreditsComponent
+        CreditsComponent,
+        VerifyComponent
     ],
     imports: [
         BrowserModule,
@@ -49,9 +53,10 @@ import {CreditsComponent} from './components/credits/credits.component';
         ParticlesModule,
         MatPasswordStrengthModule,
         MatBottomSheetModule,
-        MatDialogModule
+        MatDialogModule,
+        HttpClientModule
     ],
-    providers: [AuthGuard],
+    providers: [AuthGuard, HttpService],
     bootstrap: [AppComponent],
     entryComponents: [SocialSharingSheetComponent, DeleteDialogComponent]
 })

@@ -8,9 +8,10 @@ export class User {
         public firstname: string = '',
         public lastname: string = '',
         public email: string = '',
+        public password: string = '',
         public settings: Settings = new Settings(),
         public credits: number = 0,
-        public subscriptionType: SubscriptionStatus = SubscriptionStatus.BASIC,
+        public subscriptionStatus: SubscriptionStatus = SubscriptionStatus.BASIC,
         public accountType: AccountType = AccountType.INACTIVE
     ) {
     }
