@@ -63,7 +63,7 @@ export class RegisterComponent implements OnInit {
             this.dataservice.user.firstname = this.registerform.get('firstname').value;
             this.dataservice.user.lastname = this.registerform.get('lastname').value;
             this.dataservice.user.email = this.registerform.get('email').value;
-
+            this.dataservice.user.password = this.registerform.get('password').value;
             this.btnOpts.active = true;
             this.http.register(this.dataservice.user).subscribe(r => {
                 /* tslint:disable:no-string-literal */

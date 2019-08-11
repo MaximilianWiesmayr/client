@@ -92,7 +92,7 @@ export class DataService {
         new Settings(true, false),
         25000,
         SubscriptionStatus.PRO,
-        AccountType.INACTIVE);
+        AccountType.NOT_VERIFIED);
     // The Settings Object let you change for instance the title of the whole project
     public settings = {
         title: 'InstantGrade',

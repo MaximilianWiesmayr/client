@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {DataService} from '../../services/data.service';
+import {HttpService} from '../../services/http.service';
 
 @Component({
     selector: 'app-verify',
@@ -9,13 +10,21 @@ import {DataService} from '../../services/data.service';
 })
 export class VerifyComponent implements OnInit {
 
-    constructor(private activatedRoute: ActivatedRoute, public dataservice: DataService) {
+    private title = '';
+
+    constructor(private activatedRoute: ActivatedRoute, public dataservice: DataService, private http: HttpService) {
     }
 
     ngOnInit() {
         this.activatedRoute.queryParams.subscribe(params => {
             const userId = params.id;
-            console.log(userId);
+            this.http.verify(userId).subscribe(res => {
+                if (res['status'] === 'success') {
+                    this.title = 'YEET! Erfolgreich Aktiviert!';
+                } else {
+                    this.title = 'DAMN! Aktivierung fehlgeschlagen!';
+                }
+            });
         });
     }
 

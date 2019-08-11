@@ -12,7 +12,7 @@ export class User {
         public settings: Settings = new Settings(),
         public credits: number = 0,
         public subscriptionStatus: SubscriptionStatus = SubscriptionStatus.BASIC,
-        public accountType: AccountType = AccountType.INACTIVE
+        public accountType: AccountType = AccountType.NOT_VERIFIED
     ) {
     }
 }

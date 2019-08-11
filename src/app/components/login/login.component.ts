@@ -35,22 +35,22 @@ export class LoginComponent implements OnInit {
         mode: 'indeterminate',
     };
 
-    // Mehtod, which sends a REST Request to our Back-end
+    // Method, which sends a REST Request to our Back-end
     login() {
         this.btnOpts.active = true;
         this.http.login(this.dataservice.user).subscribe(res => {
             this.btnOpts.active = false;
             /* tslint:disable:no-string-literal */
             if (res['status'] === 'success') {
+                this.dataservice.user = res['user'];
+                this.dataservice.user.settings = JSON.parse(res['user'].settings);
+                localStorage.setItem('user', JSON.stringify(this.dataservice.user));
                 this.router.navigate(['dashboard']);
             } else {
                 this.snackBar.open('ERROR: ' + res['exception'], 'Try again');
             }
             /* tslint:enable:no-string-literal */
         });
-        /*  setTimeout(() => {
-              this.btnOpts.active = false;
-          }, 3350); */
     }
 
     ngOnInit() {

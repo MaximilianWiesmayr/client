@@ -24,6 +24,9 @@ export class AppComponent implements OnInit, AfterViewInit {
 
     ngOnInit() {
         this.viewLoadingCompleted = false;
+        if (localStorage.getItem('user') !== null) {
+            this.dataservice.user = JSON.parse(localStorage.getItem('user'));
+        }
     }
 
     ngAfterViewInit(): void {

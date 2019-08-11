@@ -1,5 +1,5 @@
 export enum AccountType {
-    ACTIVE,
-    INACTIVE,
-    DELETED
+    DELETED,
+    NOT_VERIFIED,
+    VERIFIED
 }
