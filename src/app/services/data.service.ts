@@ -1,9 +1,5 @@
 import {Injectable} from '@angular/core';
 import {User} from '../entities/User';
-import {Settings} from '../entities/Settings';
-import {DashboardInfoItem} from '../entities/dashboard-info-item';
-import {SubscriptionStatus} from '../enums/subscription-status.enum';
-import {AccountType} from '../enums/account-type.enum';
 
 @Injectable({
     providedIn: 'root'
@@ -83,44 +79,12 @@ export class DataService {
         height: 100
     };
     // The dummyUser
-    public user: User = new User(
-        'BastiArts',
-        'Sebastian',
-        'Schiefermayr',
-        'basti@bastiarts.com',
-        '123',
-        new Settings(true, false),
-        25000,
-        SubscriptionStatus.PRO,
-        AccountType.NOT_VERIFIED);
+    public user: User = new User();
     // The Settings Object let you change for instance the title of the whole project
     public settings = {
         title: 'InstantGrade',
         version: '1.0',
-        virtualCurrency: 'Credits',
-        dashboardOverviewItems: [
-            new DashboardInfoItem(
-                'photo',
-                'Photos',
-                '20'
-            ),
-            new DashboardInfoItem(
-                'storage',
-                'Space available',
-                '12GB / 15GB'
-            ),
-            new DashboardInfoItem(
-                'account_box',
-                'Current Subscription',
-                '<span class = "' + this.user.subscriptionStatus.toString() + '">' + this.user.subscriptionStatus.toString() + '</span>'
-            ),
-            new DashboardInfoItem(
-                'notification_important',
-                'Notifications',
-                '0'
-            )
-
-        ]
+        virtualCurrency: 'Credits'
     };
 
     constructor() {
@@ -136,4 +100,9 @@ export class DataService {
         return word.replace(/[^A-Z]/g, '');
     }
 
+    // Resets the User locally
+    reset() {
+        localStorage.clear();
+        this.user = new User();
+    }
 }

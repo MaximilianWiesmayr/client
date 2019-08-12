@@ -110,7 +110,9 @@ export class ClientAreaComponent implements OnInit {
             }
             /* tslint:enable:no-string-literal */
         });
+        if (item.title === 'Logout') {
+            this.dataservice.reset();
+        }
         this.router.navigate([item.route]);
-        // ROUTE HERE
     }
 }
