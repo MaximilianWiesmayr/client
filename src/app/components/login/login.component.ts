@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {DataService} from '../../services/data.service';
 import {MatProgressButtonOptions} from 'mat-progress-buttons';
 import {HttpService} from '../../services/http.service';
@@ -12,14 +12,16 @@ import {MatSnackBar} from '@angular/material';
 })
 export class LoginComponent implements OnInit {
 
+    returnUrl: string = '';
+
     constructor(
         private router: Router,
+        private route: ActivatedRoute,
         public dataservice: DataService,
         private http: HttpService,
         private snackBar: MatSnackBar
     ) {
     }
-
 
     // Button Options
     btnOpts: MatProgressButtonOptions = {
@@ -43,9 +45,10 @@ export class LoginComponent implements OnInit {
             /* tslint:disable:no-string-literal */
             if (res['status'] === 'success') {
                 this.dataservice.user = res['user'];
+                this.dataservice.user.authToken = res['token'];
                 this.dataservice.user.settings = JSON.parse(res['user'].settings);
                 localStorage.setItem('user', JSON.stringify(this.dataservice.user));
-                this.router.navigate(['dashboard']);
+                this.router.navigate([this.returnUrl]);
             } else {
                 this.snackBar.open('ERROR: ' + res['exception'], 'Try again');
             }
@@ -54,6 +57,11 @@ export class LoginComponent implements OnInit {
     }
 
     ngOnInit() {
+        // Reset login status
+        this.dataservice.logout();
+        /* tslint:disable:no-string-literal */
+        this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/dashboard';
+        /* tslint:enable:no-string-literal */
     }
 
 }

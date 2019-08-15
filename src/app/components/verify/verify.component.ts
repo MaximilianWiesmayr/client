@@ -19,11 +19,13 @@ export class VerifyComponent implements OnInit {
         this.activatedRoute.queryParams.subscribe(params => {
             const userId = params.id;
             this.http.verify(userId).subscribe(res => {
+                /* tslint:disable:no-string-literal */
                 if (res['status'] === 'success') {
-                    this.title = 'YEET! Erfolgreich Aktiviert!';
+                    this.title = 'Account successfully activated';
                 } else {
-                    this.title = 'DAMN! Aktivierung fehlgeschlagen!';
+                    this.title = 'Activation failed! --> ' + res['exception'] || '';
                 }
+                /* tslint:enable:no-string-literal */
             });
         });
     }

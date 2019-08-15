@@ -13,13 +13,13 @@ import {CreditsComponent} from './components/credits/credits.component';
 import {VerifyComponent} from './components/verify/verify.component';
 
 const routes: Routes = [
-    {path: '', redirectTo: 'login', pathMatch: 'full'}, // Later on the redirect is replaced by the Landingpage-Component
+    {path: '', redirectTo: 'dashboard', pathMatch: 'full'}, // Later on the redirect is replaced by the Landingpage-Component
     {path: 'login', component: LoginComponent},
     {
         path: 'register', component: RegisterWrapperComponent, children: [
             {path: '', component: RegisterComponent},
-            {path: 'success', component: MailSuccessComponent, canActivate: [AuthGuard]},
-            {path: 'failed', component: MailFailedComponent, canActivate: [AuthGuard]},
+            {path: 'success', component: MailSuccessComponent},
+            {path: 'failed', component: MailFailedComponent},
             {path: '**', redirectTo: ''}
         ]
     },

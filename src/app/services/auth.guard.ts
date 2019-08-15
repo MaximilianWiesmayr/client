@@ -26,7 +26,7 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
         state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
         /* return this.router.createUrlTree(
              ['/login', { error: 'you do not have the permission to enter' }]); */
-        if (this.dataservice.user.accountType === AccountType.VERIFIED) {
+        if (this.dataservice.user.accountType === AccountType.VERIFIED && this.dataservice.user.authToken) {
             return true;
         } else {
             this.router.navigate(['login']);
@@ -37,7 +37,7 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
     canActivateChild(
         next: ActivatedRouteSnapshot,
         state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-        if (this.dataservice.user.accountType === AccountType.VERIFIED) {
+        if (this.dataservice.user.accountType === AccountType.VERIFIED && this.dataservice.user.authToken) {
 
             return true;
         } else {
@@ -49,12 +49,11 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
     canLoad(
         route: Route,
         segments: UrlSegment[]): Observable<boolean> | Promise<boolean> | boolean {
-        /*  if (this.dataservice.user.accountType === AccountType.VERIFIED) {
+        if (this.dataservice.user.accountType === AccountType.VERIFIED && this.dataservice.user.authToken) {
               return true;
           } else {
               this.router.navigate(['login']);
               return false;
-          }*/
-        return true;
+        }
     }
 }

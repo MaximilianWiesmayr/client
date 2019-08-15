@@ -24,6 +24,7 @@ import {CreditsComponent} from './components/credits/credits.component';
 import {VerifyComponent} from './components/verify/verify.component';
 import {HttpClientModule} from '@angular/common/http';
 import {HttpService} from './services/http.service';
+import {AuthInterceptor} from './util/interceptors/auth-interceptor';
 
 @NgModule({
     declarations: [
@@ -56,7 +57,7 @@ import {HttpService} from './services/http.service';
         MatDialogModule,
         HttpClientModule
     ],
-    providers: [AuthGuard, HttpService],
+    providers: [AuthGuard, HttpService, AuthInterceptor],
     bootstrap: [AppComponent],
     entryComponents: [SocialSharingSheetComponent, DeleteDialogComponent]
 })

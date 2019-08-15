@@ -7,8 +7,6 @@ import {User} from '../entities/User';
 export class DataService {
     // Receives a Value from App Component if the device is a Mobile device
     public isMobile: boolean = false;
-    // Toggles the darkmode on the Page, later on it will replaced by the Userconfiguration
-    public darkmode = false;
     // Settings for the particles on the Login & Register Page
     public particles: object = {
         style: {
@@ -100,9 +98,9 @@ export class DataService {
         return word.replace(/[^A-Z]/g, '');
     }
 
-    // Resets the User locally
-    reset() {
-        localStorage.clear();
+    logout() {
+        // remove user from local storage to log user out
+        localStorage.removeItem('user');
         this.user = new User();
     }
 }
