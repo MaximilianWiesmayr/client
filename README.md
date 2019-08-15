@@ -1,27 +1,64 @@
 # InstantGradeClient
 
+Frontend by [Sebastian Schiefermayr](https://bastiarts.com)
+
+## Entities
+
+<details>
+<summary>User</summary>
+
+```typescript
+export class User {
+    constructor(
+        public username: string = '',
+        public firstname: string = '',
+        public lastname: string = '',
+        public email: string = '',
+        public password: string = '',
+        public settings: Settings = new Settings(),
+        public credits: number = 0,
+        public subscriptionStatus: SubscriptionStatus = SubscriptionStatus.BASIC,
+        public accountType: AccountType = AccountType.NOT_VERIFIED,
+        public authToken?: string
+    ) {
+    }
+}
+```
+</details>
+
+<details>
+<summary>Settings</summary>
+
+```typescript
+export class Settings {
+    constructor(
+        public darkmode: boolean = false,
+        public navBarCollapsed: boolean = false,
+        public myPhotosGridView: boolean = true
+    ) {
+    }
+}
+```
+</details>
+
+<details>
+<summary>Image</summary>
+
+```typescript
+export class Image {
+    constructor(
+        public title: string = '', // custom title set by the user, by default its the factory name
+        public factoryTitle: string = '', // DSG00151 bla bla
+        public path: string = '', // Storage Path
+        public extension: ImageExtension = ImageExtension.JPG, // ImageExtension
+        public fileSize: string = '0 MB'
+
+    ) {
+    }
+}
+```
+</details>
+
+## Additional Informations
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.3.
-
-## Development server
-
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
