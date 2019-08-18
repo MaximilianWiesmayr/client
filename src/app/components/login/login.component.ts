@@ -45,8 +45,8 @@ export class LoginComponent implements OnInit {
             /* tslint:disable:no-string-literal */
             if (res['status'] === 'success') {
                 this.dataservice.user = res['user'];
-                this.dataservice.user.authToken = res['token'];
                 this.dataservice.user.settings = JSON.parse(res['user'].settings);
+                this.dataservice.user.authToken = res['token'];
                 localStorage.setItem('user', JSON.stringify(this.dataservice.user));
                 this.router.navigate([this.returnUrl]);
             } else {

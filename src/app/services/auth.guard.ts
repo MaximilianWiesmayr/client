@@ -24,8 +24,10 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
     canActivate(
         next: ActivatedRouteSnapshot,
         state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-        /* return this.router.createUrlTree(
-             ['/login', { error: 'you do not have the permission to enter' }]); */
+        /**
+         * Check if User has a verified Account and a valid Token (For validating the JWT Token, I used an Interceptor.
+         * See util/interceptors/auth-interceptor.ts how exactly I validated it.
+         * */
         if (this.dataservice.user.accountType === AccountType.VERIFIED && this.dataservice.user.authToken) {
             return true;
         } else {

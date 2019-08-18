@@ -25,4 +25,11 @@ export class HttpService {
     verify(token: string) {
         return this.http.post(environment.apiUrl + 'auth/verify', token);
     }
+
+    /*================================================
+                    CLIENT AREA
+    ================================================*/
+    getOverview(username: string) {
+        return this.http.get<string>(environment.apiUrl + 'clientarea/overview/' + username);
+    }
 }

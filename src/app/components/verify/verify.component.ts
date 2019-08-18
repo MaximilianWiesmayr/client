@@ -18,6 +18,7 @@ export class VerifyComponent implements OnInit {
     ngOnInit() {
         this.activatedRoute.queryParams.subscribe(params => {
             const userId = params.id;
+            // Sends a REST-Request to our backend
             this.http.verify(userId).subscribe(res => {
                 /* tslint:disable:no-string-literal */
                 if (res['status'] === 'success') {

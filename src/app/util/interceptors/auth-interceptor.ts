@@ -4,11 +4,10 @@ import {Observable, throwError} from 'rxjs';
 import {DataService} from '../../services/data.service';
 import {environment} from '../../../environments/environment';
 import {catchError} from 'rxjs/operators';
-import {Router} from '@angular/router';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
-    constructor(private dataservice: DataService, private router: Router) {
+    constructor(private dataservice: DataService) {
     }
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -26,7 +25,7 @@ export class AuthInterceptor implements HttpInterceptor {
 
         return next.handle(request).pipe(catchError(err => {
             if (err.status === 401) {
-                // auto logout if 401 response returned from api
+                // auto logout if 401 response returned from api (401 - UNAUTHORIZED)
                 this.dataservice.logout();
                 location.reload();
             }

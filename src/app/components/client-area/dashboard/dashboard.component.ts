@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {DataService} from '../../../services/data.service';
 import {DashboardInfoItem} from '../../../entities/dashboard-info-item';
+import {HttpService} from '../../../services/http.service';
 
 
 @Component({
@@ -11,7 +12,7 @@ import {DashboardInfoItem} from '../../../entities/dashboard-info-item';
 export class DashboardComponent implements OnInit {
 
 
-    constructor(public dataservice: DataService) {
+    constructor(public dataservice: DataService, private httpService: HttpService) {
     }
 
     dashboardOverviewItems = [
@@ -40,5 +41,8 @@ export class DashboardComponent implements OnInit {
     ];
 
     ngOnInit(): void {
+        this.httpService.getOverview(this.dataservice.user.username).subscribe(res => {
+            alert(res);
+        });
     }
 }

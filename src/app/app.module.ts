@@ -22,7 +22,7 @@ import {DeleteDialogComponent, MyMediaComponent, SocialSharingSheetComponent} fr
 import {MatBottomSheetModule, MatDialogModule} from '@angular/material';
 import {CreditsComponent} from './components/credits/credits.component';
 import {VerifyComponent} from './components/verify/verify.component';
-import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {HttpService} from './services/http.service';
 import {AuthInterceptor} from './util/interceptors/auth-interceptor';
 
@@ -57,7 +57,11 @@ import {AuthInterceptor} from './util/interceptors/auth-interceptor';
         MatDialogModule,
         HttpClientModule
     ],
-    providers: [AuthGuard, HttpService, AuthInterceptor],
+    providers: [AuthGuard, HttpService, {
+        provide: HTTP_INTERCEPTORS,
+        useClass: AuthInterceptor,
+        multi: true
+    }],
     bootstrap: [AppComponent],
     entryComponents: [SocialSharingSheetComponent, DeleteDialogComponent]
 })

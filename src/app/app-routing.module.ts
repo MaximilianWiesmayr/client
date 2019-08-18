@@ -24,7 +24,8 @@ const routes: Routes = [
         ]
     },
     {path: 'verify', component: VerifyComponent},
-    {path: 'dashboard', component: ClientAreaComponent, canActivate: [AuthGuard], children: [
+    {
+        path: 'dashboard', component: ClientAreaComponent, canActivate: [AuthGuard], canLoad: [AuthGuard], children: [
             {path: '', component: DashboardComponent},
             {path: 'photos', component: MyMediaComponent}
         ]},
