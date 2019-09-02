@@ -4,7 +4,7 @@
 </div>
 <div class="queue">
     <div *ngFor="let file of files;let i= index" [class]="changeClasses(file)">
-        <mat-spinner *ngIf="file.status === 'pending'"></mat-spinner>
+        <mat-spinner *ngIf="file.status === 'pending'" [diameter]="50"></mat-spinner>
         <p> {{ file.name }} {{file.status}} </p>
         <button (click)="deleteAttachment(i)" class="delete-file">
             <img src="../../assets/Recycle_Bin_Full.png">
