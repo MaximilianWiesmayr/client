@@ -28,7 +28,7 @@ export class DashboardComponent implements OnInit {
                 ),
                 new DashboardInfoItem(
                     'storage',
-                    'Space available',
+                    'Space used',
                     res['disc_space']
                 ),
                 new DashboardInfoItem(

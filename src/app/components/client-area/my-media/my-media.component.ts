@@ -66,7 +66,7 @@ export class MyMediaComponent implements OnInit {
         this.metaMap.clear();
         this.overviewMetaMap.clear();
         const meta: object = JSON.parse(image.metadata);
-        Object.keys(meta).filter(key => !key.includes('Unknown')).forEach(key => {
+        Object.keys(meta).filter(key => !key.includes('Unknown') && !key.includes('TRC')).forEach(key => {
             this.metaMap.set(key.trim(), meta[key].trim());
         });
         // filters the general meta of an image
