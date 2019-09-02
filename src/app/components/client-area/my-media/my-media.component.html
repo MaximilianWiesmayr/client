@@ -29,6 +29,9 @@
                 <button (click)="openSharingFeed()" color="primary" mat-button>
                     <mat-icon>share</mat-icon>
                     <span class="buttonTitle">Share</span></button>
+                <button (click)="openSharingFeed()" color="accent" mat-button>
+                    <mat-icon>edit</mat-icon>
+                    <span class="buttonTitle">Edit</span></button>
                 <button (click)="openDeleteDialog()" color="warn" mat-stroked-button>
                     <mat-icon>delete</mat-icon>
                     <span class="buttonTitle">Delete</span></button>
@@ -40,14 +43,14 @@
                             <mat-icon>perm_identity</mat-icon>
                         </td>
                         <td>User</td>
-                        <td>BastiArts</td>
+                        <td>{{this.selectedImage.owner}}</td>
                     </tr>
-                    <tr>
+                    <tr *ngFor=" let res of metaMap | keyvalue">
                         <td>
                             <mat-icon>perm_identity</mat-icon>
                         </td>
-                        <td>User</td>
-                        <td>BastiArts</td>
+                        <td>{{res.key}}</td>
+                        <td>{{res.value}}</td>
                     </tr>
                 </table>
             </div>

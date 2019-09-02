@@ -32,11 +32,19 @@ $container_height: 25vh;
   float: right;
   display: flex;
   justify-content: space-between;
-  width: 80%;
+  width: calc(80% - 15px);
   margin: 10px auto;
-  border: 1px dashed black;
-  padding: 5px;
+  background-color: rgba(0, 0, 0, 0.3);
+  padding: 5px 5px 5px 20px;
   color: $gradient_start;
+}
+
+.files-list.uploaded {
+  background-color: rgba(49, 110, 49, 0.1);
+}
+
+.files-list.cancelled {
+  background-color: rgba(110, 1, 0, 0.1);
 }
 
 .files-list .delete-file {

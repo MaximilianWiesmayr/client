@@ -11,7 +11,7 @@ import {MatSnackBar} from '@angular/material';
 })
 export class FileUploadComponent implements OnInit {
 
-    files: any = [];
+    files: Array<object> = [];
 
     constructor(private httpService: HttpService, private dataservice: DataService, private snackBar: MatSnackBar) {
     }
@@ -23,13 +23,23 @@ export class FileUploadComponent implements OnInit {
             const element = event[index];
             formData.append('owner', this.dataservice.user.username);
             formData.append('file', element, element.name);
-            this.files.push(element.name);
+            this.files.push({name: element.name, status: 'pending'});
             this.httpService.uploadImage(formData).subscribe(res => {
                     /* tslint:disable:no-string-literal */
                     if (res['status'] === 'success') {
                         this.snackBar.open('Image: ' + res['fileName'] + ' successfully uploaded.', '✔');
+                        this.files.forEach(f => {
+                            if (f['name'] === element.name) {
+                                f['status'] = 'uploaded';
+                            }
+                        });
                     } else {
                         this.snackBar.open('ERROR: ' + res['exception'], 'Try again');
+                        this.files.forEach(f => {
+                            if (f['name'] === element.name) {
+                                f['status'] = 'cancelled';
+                            }
+                        });
                     }
                     setTimeout(() => this.snackBar.dismiss(), this.dataservice.settings.snackBarTimeout);
                 },
@@ -42,6 +52,17 @@ export class FileUploadComponent implements OnInit {
 
     deleteAttachment(index) {
         this.files.splice(index, 1);
+    }
+
+    changeClasses(file) {
+        switch (file.status) {
+            case 'uploaded':
+                return 'files-list uploaded';
+            case 'cancelled':
+                return 'files-list cancelled';
+            default:
+                return 'files-list';
+        }
     }
 
     ngOnInit() {

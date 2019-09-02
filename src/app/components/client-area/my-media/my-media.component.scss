@@ -48,7 +48,8 @@
   width: 100%;
   /* min-height: calc(100% - 18vh); */
   height: auto;
-  overflow-y: auto;
+  max-height: calc(100% - (20vh + #{$imageItem_H}));
+  overflow-y: auto !important;
   display: flex;
   flex-flow: row wrap;
   @include sm {
@@ -173,19 +174,24 @@
 }
 
 #specsBox {
+  position: relative;
   width: calc(100% - 4vw);
-  height: calc(100vh - 44vh);
+  height: calc(100vh - 46vh);
   padding: 2vh;
   margin: 0 auto;
-  overflow-y: auto;
   @include sm {
     width: calc(100% - 9vw);
   }
 }
 
+#specsBox:hover {
+  overflow-x: auto;
+}
+
 #specsBox table {
+  position: absolute;
   width: 100%;
-  font-size: 130%;
+  font-size: 100%; // 130%
   @include sm {
     width: calc(100% - 5vw) !important;
   }
@@ -195,19 +201,25 @@
   padding: 10vh 0;
   transition: all .3s;
   height: 5vh;
+  max-width: calc(100% - 4vw);
 }
 
+// Icon
 #specsBox table tr td:nth-of-type(1) {
   width: 10%;
   opacity: .5;
 }
 
+// Key
 #specsBox table tr td:nth-of-type(2) {
   opacity: .5;
 }
 
+// Value
 #specsBox table tr td:nth-of-type(3) {
-  text-align: right;
+  // text-align: right;
+  //  font-size: small;
+  text-overflow: ellipsis;
   @include sm {
     padding-right: 5vw;
   }

@@ -22,12 +22,15 @@ export class MyMediaComponent implements OnInit {
     // Indicates if the Detail Sidebar is open or not
     public isInfoOpen = false;
     // Dummy Images later replaced by our HTTP Request
-    // TODO HTTP Request
     public images: Array<Image> = [];
     // The currently selected Image (by clicking on it to open the Details)
-    public selectedImage: Image;
+    public selectedImage: Image = new Image();
     // UploadDomain
     public uploadDomain: string = environment.publicDomain;
+    // Metadata Map of the selected Image (All metadata)
+    public metaMap: Map<string, any> = new Map<string, any>();
+    // Metadata Map of the selected Image (Overview metadata)
+    public overviewMetaMap: Map<string, any> = new Map<string, any>();
 
     constructor(
         public dataservice: DataService,
@@ -57,11 +60,19 @@ export class MyMediaComponent implements OnInit {
 
     // Opens the Info dialog for the clicked image
     openInfo(image: Image) {
-        const meta: object = JSON.parse(image.metadata);
-        // Sets the opening indicator to true
-        this.isInfoOpen = true;
         // Sets the current Image
         this.selectedImage = image;
+        // Resets the MetaMaps
+        this.metaMap.clear();
+        this.overviewMetaMap.clear();
+        const meta: object = JSON.parse(image.metadata);
+        Object.keys(meta).filter(key => !key.includes('Unknown')).forEach(key => {
+            this.metaMap.set(key.trim(), meta[key].trim());
+        });
+        // filters the general meta of an image
+        this.setOverviewMeta();
+        // Sets the opening indicator to true
+        this.isInfoOpen = true;
         // Sets the background-image of the preview
         document.getElementById('imagePreview').style.backgroundImage =
             'url("' + this.uploadDomain + '/' + image.path + '")';
@@ -108,8 +119,14 @@ export class MyMediaComponent implements OnInit {
     }
 
     deleteImage(image: Image): void {
-        // TODO IMAGE DELETE REQUEST
         this.images = this.images.filter(i => i !== image);
+    }
+
+    setOverviewMeta() {
+        this.overviewMetaMap.set('Date/Time Original', this.metaMap.get('Date/Time Original'));
+        this.overviewMetaMap.set('Extension', this.metaMap.get('Detected File Type Name'));
+        this.overviewMetaMap.set('Shutter Speed Value', this.metaMap.get('Shutter Speed Value'));
+        this.overviewMetaMap.set('Focus Mode', this.metaMap.get('Focus Mode'));
     }
 }
 
