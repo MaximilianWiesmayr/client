@@ -1,0 +1,50 @@
+@import "~src/themes/default";
+
+$container_height: 25vh;
+
+.uploadfilecontainer {
+  height: $container_height;
+  width: 30vw;
+  float: left;
+  border: 1px dashed black;
+}
+
+.uploadfilecontainer #placeholder {
+  line-height: $container_height;
+  height: $container_height;
+  width: 100%;
+  font-size: large;
+  color: gray;
+  text-align: center;
+}
+
+.uploadfilecontainer:hover {
+  cursor: pointer;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.queue {
+  overflow-y: auto;
+  max-height: $container_height;
+}
+
+.files-list {
+  float: right;
+  display: flex;
+  justify-content: space-between;
+  width: 80%;
+  margin: 10px auto;
+  border: 1px dashed black;
+  padding: 5px;
+  color: $gradient_start;
+}
+
+.files-list .delete-file {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.files-list .delete-file img {
+  width: 30px;
+}

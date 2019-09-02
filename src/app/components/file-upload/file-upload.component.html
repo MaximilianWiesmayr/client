@@ -1,0 +1,12 @@
+<div (click)="fileInput.click()" (onFileDropped)="uploadFile($event)" appDragNDrop class="uploadfilecontainer">
+    <div id="placeholder">Click or drag your images to upload</div>
+    <input #fileInput (change)="uploadFile($event.target.files)" hidden type="file">
+</div>
+<div class="queue">
+    <div *ngFor="let file of files;let i= index" class="files-list">
+        <p> {{ file }} </p>
+        <button (click)="deleteAttachment(i)" class="delete-file">
+            <img src="../../assets/Recycle_Bin_Full.png">
+        </button>
+    </div>
+</div>
