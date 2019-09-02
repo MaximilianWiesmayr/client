@@ -1,10 +1,11 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {Image} from '../../../entities/Image';
-import {ImageExtension} from '../../../enums/image-extension.enum';
 import {DataService} from '../../../services/data.service';
 import {MatBottomSheet, MatBottomSheetRef} from '@angular/material';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import {HttpService} from '../../../services/http.service';
+import {environment} from '../../../../environments/environment';
 
 // Interface for our deletion - popup
 export interface ImageDelete {
@@ -22,15 +23,15 @@ export class MyMediaComponent implements OnInit {
     public isInfoOpen = false;
     // Dummy Images later replaced by our HTTP Request
     // TODO HTTP Request
-    public images: Array<Image> = [
-        new Image('TE', '20190411-DSCF0697', '/assets/', ImageExtension.JPG),
-        new Image('TEST', '20190410-DSCF0620', '/assets/', ImageExtension.JPG), // ../../../../assets/
-    ];
+    public images: Array<Image> = [];
     // The currently selected Image (by clicking on it to open the Details)
     public selectedImage: Image;
+    // UploadDomain
+    public uploadDomain: string = environment.publicDomain;
 
     constructor(
         public dataservice: DataService,
+        private httpService: HttpService,
         private socialSheet: MatBottomSheet,
         public dialog: MatDialog,
         private snackBar: MatSnackBar
@@ -38,21 +39,32 @@ export class MyMediaComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.loadMedia();
     }
 
     // Receive Media from our Back-End via REST
     loadMedia() {
+        this.httpService.loadPhotos(this.dataservice.user.username).subscribe((res: Array<object>) => {
+            if (res !== null) {
+                for (const img of res) {
+                    /* tslint:disable:no-string-literal */
+                    this.images.push(new Image(img['customName'], img['factoryName'], img['filepath'], img['metadata'], img['owner']));
+                    /* tslint:enable:no-string-literal */
+                }
+            }
+        });
     }
 
     // Opens the Info dialog for the clicked image
     openInfo(image: Image) {
+        const meta: object = JSON.parse(image.metadata);
         // Sets the opening indicator to true
         this.isInfoOpen = true;
         // Sets the current Image
         this.selectedImage = image;
         // Sets the background-image of the preview
         document.getElementById('imagePreview').style.backgroundImage =
-            'url("' + image.path + image.factoryTitle + '.' + image.extension + '")';
+            'url("' + this.uploadDomain + '/' + image.path + '")';
     }
 
     // Opens the Bottom sheet to share the image on Social Media
@@ -73,13 +85,24 @@ export class MyMediaComponent implements OnInit {
         dialogRef.afterClosed().subscribe(result => {
             if (result) {
                 this.deleteImage(this.selectedImage);
-                this.isInfoOpen = false;
-                this.snackBar.open('Image successfully deleted.', 'Undo');
-                // Method for restoring the previous deleted image
-                this.snackBar._openedSnackBarRef.onAction().subscribe(() => {
-                    // TODO IMAGE RESTORE HTTP REQUEST
-                    this.images.push(this.selectedImage);
+                this.httpService.deletePhoto(this.selectedImage.factoryTitle, this.selectedImage.owner).subscribe(res => {
+                    if (res['status'] === 'success') {
+                        this.isInfoOpen = false;
+                        this.snackBar.open('Image successfully deleted.', 'Undo');
+                        setTimeout(() => this.snackBar.dismiss(), this.dataservice.settings.snackBarTimeout);
+                        // Method for restoring the previous deleted image
+                        this.snackBar._openedSnackBarRef.onAction().subscribe(() => {
+                            this.httpService.recoverPhoto(this.selectedImage.factoryTitle, this.selectedImage.owner).subscribe(res => {
+                                if (res['status'] === 'success') {
+                                    this.images.push(this.selectedImage);
+                                    this.snackBar.open('Image successfully recovered.', '✔');
+                                    setTimeout(() => this.snackBar.dismiss(), this.dataservice.settings.snackBarTimeout);
+                                }
+                            });
+                        });
+                    }
                 });
+
             }
         });
     }

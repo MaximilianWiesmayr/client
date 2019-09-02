@@ -82,7 +82,8 @@ export class DataService {
     public settings = {
         title: 'InstantGrade',
         version: '1.0',
-        virtualCurrency: 'Credits'
+        virtualCurrency: 'Credits',
+        snackBarTimeout: 3000 // 3 sek
     };
 
     constructor() {

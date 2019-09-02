@@ -12,7 +12,7 @@
         <div (click)="openInfo(image)" *ngFor="let image of this.images"
              [class.list]="!this.dataservice.user.settings.myPhotosGridView"
              class="mediaItem "><img
-                [src]="image.path + image.factoryTitle + '.' + image.extension"
+                [src]="this.uploadDomain + '/' + image.path"
                 ondragstart="return false;">
             <div *ngIf="!dataservice.user.settings.myPhotosGridView" class="listSpecs">
                 <span class="listSpecsTitle">{{image.title != '' ? image.title : image.factoryTitle}}</span>

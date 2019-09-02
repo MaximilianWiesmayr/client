@@ -15,34 +15,35 @@ export class DashboardComponent implements OnInit {
     constructor(public dataservice: DataService, private httpService: HttpService) {
     }
 
-    dashboardOverviewItems = [
-        new DashboardInfoItem(
-            'photo',
-            'Photos',
-            '20'
-        ),
-        new DashboardInfoItem(
-            'storage',
-            'Space available',
-            '12GB / 15GB'
-        ),
-        new DashboardInfoItem(
-            'account_box',
-            'Current Subscription',
-            '<span class = "' + this.dataservice.user.subscriptionStatus.toString() + '">'
-            + this.dataservice.user.subscriptionStatus.toString() + '</span>'
-        ),
-        new DashboardInfoItem(
-            'notification_important',
-            'Notifications',
-            '0'
-        )
-
-    ];
+    dashboardOverviewItems: Array<DashboardInfoItem>;
 
     ngOnInit(): void {
         this.httpService.getOverview(this.dataservice.user.username).subscribe(res => {
-            alert(res);
+            this.dashboardOverviewItems = [
+                /* tslint:disable:no-string-literal */
+                new DashboardInfoItem(
+                    'photo',
+                    'Photos',
+                    res['photos']
+                ),
+                new DashboardInfoItem(
+                    'storage',
+                    'Space available',
+                    res['disc_space']
+                ),
+                new DashboardInfoItem(
+                    'account_box',
+                    'Current Subscription',
+                    '<span class = "' + res['subscription'] + '">'
+                    + res['subscription'] + '</span>'
+                ),
+                new DashboardInfoItem(
+                    'notification_important',
+                    'Notifications',
+                    res['notifications']
+                )
+                /* tslint:enable:no-string-literal */
+            ];
         });
     }
 }

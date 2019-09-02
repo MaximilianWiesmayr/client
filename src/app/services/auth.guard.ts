@@ -31,7 +31,7 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
         if (this.dataservice.user.accountType === AccountType.VERIFIED && this.dataservice.user.authToken) {
             return true;
         } else {
-            this.router.navigate(['login']);
+            this.router.navigate(['login'], {queryParams: {returnUrl: state.url}});
             return false;
         }
     }
@@ -52,10 +52,10 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
         route: Route,
         segments: UrlSegment[]): Observable<boolean> | Promise<boolean> | boolean {
         if (this.dataservice.user.accountType === AccountType.VERIFIED && this.dataservice.user.authToken) {
-              return true;
-          } else {
-              this.router.navigate(['login']);
-              return false;
+            return true;
+        } else {
+            this.router.navigate(['login']);
+            return false;
         }
     }
 }

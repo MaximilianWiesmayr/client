@@ -30,6 +30,22 @@ export class HttpService {
                     CLIENT AREA
     ================================================*/
     getOverview(username: string) {
-        return this.http.get<string>(environment.apiUrl + 'clientarea/overview/' + username);
+        return this.http.get(environment.apiUrl + 'clientarea/overview/' + username);
+    }
+
+    uploadImage(formData: FormData) {
+        return this.http.post(environment.apiUrl + 'image/upload', formData);
+    }
+
+    loadPhotos(username: string) {
+        return this.http.get(environment.apiUrl + 'clientarea/photos/' + username);
+    }
+
+    deletePhoto(imageName: string, owner: string) {
+        return this.http.post(environment.apiUrl + 'image/delete', {imageName, owner});
+    }
+
+    recoverPhoto(imageName: string, owner: string) {
+        return this.http.post(environment.apiUrl + 'image/recover', {imageName, owner});
     }
 }

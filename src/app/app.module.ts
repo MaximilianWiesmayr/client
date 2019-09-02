@@ -25,6 +25,8 @@ import {VerifyComponent} from './components/verify/verify.component';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {HttpService} from './services/http.service';
 import {AuthInterceptor} from './util/interceptors/auth-interceptor';
+import {DragNDropDirective} from './directives/drag-n-drop.directive';
+import {FileUploadComponent} from './components/file-upload/file-upload.component';
 
 @NgModule({
     declarations: [
@@ -42,7 +44,9 @@ import {AuthInterceptor} from './util/interceptors/auth-interceptor';
         SocialSharingSheetComponent,
         DeleteDialogComponent,
         CreditsComponent,
-        VerifyComponent
+        VerifyComponent,
+        DragNDropDirective,
+        FileUploadComponent
     ],
     imports: [
         BrowserModule,
