@@ -1,0 +1,39 @@
+@import "~src/themes/default";
+
+$settings_width: 20vw;
+#wrapper {
+  width: 100%;
+  height: 100%;
+}
+
+#toolSettings {
+  height: 100%;
+  width: $settings_width;
+  float: right;
+}
+
+#toolSettings mat-expansion-panel {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+#toolSettings mat-slider {
+  width: 50%;
+}
+
+.imageArea {
+  background-color: #c5c5c5;
+  width: calc(100% - #{$settings_width});
+  height: 100%;
+  float: left;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.imageArea #previewIMG {
+  width: 50vw;
+  height: 70vh;
+  background-color: white;
+}

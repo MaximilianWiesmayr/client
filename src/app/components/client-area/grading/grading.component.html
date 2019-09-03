@@ -1,0 +1,26 @@
+<div [class.dark]="this.dataservice.user.settings.darkmode" id="wrapper">
+    <div id="toolSettings">
+        <mat-accordion>
+            <mat-expansion-panel *ngFor="let setting of this.settings">
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        {{setting.category}}
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <!-- SLIDER SECTION -->
+                <div *ngFor="let child of setting.children" class="sliderBox">
+                    {{child.title}}
+                    <mat-slider #slider (input)="makeChanges(child.title, slider.value)" [max]="child.max"
+                                [min]="child.min" [step]="child.step" color="primary"></mat-slider>
+                    {{slider.value}}
+                </div>
+
+
+            </mat-expansion-panel>
+        </mat-accordion>
+
+    </div>
+    <div class="imageArea">
+        <div id="previewIMG"></div>
+    </div>
+</div>

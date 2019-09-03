@@ -23,6 +23,12 @@ export class ClientAreaComponent implements OnInit {
             active: false
         },
         {
+            title: 'Grade',
+            icon: 'tune',
+            route: '/dashboard/grading',
+            active: false
+        },
+        {
             title: 'Browse',
             icon: 'cloud_circle',
             route: '/browse',
@@ -40,8 +46,8 @@ export class ClientAreaComponent implements OnInit {
     }
 
     // Toggles the Sidebar
-    toggleCollapse() {
-        this.dataservice.user.settings.navBarCollapsed = !this.dataservice.user.settings.navBarCollapsed;
+    toggleCollapse(collapsed?: boolean) {
+        this.dataservice.user.settings.navBarCollapsed = collapsed !== null ? collapsed : !this.dataservice.user.settings.navBarCollapsed;
         document.getElementsByClassName('usernameAndCredits')[0].getElementsByTagName('span')[0].innerText =
             this.dataservice.user.settings.navBarCollapsed ?
                 this.dataservice.makeInitials() :
@@ -95,6 +101,9 @@ export class ClientAreaComponent implements OnInit {
                 n['active'] = false;
             }
             /* tslint:enable:no-string-literal */
+        });
+        this.dataservice.collapseEmitter.subscribe((res: boolean) => {
+            this.toggleCollapse(res);
         });
     }
 

@@ -1,4 +1,4 @@
-import {Injectable} from '@angular/core';
+import {EventEmitter, Injectable} from '@angular/core';
 import {User} from '../entities/User';
 
 @Injectable({
@@ -85,7 +85,8 @@ export class DataService {
         virtualCurrency: 'Credits',
         snackBarTimeout: 3000 // 3 sek
     };
-
+    // Testing
+    public collapseEmitter: EventEmitter<boolean> = new EventEmitter();
     constructor() {
     }
 

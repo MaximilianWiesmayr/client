@@ -11,6 +11,7 @@ import {MailFailedComponent} from './components/register/mail-failed/mail-failed
 import {MyMediaComponent} from './components/client-area/my-media/my-media.component';
 import {CreditsComponent} from './components/credits/credits.component';
 import {VerifyComponent} from './components/verify/verify.component';
+import {GradingComponent} from './components/client-area/grading/grading.component';
 
 const routes: Routes = [
     {path: '', redirectTo: 'dashboard', pathMatch: 'full'}, // Later on the redirect is replaced by the Landingpage-Component
@@ -25,9 +26,15 @@ const routes: Routes = [
     },
     {path: 'verify', component: VerifyComponent},
     {
-        path: 'dashboard', component: ClientAreaComponent, canActivate: [AuthGuard], canLoad: [AuthGuard], children: [
+        path: 'dashboard',
+        component: ClientAreaComponent,
+        canActivate: [AuthGuard],
+        canActivateChild: [AuthGuard],
+        canLoad: [AuthGuard],
+        children: [
             {path: '', component: DashboardComponent},
-            {path: 'photos', component: MyMediaComponent}
+            {path: 'photos', component: MyMediaComponent},
+            {path: 'grading', component: GradingComponent}
         ]},
     {path: 'credits', component: CreditsComponent},
     {path: '**', redirectTo: 'login'}

@@ -40,7 +40,7 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
         next: ActivatedRouteSnapshot,
         state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
         if (this.dataservice.user.accountType === AccountType.VERIFIED && this.dataservice.user.authToken) {
-
+            this.dataservice.collapseEmitter.emit(false);
             return true;
         } else {
             this.router.navigate(['login']);
