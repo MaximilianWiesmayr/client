@@ -29,6 +29,8 @@ $dark-accent: mat-palette($mat-amber, A200, A100, A400);
 $dark-warn: mat-palette($mat-deep-orange, 400);
 $dark-theme: mat-dark-theme($dark-primary, $dark-accent, $dark-warn);
 
+$darkModeBG: #1C1C1C;
+
 /* GLOBAL STYLE */
 body, html {
   padding: 0;
@@ -70,7 +72,7 @@ body, html {
 /* -= DARK MODE SETTINGS =- */
 .dark {
   @include angular-material-theme($dark-theme);
-  background-color: #1C1C1C !important;
+  background-color: $darkModeBG !important;
   color: white;
 }
 
@@ -80,7 +82,7 @@ body, html {
 
 /* __ LOGIN __ */
 .dark .authContainer {
-  background-color: #1C1C1C;
+  background-color: $darkModeBG;
 }
 
 /* __ Mail Components (success/failed) __*/
@@ -98,7 +100,7 @@ body, html {
 
 /* Loading Screen */
 .dark .loadingWrapper {
-  background-color: #1C1C1C;
+  background-color: $darkModeBG;
 }
 
 /* Dashboard Overview Icon*/
@@ -160,4 +162,8 @@ a[mat-list-item]:hover .staticImage.twitter {
 /* MY PHOTOS - GRADING SECTION */
 .dark #toolSettings {
   color: white !important;
+}
+
+.dark #imageArea {
+  background-color: rgba(255, 255, 255, .1) !important;
 }

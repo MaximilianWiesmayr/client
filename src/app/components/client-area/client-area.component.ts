@@ -47,7 +47,7 @@ export class ClientAreaComponent implements OnInit {
 
     // Toggles the Sidebar
     toggleCollapse(collapsed?: boolean) {
-        this.dataservice.user.settings.navBarCollapsed = collapsed !== null ? collapsed : !this.dataservice.user.settings.navBarCollapsed;
+        this.dataservice.user.settings.navBarCollapsed = collapsed !== undefined ? collapsed : !this.dataservice.user.settings.navBarCollapsed;
         document.getElementsByClassName('usernameAndCredits')[0].getElementsByTagName('span')[0].innerText =
             this.dataservice.user.settings.navBarCollapsed ?
                 this.dataservice.makeInitials() :

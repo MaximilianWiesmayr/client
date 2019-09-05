@@ -28,6 +28,7 @@ import {AuthInterceptor} from './util/interceptors/auth-interceptor';
 import {DragNDropDirective} from './directives/drag-n-drop.directive';
 import {FileUploadComponent} from './components/file-upload/file-upload.component';
 import {GradingComponent} from './components/client-area/grading/grading.component';
+import {MouseWheelDirective} from './directives/mousewheel.directive';
 
 @NgModule({
     declarations: [
@@ -46,9 +47,10 @@ import {GradingComponent} from './components/client-area/grading/grading.compone
         DeleteDialogComponent,
         CreditsComponent,
         VerifyComponent,
-        DragNDropDirective,
         FileUploadComponent,
-        GradingComponent
+        GradingComponent,
+        DragNDropDirective,
+        MouseWheelDirective
     ],
     imports: [
         BrowserModule,
