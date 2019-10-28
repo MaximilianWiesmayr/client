@@ -110,6 +110,26 @@
   }
 }
 
+.searchForm {
+  width: 100%;
+}
+
+.metaTable th, ::ng-deep .metaTable thead {
+  display: none !important;
+}
+
+::ng-deep .metaTable {
+  background-color: transparent !important;
+  width: 100%;
+}
+
+.metaTable td.mat-cell:first-of-type {
+  padding-left: 0 !important;
+}
+
+.metaTable td.mat-cell:not(:first-of-type) {
+  text-align: right !important;
+}
 #actionMenu {
   display: flex;
   flex-wrap: wrap;

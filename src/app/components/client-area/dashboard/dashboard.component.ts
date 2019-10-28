@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {DataService} from '../../../services/data.service';
 import {DashboardInfoItem} from '../../../entities/dashboard-info-item';
 import {HttpService} from '../../../services/http.service';
+import {Router} from '@angular/router';
 
 
 @Component({
@@ -12,7 +13,7 @@ import {HttpService} from '../../../services/http.service';
 export class DashboardComponent implements OnInit {
 
 
-    constructor(public dataservice: DataService, private httpService: HttpService) {
+    constructor(public dataservice: DataService, private httpService: HttpService, private router: Router) {
     }
 
     dashboardOverviewItems: Array<DashboardInfoItem>;
@@ -44,6 +45,7 @@ export class DashboardComponent implements OnInit {
                 )
                 /* tslint:enable:no-string-literal */
             ];
-        });
+            },
+            error => this.router.navigate(['login'], {queryParams: {errorMSG: error}}));
     }
 }

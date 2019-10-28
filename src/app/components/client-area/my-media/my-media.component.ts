@@ -1,11 +1,12 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {Image} from '../../../entities/Image';
 import {DataService} from '../../../services/data.service';
-import {MatBottomSheet, MatBottomSheetRef} from '@angular/material';
+import {MatBottomSheet, MatBottomSheetRef, MatTableDataSource} from '@angular/material';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {HttpService} from '../../../services/http.service';
 import {environment} from '../../../../environments/environment';
+import {Router} from '@angular/router';
 
 // Interface for our deletion - popup
 export interface ImageDelete {
@@ -13,6 +14,10 @@ export interface ImageDelete {
     image: Image;
 }
 
+export interface MetaElement {
+    key: string;
+    value: any;
+}
 @Component({
     selector: 'app-my-media',
     templateUrl: './my-media.component.html',
@@ -28,16 +33,18 @@ export class MyMediaComponent implements OnInit {
     // UploadDomain
     public uploadDomain: string = environment.publicDomain;
     // Metadata Map of the selected Image (All metadata)
-    public metaMap: Map<string, any> = new Map<string, any>();
-    // Metadata Map of the selected Image (Overview metadata)
-    public overviewMetaMap: Map<string, any> = new Map<string, any>();
+    public metaList: Array<MetaElement> = [];
+    // Table Datasource
+    public datasource;
+    public displayedColumns: Array<string> = ['key', 'value'];
 
     constructor(
         public dataservice: DataService,
         private httpService: HttpService,
         private socialSheet: MatBottomSheet,
         public dialog: MatDialog,
-        private snackBar: MatSnackBar
+        private snackBar: MatSnackBar,
+        private router: Router
     ) {
     }
 
@@ -63,14 +70,15 @@ export class MyMediaComponent implements OnInit {
         // Sets the current Image
         this.selectedImage = image;
         // Resets the MetaMaps
-        this.metaMap.clear();
-        this.overviewMetaMap.clear();
+        this.metaList = [];
         const meta: object = JSON.parse(image.metadata);
+        this.metaList.push({key: 'Owner', value: this.selectedImage.owner});
         Object.keys(meta).filter(key => !key.includes('Unknown') && !key.includes('TRC')).forEach(key => {
-            this.metaMap.set(key.trim(), meta[key].trim());
+            this.metaList.push({key: key.trim(), value: meta[key].trim()});
         });
+        this.datasource = new MatTableDataSource(this.metaList);
         // filters the general meta of an image
-        this.setOverviewMeta();
+        // this.setOverviewMeta();
         // Sets the opening indicator to true
         this.isInfoOpen = true;
         // Sets the background-image of the preview
@@ -118,15 +126,28 @@ export class MyMediaComponent implements OnInit {
         });
     }
 
+    // Moves the image to the trash
     deleteImage(image: Image): void {
         this.images = this.images.filter(i => i !== image);
     }
 
-    setOverviewMeta() {
-        this.overviewMetaMap.set('Date/Time Original', this.metaMap.get('Date/Time Original'));
-        this.overviewMetaMap.set('Extension', this.metaMap.get('Detected File Type Name'));
-        this.overviewMetaMap.set('Shutter Speed Value', this.metaMap.get('Shutter Speed Value'));
-        this.overviewMetaMap.set('Focus Mode', this.metaMap.get('Focus Mode'));
+    // Opens the Grading-Page
+    gradeImage() {
+        this.dataservice.gradingImage = this.selectedImage;
+        this.dataservice.navItems.forEach(i => {
+            /* tslint:disable:no-string-literal */
+            i['active'] = false;
+            if (i['route'] === '/dashboard/grading') {
+                i['active'] = true;
+            }
+            /* tslint:enable:no-string-literal */
+        });
+        this.router.navigate(['/dashboard/grading']);
+    }
+
+    // Filter function of the MetaList
+    applyFilter(filterValue: string) {
+        this.datasource.filter = filterValue.trim().toLowerCase();
     }
 }
 

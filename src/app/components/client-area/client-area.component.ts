@@ -9,45 +9,13 @@ import {SubscriptionStatus} from '../../enums/subscription-status.enum';
     styleUrls: ['./client-area.component.scss']
 })
 export class ClientAreaComponent implements OnInit {
-    public navItems: Array<object> = [
-        {
-            title: 'Dashboard',
-            icon: 'dashboard',
-            route: '/dashboard',
-            active: true
-        },
-        {
-            title: 'My Photos',
-            icon: 'folder', // photo_library
-            route: '/dashboard/photos',
-            active: false
-        },
-        {
-            title: 'Grade',
-            icon: 'tune',
-            route: '/dashboard/grading',
-            active: false
-        },
-        {
-            title: 'Browse',
-            icon: 'cloud_circle',
-            route: '/browse',
-            active: false
-        },
-        {
-            title: 'Logout',
-            icon: 'logout',
-            route: '/logout',
-            active: false
-        }
-    ];
-
     constructor(public dataservice: DataService, public router: Router) {
     }
 
     // Toggles the Sidebar
     toggleCollapse(collapsed?: boolean) {
-        this.dataservice.user.settings.navBarCollapsed = collapsed !== undefined ? collapsed : !this.dataservice.user.settings.navBarCollapsed;
+        this.dataservice.user.settings.navBarCollapsed = collapsed !== undefined ?
+            collapsed : !this.dataservice.user.settings.navBarCollapsed;
         document.getElementsByClassName('usernameAndCredits')[0].getElementsByTagName('span')[0].innerText =
             this.dataservice.user.settings.navBarCollapsed ?
                 this.dataservice.makeInitials() :
@@ -93,7 +61,7 @@ export class ClientAreaComponent implements OnInit {
                 break;
         }
         // Switch the selection of the Sidebar-Navigation regarding the URL
-        this.navItems.forEach(n => {
+        this.dataservice.navItems.forEach(n => {
             /* tslint:disable:no-string-literal */
             if (this.router.url.endsWith(n['route'])) {
                 n['active'] = true;
@@ -111,7 +79,7 @@ export class ClientAreaComponent implements OnInit {
         if (this.dataservice.isMobile) {
             this.dataservice.user.settings.navBarCollapsed = false;
         }
-        this.navItems.forEach(i => {
+        this.dataservice.navItems.forEach(i => {
             /* tslint:disable:no-string-literal */
             i['active'] = false;
             if (i === item) {

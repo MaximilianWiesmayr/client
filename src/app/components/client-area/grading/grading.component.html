@@ -32,7 +32,8 @@
 
     </div>
     <div (mouseWheelDown)="zoomImage('DOWN')" (mouseWheelUp)="zoomImage('UP')" id="imageArea" mouseWheel>
-        <div id="previewIMG"><img alt="20190408-DSCF0335.jpg"
-                                  src="http://instantgrade.bastiarts.com/uploads/BastiArts/20190408-DSCF0335.jpg"></div>
+        <div id="previewIMG"><img LazyLoad [src]="this.dataservice.settings.domain + this.dataservice.gradingImage.path"
+                                  alt="Preview-Image"
+                                  draggable="false"></div>
     </div>
 </div>

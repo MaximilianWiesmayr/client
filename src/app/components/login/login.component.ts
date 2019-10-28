@@ -41,19 +41,24 @@ export class LoginComponent implements OnInit {
     login() {
         this.btnOpts.active = true;
         this.http.login(this.dataservice.user).subscribe(res => {
-            this.btnOpts.active = false;
-            /* tslint:disable:no-string-literal */
-            if (res['status'] === 'success') {
-                this.dataservice.user = res['user'];
-                this.dataservice.user.settings = JSON.parse(res['user'].settings);
-                this.dataservice.user.authToken = res['token'];
-                localStorage.setItem('user', JSON.stringify(this.dataservice.user));
-                this.router.navigate([this.returnUrl]);
-            } else {
-                this.snackBar.open('ERROR: ' + res['exception'], 'Try again');
-            }
-            /* tslint:enable:no-string-literal */
-        });
+                this.btnOpts.active = false;
+                /* tslint:disable:no-string-literal */
+                if (res['status'] === 'success') {
+                    this.dataservice.user = res['user'];
+                    this.dataservice.user.settings = JSON.parse(res['user'].settings);
+                    this.dataservice.user.authToken = res['token'];
+                    localStorage.setItem('user', JSON.stringify(this.dataservice.user));
+                    this.router.navigate([this.returnUrl]);
+                } else {
+                    this.snackBar.open('ERROR: ' + res['exception'], 'Try again');
+                }
+                /* tslint:enable:no-string-literal */
+            },
+            error => {
+                this.btnOpts.active = false;
+                this.snackBar.open('ERROR: ' + error, 'Try again');
+
+            });
     }
 
     ngOnInit() {
@@ -62,6 +67,12 @@ export class LoginComponent implements OnInit {
         /* tslint:disable:no-string-literal */
         this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/dashboard';
         /* tslint:enable:no-string-literal */
+        this.route.queryParams.subscribe(params => {
+            if (params.errorMSG) {
+                this.snackBar.open('ERROR: ' + params.errorMSG);
+
+            }
+        });
     }
 
 }

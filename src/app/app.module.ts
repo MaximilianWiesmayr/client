@@ -29,6 +29,7 @@ import {DragNDropDirective} from './directives/drag-n-drop.directive';
 import {FileUploadComponent} from './components/file-upload/file-upload.component';
 import {GradingComponent} from './components/client-area/grading/grading.component';
 import {MouseWheelDirective} from './directives/mousewheel.directive';
+import {LazyLoadDirective} from './directives/lazy-load.directive';
 
 @NgModule({
     declarations: [
@@ -50,7 +51,8 @@ import {MouseWheelDirective} from './directives/mousewheel.directive';
         FileUploadComponent,
         GradingComponent,
         DragNDropDirective,
-        MouseWheelDirective
+        MouseWheelDirective,
+        LazyLoadDirective
     ],
     imports: [
         BrowserModule,

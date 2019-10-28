@@ -1,5 +1,6 @@
 import {EventEmitter, Injectable} from '@angular/core';
 import {User} from '../entities/User';
+import {Image} from '../entities/Image';
 
 @Injectable({
     providedIn: 'root'
@@ -76,17 +77,53 @@ export class DataService {
         width: 100,
         height: 100
     };
-    // The dummyUser
-    public user: User = new User();
     // The Settings Object let you change for instance the title of the whole project
     public settings = {
         title: 'InstantGrade',
         version: '1.0',
         virtualCurrency: 'Credits',
-        snackBarTimeout: 3000 // 3 sek
+        snackBarTimeout: 3000, // 3 sek
+        domain: 'http://instantgrade.bastiarts.com/'
     };
-    // Testing
+    // Sidebar Items
+    public navItems: Array<object> = [
+        {
+            title: 'Dashboard',
+            icon: 'dashboard',
+            route: '/dashboard',
+            active: true
+        },
+        {
+            title: 'My Photos',
+            icon: 'folder', // photo_library
+            route: '/dashboard/photos',
+            active: false
+        },
+        {
+            title: 'Grade',
+            icon: 'tune',
+            route: '/dashboard/grading',
+            active: false
+        },
+        {
+            title: 'Browse',
+            icon: 'cloud_circle',
+            route: '/browse',
+            active: false
+        },
+        {
+            title: 'Logout',
+            icon: 'logout',
+            route: '/logout',
+            active: false
+        }
+    ];
+    // The dummyUser
+    public user: User = new User();
+    // Sidebar collapsing emitter
     public collapseEmitter: EventEmitter<boolean> = new EventEmitter();
+    // GradingImage
+    public gradingImage: Image = new Image();
     constructor() {
     }
 

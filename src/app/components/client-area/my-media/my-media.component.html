@@ -29,7 +29,7 @@
                 <button (click)="openSharingFeed()" color="primary" mat-button>
                     <mat-icon>share</mat-icon>
                     <span class="buttonTitle">Share</span></button>
-                <button (click)="openSharingFeed()" color="accent" mat-button>
+                <button (click)="gradeImage()" color="accent" mat-button>
                     <mat-icon>edit</mat-icon>
                     <span class="buttonTitle">Edit</span></button>
                 <button (click)="openDeleteDialog()" color="warn" mat-stroked-button>
@@ -37,6 +37,36 @@
                     <span class="buttonTitle">Delete</span></button>
             </div>
             <div id="specsBox">
+                <mat-form-field class="searchForm">
+                    <input (keyup)="applyFilter($event.target.value)" matInput placeholder="Filter">
+                </mat-form-field>
+
+                <table [dataSource]="this.datasource" class="metaTable" mat-table>
+
+                    <!-- Key Column -->
+                    <ng-container matColumnDef="key">
+                        <th *matHeaderCellDef mat-header-cell> Key</th>
+                        <td *matCellDef="let element" mat-cell> {{element.key}} </td>
+                    </ng-container>
+
+                    <!-- Value Column -->
+                    <ng-container matColumnDef="value">
+                        <th *matHeaderCellDef mat-header-cell> Value</th>
+                        <td *matCellDef="let element" mat-cell> {{element.value}} </td>
+                    </ng-container>
+
+                    <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
+                    <tr *matRowDef="let row; columns: displayedColumns;" mat-row></tr>
+                </table>
+
+                <!--
+                    <form class="searchForm">
+                        <mat-form-field class="searchField">
+                            <input type="text" matInput placeholder="Filter" (input)="searchMeta($event.target.value)">
+                            <mat-icon matSuffix>search</mat-icon>
+                        </mat-form-field>
+
+                    </form>
                 <table>
                     <tr>
                         <td>
@@ -52,7 +82,7 @@
                         <td>{{res.key}}</td>
                         <td>{{res.value}}</td>
                     </tr>
-                </table>
+                </table> -->
             </div>
         </div>
     </div>

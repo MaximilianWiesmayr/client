@@ -241,11 +241,10 @@ export class GradingComponent implements OnInit {
             children: []
         },
     ];
-    // Self explanatory
+    // Self explanatory (Setting)
     private current_editable_child;
     // Zoom Preview Image via mousewheel
     private default_image_scale = 1;
-
     ngOnInit() {
         this.dataservice.collapseEmitter.emit(true);
     }
@@ -255,9 +254,10 @@ export class GradingComponent implements OnInit {
         private snackBar: MatSnackBar
     ) {
     }
-
     // Method for sending the changes to the backend
     makeChanges(category: string, setting: string, value: number) {
+
+
         console.log(category + '_' + setting + ' > ' + value);
         value += 1; // Default value for css filter
         if (setting === 'Exposure') {
