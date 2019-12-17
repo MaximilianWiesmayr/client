@@ -4,6 +4,7 @@ import {MatSnackBar} from '@angular/material';
 import {WebsocketService} from 'src/app/services/websocket.service';
 import {GradingSetting} from 'src/app/entities/grading-setting';
 import {environment} from '../../../../environments/environment';
+import {NavigationEnd, NavigationError, NavigationStart, Router} from '@angular/router';
 
 @Component({
   selector: 'app-grading',
@@ -256,13 +257,38 @@ export class GradingComponent implements OnInit {
   constructor(
     public dataservice: DataService,
     public websocketService: WebsocketService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private router: Router
   ) {
+    // @ts-ignore
+    this.router.events.subscribe((event: Event) => {
+
+      if (event instanceof NavigationStart) {
+        // Show loading indicator
+        this.websocketService.ws.close();
+      }
+
+      if (event instanceof NavigationEnd) {
+        // Hide loading indicator
+      }
+
+      if (event instanceof NavigationError) {
+        // Hide loading indicator
+
+        // Present error to user
+        console.log(event.error);
+      }
+    });
   }
 
   ngOnInit() {
     this.dataservice.collapseEmitter.emit(true);
-    this.websocketService.connect(environment.socketBaseUrl + 'grade');
+    this.websocketService.connect(environment.socketBaseUrl + 'grade', this.dataservice.user.authToken);
+    this.websocketService.connectionEmitter.subscribe((connected: boolean) => {
+      if (connected) {
+        this.websocketService.importImage(this.dataservice.gradingImage);
+      }
+    });
   }
 
   // Method for sending the changes to the backend
