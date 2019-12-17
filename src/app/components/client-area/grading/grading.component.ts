@@ -1,16 +1,19 @@
 import {Component, OnInit} from '@angular/core';
 import {DataService} from '../../../services/data.service';
 import {MatSnackBar} from '@angular/material';
+import {WebsocketService} from 'src/app/services/websocket.service';
+import {GradingSetting} from 'src/app/entities/grading-setting';
+import {environment} from '../../../../environments/environment';
 
 @Component({
-    selector: 'app-grading',
-    templateUrl: './grading.component.html',
-    styleUrls: ['./grading.component.scss']
+  selector: 'app-grading',
+  templateUrl: './grading.component.html',
+  styleUrls: ['./grading.component.scss']
 })
 export class GradingComponent implements OnInit {
-    // Array of available Grading options
-    settings: Array<object> = [
-        {
+  // Array of available Grading options
+  settings: Array<object> = [
+    {
             category: 'Temperature',
             children: [
                 {
@@ -250,29 +253,30 @@ export class GradingComponent implements OnInit {
   // Preview Image DOM Element
   public PREVIMG = document.getElementsByTagName('img')[0];
 
-  ngOnInit() {
-    this.dataservice.collapseEmitter.emit(true);
-  }
-
   constructor(
     public dataservice: DataService,
+    public websocketService: WebsocketService,
     private snackBar: MatSnackBar
   ) {
   }
-    // Method for sending the changes to the backend
-    makeChanges(category: string, setting: string, value: number) {
 
+  ngOnInit() {
+    this.dataservice.collapseEmitter.emit(true);
+    this.websocketService.connect(environment.socketBaseUrl + 'grade');
+  }
 
-        console.log(category + '_' + setting + ' > ' + value);
-        value += 1; // Default value for css filter
-        if (setting === 'Exposure') {
-            document.getElementsByTagName('img')[0].style.filter =
-                'brightness(' + value + ')';
-        } else if (setting === 'Contrast') {
-            document.getElementsByTagName('img')[0].style.filter =
+  // Method for sending the changes to the backend
+  makeChanges(category: string, setting: string, value: number) {
+    console.log(category + '_' + setting + ' > ' + value);
+    value += 1; // Default value for css filter
+    if (setting === 'Exposure') {
+      document.getElementsByTagName('img')[0].style.filter =
+        'brightness(' + value + ')';
+    } else if (setting === 'Contrast') {
+      document.getElementsByTagName('img')[0].style.filter =
                 'contrast(' + value + ')';
         }
-
+    this.websocketService.gradingEmitter.emit(new GradingSetting('setting', setting, value));
     }
 
     // If the user wants to enter a custom value
