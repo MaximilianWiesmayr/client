@@ -33,7 +33,13 @@
     </div>
     <div (mouseWheelDown)="zoomImage('DOWN')" (mouseWheelUp)="zoomImage('UP')" id="imageArea" mouseWheel>
         <div id="previewIMG"><img LazyLoad [src]="this.dataservice.settings.domain + this.dataservice.gradingImage.path"
+                                  (mousedown)="this.preview_clicked = true;"
+                                  (mousemove)="movePrevImage($event)"
+                                  (mouseup)="this.preview_clicked = false;"
                                   alt="Preview-Image"
                                   draggable="false"></div>
+      <div *ngIf="this.default_image_scale != 1" id="zoomReset">
+        <button (click)="resetZoom()" mat-raised-button>Reset Zoom</button>
+      </div>
     </div>
 </div>

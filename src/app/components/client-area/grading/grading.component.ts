@@ -236,24 +236,29 @@ export class GradingComponent implements OnInit {
                 },
             ]
         },
-        {
-            category: 'Presets',
-            children: []
-        },
+      {
+        category: 'Presets',
+        children: []
+      },
     ];
-    // Self explanatory (Setting)
-    private current_editable_child;
-    // Zoom Preview Image via mousewheel
-    private default_image_scale = 1;
-    ngOnInit() {
-        this.dataservice.collapseEmitter.emit(true);
-    }
+  // Self explanatory (Setting)
+  private current_editable_child;
+  // Zoom Preview Image via mousewheel
+  private default_image_scale = 1;
+  // Indicator if Image is clicked (ready to move)
+  public preview_clicked: boolean = false;
+  // Preview Image DOM Element
+  public PREVIMG = document.getElementsByTagName('img')[0];
 
-    constructor(
-        public dataservice: DataService,
-        private snackBar: MatSnackBar
-    ) {
-    }
+  ngOnInit() {
+    this.dataservice.collapseEmitter.emit(true);
+  }
+
+  constructor(
+    public dataservice: DataService,
+    private snackBar: MatSnackBar
+  ) {
+  }
     // Method for sending the changes to the backend
     makeChanges(category: string, setting: string, value: number) {
 
@@ -312,20 +317,46 @@ export class GradingComponent implements OnInit {
         this.makeChanges(category, child.title, slider.value);
     }
 
+  // Zooms the Preview Image
     zoomImage(direction: string) {
         switch (direction) {
             case 'DOWN':
-                this.default_image_scale -= this.default_image_scale > 0.01 ? .1 : 0;
-                document.getElementsByTagName('img')[0].style.transform =
-                    'scale(' + this.default_image_scale + ')';
-                break;
-            case 'UP':
-                this.default_image_scale += .1;
-                document.getElementsByTagName('img')[0].style.transform =
-                    'scale(' + this.default_image_scale + ')';
-                break;
-            default:
-                break;
+              this.default_image_scale -= this.default_image_scale > 0.01 ? .1 : 0;
+              this.scaleImage();
+              break;
+          case 'UP':
+            this.default_image_scale += .1;
+            this.scaleImage();
+            break;
+          default:
+            break;
         }
     }
+
+  /** Moves the Zoomed Image */
+  movePrevImage(event) {
+    event.preventDefault();
+    let x, y, imgX, imgY;
+    if (this.preview_clicked && this.default_image_scale != 1) {
+      x = event.clientX;
+      y = event.clientY;
+      imgX = this.PREVIMG.offsetLeft;
+      imgY = this.PREVIMG.offsetTop;
+
+      this.PREVIMG.style.transform =
+        'translateX(' + (x - imgX) + 'px)';
+      this.PREVIMG.style.transform =
+        'translateY(' + (y - imgY) + 'px)';
+    }
+  }
+
+  scaleImage() {
+    document.getElementsByTagName('img')[0].style.transform =
+      'scale(' + this.default_image_scale + ')';
+  }
+
+  resetZoom() {
+    this.default_image_scale = 1;
+    this.scaleImage();
+  }
 }

@@ -45,6 +45,7 @@ $settings_width: 20vw;
 }
 
 #imageArea {
+  position: relative;
   background-color: #c5c5c5;
   width: calc(100% - #{$settings_width});
   height: 100%;
@@ -52,6 +53,7 @@ $settings_width: 20vw;
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
 }
 
 #imageArea #previewIMG {
@@ -68,5 +70,17 @@ $settings_width: 20vw;
 #imageArea #previewIMG img {
   max-width: 50vw;
   max-height: 80vh;
+  z-index: 200;
+}
+
+#imageArea #zoomReset {
+  position: absolute;
+  padding: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  background-color: rgba(0, 0, 0, 0.5);
+  right: 0;
+  bottom: 2px;
   z-index: 200;
 }
