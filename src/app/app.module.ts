@@ -30,30 +30,34 @@ import {FileUploadComponent} from './components/file-upload/file-upload.componen
 import {GradingComponent} from './components/client-area/grading/grading.component';
 import {MouseWheelDirective} from './directives/mousewheel.directive';
 import {LazyLoadDirective} from './directives/lazy-load.directive';
+import {BrowseComponent} from './components/client-area/browse/browse.component';
+import {BrowseItemComponent} from './components/client-area/browse/browse-item/browse-item.component';
 
 @NgModule({
-    declarations: [
-        AppComponent,
-        ClientAreaComponent,
-        LoginComponent,
-        RegisterComponent,
-        DashboardComponent,
-        MailSuccessComponent,
-        RegisterWrapperComponent,
+  declarations: [
+    AppComponent,
+    ClientAreaComponent,
+    LoginComponent,
+    RegisterComponent,
+    DashboardComponent,
+    MailSuccessComponent,
+    RegisterWrapperComponent,
         MailFailedComponent,
         LoadingScreenComponent,
-        OverviewItemComponent,
-        MyMediaComponent,
-        SocialSharingSheetComponent,
-        DeleteDialogComponent,
-        CreditsComponent,
-        VerifyComponent,
-        FileUploadComponent,
-        GradingComponent,
-        DragNDropDirective,
-        MouseWheelDirective,
-        LazyLoadDirective
-    ],
+    OverviewItemComponent,
+    MyMediaComponent,
+    SocialSharingSheetComponent,
+    DeleteDialogComponent,
+    CreditsComponent,
+    VerifyComponent,
+    FileUploadComponent,
+    GradingComponent,
+    DragNDropDirective,
+    MouseWheelDirective,
+    LazyLoadDirective,
+    BrowseComponent,
+    BrowseItemComponent
+  ],
     imports: [
         BrowserModule,
         AppRoutingModule,

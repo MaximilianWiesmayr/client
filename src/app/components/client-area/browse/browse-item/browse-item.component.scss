@@ -1,0 +1,117 @@
+@import "~src/themes/default";
+
+$item_Max_W: 12vw;
+$avatarHeight: 5vh;
+$buttonHeight: 5vh;
+
+.browseItem {
+  position: relative;
+}
+
+.browseItem.body {
+  max-width: $item_Max_W;
+  padding: 1vh .5vw 0 .5vw;
+  -webkit-box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.75);
+}
+
+.browseItem.image, .browseItem.image img {
+  height: auto;
+  max-height: 30vh;
+  width: 100%;
+}
+
+// === INFO ===
+.browseItem.infoContainer {
+  width: calc(#{$item_Max_W} - 1vw);
+  max-height: 20vh;
+  padding: 1vh .5vw;
+}
+
+// === AUTHOR INFO ===
+.browseItem.infoContainer .authorInfo {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-flow: row;
+  justify-content: flex-start;
+  margin-bottom: 1vh;
+}
+
+.browseItem.infoContainer .authorInfo .avatar {
+  border-radius: 5px;
+  width: $avatarHeight;
+  height: $avatarHeight;
+  max-height: 64px;
+  background-image: url('src/assets/pb.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  margin-right: 1vw;
+}
+
+.browseItem.infoContainer .authorInfo .name {
+  line-height: $avatarHeight;
+  max-width: calc(100% - #{$avatarHeight});
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+// === Description ===
+.browseItem.infoContainer .textInfo {
+  width: 100%;
+  max-height: 5vh;
+  text-overflow: ellipsis;
+}
+
+.browseItem.infoContainer .textInfo .tags {
+  font-size: small;
+  opacity: .75;
+}
+
+// === ACTIONS ===
+.browseItem .actionButtons {
+  width: 100%;
+  height: $buttonHeight;
+  display: flex;
+  flex-flow: row;
+  justify-items: stretch;
+  text-align: center;
+}
+
+.browseItem .actionButtons .button {
+  flex: 2 0px;
+  text-align: center;
+  line-height: $buttonHeight;
+  position: relative;
+
+}
+
+.button:hover {
+  background-color: rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+}
+
+.button mat-icon {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+}
+
+.button.buttonContent {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  max-width: calc(100% - #{$item_Max_W});
+  max-height: 100%;
+  overflow: auto;
+}
+
