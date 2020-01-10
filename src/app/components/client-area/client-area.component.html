@@ -30,8 +30,8 @@
                 </abbr>
             </div>
             <div id="credits">
-                {{this.dataservice.settings.title}} - Version {{this.dataservice.settings.version}} <br>
-                &copy; by Sebastian Schiefermayr 2019
+              {{this.dataservice.settings.title}} - Version {{this.dataservice.settings.version}} <br>
+              &copy; by Sebastian Schiefermayr 2019 - {{this.datePipe.transform(this.actualDate, 'yyyy')}}
             </div>
         </div>
     </div>

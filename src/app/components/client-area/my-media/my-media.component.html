@@ -11,13 +11,15 @@
     <div [class.dark]="this.dataservice.user.settings.darkmode" id="mediaContainer">
         <div (click)="openInfo(image)" *ngFor="let image of this.images"
              [class.list]="!this.dataservice.user.settings.myPhotosGridView"
-             class="mediaItem "><img
-                [src]="this.uploadDomain + '/' + image.path"
-                ondragstart="return false;">
-            <div *ngIf="!dataservice.user.settings.myPhotosGridView" class="listSpecs">
-                <span class="listSpecsTitle">{{image.title != '' ? image.title : image.factoryTitle}}</span>
-                <span class="listSpecsFileSize">{{image.fileSize}}</span>
-            </div>
+             class="mediaItem ">
+          <div class="img_name_overlay">{{image.factoryTitle}}</div>
+          <img
+            [src]="this.uploadDomain + '/' + image.path"
+            ondragstart="return false;">
+          <div *ngIf="!dataservice.user.settings.myPhotosGridView" class="listSpecs">
+            <span class="listSpecsTitle">{{image.title != '' ? image.title : image.factoryTitle}}</span>
+            <span class="listSpecsFileSize">{{image.fileSize}}</span>
+          </div>
         </div>
 
     </div>

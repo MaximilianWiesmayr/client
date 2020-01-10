@@ -2,26 +2,29 @@ import {Component, OnInit} from '@angular/core';
 import {DataService} from '../../services/data.service';
 import {Router} from '@angular/router';
 import {SubscriptionStatus} from '../../enums/subscription-status.enum';
+import {DatePipe} from '@angular/common';
 
 @Component({
-    selector: 'app-client-area',
-    templateUrl: './client-area.component.html',
-    styleUrls: ['./client-area.component.scss']
+  selector: 'app-client-area',
+  templateUrl: './client-area.component.html',
+  styleUrls: ['./client-area.component.scss']
 })
 export class ClientAreaComponent implements OnInit {
-    constructor(public dataservice: DataService, public router: Router) {
-    }
+  public actualDate: Date = new Date();
 
-    // Toggles the Sidebar
-    toggleCollapse(collapsed?: boolean) {
-        this.dataservice.user.settings.navBarCollapsed = collapsed !== undefined ?
-            collapsed : !this.dataservice.user.settings.navBarCollapsed;
-        document.getElementsByClassName('usernameAndCredits')[0].getElementsByTagName('span')[0].innerText =
-            this.dataservice.user.settings.navBarCollapsed ?
-                this.dataservice.makeInitials() :
-                this.dataservice.user.firstname + ' ' + this.dataservice.user.lastname;
-        document.getElementById('header').innerText =
-            this.dataservice.user.settings.navBarCollapsed ?
+  constructor(public dataservice: DataService, public router: Router, public datePipe: DatePipe) {
+  }
+
+  // Toggles the Sidebar
+  toggleCollapse(collapsed?: boolean) {
+    this.dataservice.user.settings.navBarCollapsed = collapsed !== undefined ?
+      collapsed : !this.dataservice.user.settings.navBarCollapsed;
+    document.getElementsByClassName('usernameAndCredits')[0].getElementsByTagName('span')[0].innerText =
+      this.dataservice.user.settings.navBarCollapsed ?
+        this.dataservice.makeInitials() :
+        this.dataservice.user.firstname + ' ' + this.dataservice.user.lastname;
+    document.getElementById('header').innerText =
+      this.dataservice.user.settings.navBarCollapsed ?
                 this.dataservice.makeInitialsFromWord(this.dataservice.settings.title) :
                 this.dataservice.settings.title;
     }

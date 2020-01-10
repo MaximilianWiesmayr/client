@@ -72,7 +72,8 @@ export class MyMediaComponent implements OnInit {
         // Resets the MetaMaps
         this.metaList = [];
         const meta: object = JSON.parse(image.metadata);
-        this.metaList.push({key: 'Owner', value: this.selectedImage.owner});
+        this.metaList.push({key: 'Filename', value: this.selectedImage.factoryTitle});
+      this.metaList.push({key: 'Owner', value: this.selectedImage.owner});
         Object.keys(meta).filter(key => !key.includes('Unknown') && !key.includes('TRC')).forEach(key => {
             this.metaList.push({key: key.trim(), value: meta[key].trim()});
         });

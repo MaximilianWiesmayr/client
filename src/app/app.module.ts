@@ -32,6 +32,7 @@ import {MouseWheelDirective} from './directives/mousewheel.directive';
 import {LazyLoadDirective} from './directives/lazy-load.directive';
 import {BrowseComponent} from './components/client-area/browse/browse.component';
 import {BrowseItemComponent} from './components/client-area/browse/browse-item/browse-item.component';
+import {DatePipe} from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -42,8 +43,8 @@ import {BrowseItemComponent} from './components/client-area/browse/browse-item/b
     DashboardComponent,
     MailSuccessComponent,
     RegisterWrapperComponent,
-        MailFailedComponent,
-        LoadingScreenComponent,
+    MailFailedComponent,
+    LoadingScreenComponent,
     OverviewItemComponent,
     MyMediaComponent,
     SocialSharingSheetComponent,
@@ -58,27 +59,28 @@ import {BrowseItemComponent} from './components/client-area/browse/browse-item/b
     BrowseComponent,
     BrowseItemComponent
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        FormsModule,
-        ReactiveFormsModule,
-        MaterialModule,
-        BrowserAnimationsModule,
-        ParticlesModule,
-        MatPasswordStrengthModule,
-        MatBottomSheetModule,
-        MatDialogModule,
-        HttpClientModule
-    ],
-    providers: [AuthGuard, HttpService, {
-        provide: HTTP_INTERCEPTORS,
-        useClass: AuthInterceptor,
-        multi: true
-    },
-        {provide: HAMMER_GESTURE_CONFIG, useClass: GestureConfig}],
-    bootstrap: [AppComponent],
-    entryComponents: [SocialSharingSheetComponent, DeleteDialogComponent]
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MaterialModule,
+    BrowserAnimationsModule,
+    ParticlesModule,
+    MatPasswordStrengthModule,
+    MatBottomSheetModule,
+    MatDialogModule,
+    HttpClientModule
+  ],
+  providers: [AuthGuard, HttpService, {
+    provide: HTTP_INTERCEPTORS,
+    useClass: AuthInterceptor,
+    multi: true
+  },
+    DatePipe,
+    {provide: HAMMER_GESTURE_CONFIG, useClass: GestureConfig}],
+  bootstrap: [AppComponent],
+  entryComponents: [SocialSharingSheetComponent, DeleteDialogComponent]
 })
 export class AppModule {
 }

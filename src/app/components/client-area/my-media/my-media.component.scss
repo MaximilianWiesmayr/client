@@ -82,6 +82,23 @@
   }
 }
 
+.mediaItem .img_name_overlay {
+  position: absolute;
+  width: $imageItem_W;
+  height: $imageItem_H;
+  line-height: $imageItem_H;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.5);
+  transition: all .2s;
+  font-size: small;
+  text-align: center;
+  opacity: 0;
+}
+
+.mediaItem .img_name_overlay:hover {
+  opacity: 1;
+}
+
 .mediaItem:hover img {
   border: 2px solid black;
 }
