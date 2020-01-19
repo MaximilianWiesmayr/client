@@ -122,6 +122,8 @@ export class DataService {
   public user: User = new User();
   // Sidebar collapsing emitter
   public collapseEmitter: EventEmitter<boolean> = new EventEmitter();
+  /** Emitter to refresh the dashboardstats eg. if Image got deleted, uploaded, ...*/
+  public imageStatusEmitter: EventEmitter<Image> = new EventEmitter(true);
   // GradingImage
   public gradingImage: Image = new Image();
 

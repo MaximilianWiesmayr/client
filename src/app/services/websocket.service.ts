@@ -46,7 +46,6 @@ export class WebsocketService {
   }
 
   importImage(image: Image) {
-    console.log('asdasd');
     const obj: object = {
       type: 'import',
       path: image.path

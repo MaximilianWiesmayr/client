@@ -27,12 +27,13 @@ export class FileUploadComponent implements OnInit {
             this.httpService.uploadImage(formData).subscribe(res => {
                     /* tslint:disable:no-string-literal */
                     if (res['status'] === 'success') {
-                        this.snackBar.open('Image: ' + res['fileName'] + ' successfully uploaded.', '✔');
-                        this.files.forEach(f => {
-                            if (f['name'] === element.name) {
-                                f['status'] = 'uploaded';
-                            }
-                        });
+                      this.dataservice.imageStatusEmitter.emit(null); // Just to refresh the Overview Items
+                      this.snackBar.open('Image: ' + res['fileName'] + ' successfully uploaded.', '✔');
+                      this.files.forEach(f => {
+                        if (f['name'] === element.name) {
+                          f['status'] = 'uploaded';
+                        }
+                      });
                     } else {
                         this.snackBar.open('ERROR: ' + res['exception'], 'Try again');
                         this.files.forEach(f => {
