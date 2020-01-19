@@ -1,0 +1,15 @@
+@import '~src/themes/default';
+
+#imageBrowser {
+  max-width: 75vw;
+}
+
+img {
+  max-width: 150px;
+  cursor: pointer;
+  transition: all .2s;
+}
+
+img:hover {
+  opacity: .5;
+}

@@ -1,10 +1,12 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {DataService} from '../../../services/data.service';
-import {MatSnackBar} from '@angular/material';
+import {MAT_DIALOG_DATA, MatDialog, MatDialogRef, MatSnackBar} from '@angular/material';
 import {WebsocketService} from 'src/app/services/websocket.service';
 import {GradingSetting} from 'src/app/entities/grading-setting';
 import {environment} from '../../../../environments/environment';
 import {NavigationEnd, NavigationError, NavigationStart, Router} from '@angular/router';
+import {Image} from '../../../entities/Image';
+import {HttpService} from '../../../services/http.service';
 
 @Component({
   selector: 'app-grading',
@@ -257,8 +259,10 @@ export class GradingComponent implements OnInit {
   constructor(
     public dataservice: DataService,
     public websocketService: WebsocketService,
+    private httpService: HttpService,
     private snackBar: MatSnackBar,
-    private router: Router
+    private router: Router,
+    private dialog: MatDialog
   ) {
     // @ts-ignore
     this.router.events.subscribe((event: Event) => {
@@ -284,11 +288,15 @@ export class GradingComponent implements OnInit {
   ngOnInit() {
     this.dataservice.collapseEmitter.emit(true);
     this.websocketService.connect(environment.socketBaseUrl + 'grade', this.dataservice.user.authToken);
-    this.websocketService.connectionEmitter.subscribe((connected: boolean) => {
-      if (connected) {
-        this.websocketService.importImage(this.dataservice.gradingImage);
-      }
-    });
+    if (this.dataservice.gradingImage.path !== '') {
+      this.websocketService.connectionEmitter.subscribe((connected: boolean) => {
+        if (connected) {
+          this.websocketService.importImage(this.dataservice.gradingImage);
+        }
+      });
+    } else {
+      this.openBrowser();
+    }
   }
 
   // Method for sending the changes to the backend
@@ -388,5 +396,64 @@ export class GradingComponent implements OnInit {
   resetZoom() {
     this.default_image_scale = 1;
     this.scaleImage();
+  }
+
+  /** Opens the Image Browser if no Image is selected*/
+  openBrowser(): void {
+    this.httpService.loadPhotos(this.dataservice.user.username).subscribe((res: Array<object>) => {
+      const images: Array<Image> = [];
+      if (res !== null) {
+        for (const img of res) {
+
+          /* tslint:disable:no-string-literal */
+          images.push(new Image(img['customName'], img['factoryName'], img['filepath'], img['metadata'], img['owner']));
+          /* tslint:enable:no-string-literal */
+        }
+        const dialogRef = this.dialog.open(ImageBrowserComponent, {
+          width: '70%',
+          data: {images}
+        });
+        dialogRef.afterClosed().subscribe(result => {
+          this.dataservice.gradingImage = result;
+          this.websocketService.importImage(this.dataservice.gradingImage);
+
+          document.getElementById('prevIMG').setAttribute('src', this.loadPreviewImage());
+        });
+      }
+    });
+
+  }
+
+  loadPreviewImage() {
+    return this.dataservice.settings.domain + this.dataservice.gradingImage.path;
+  }
+}
+
+export interface ImageBrowserData {
+  images: Array<Image>;
+}
+
+/**
+ * @title Image Browser
+ * If no Image is selected
+ */
+@Component({
+  selector: 'app-image-browser',
+  templateUrl: './image-browser/image-browser.component.html',
+  styleUrls: ['./image-browser/image-browser.component.scss']
+})
+export class ImageBrowserComponent {
+// UploadDomain
+  public uploadDomain: string = environment.publicDomain;
+
+  constructor(
+    private dataservice: DataService,
+    public dialogRef: MatDialogRef<ImageBrowserComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: ImageBrowserData) {
+  }
+
+
+  setImage(img: Image) {
+    this.dialogRef.close(img);
   }
 }

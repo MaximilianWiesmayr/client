@@ -27,7 +27,7 @@ import {HttpService} from './services/http.service';
 import {AuthInterceptor} from './util/interceptors/auth-interceptor';
 import {DragNDropDirective} from './directives/drag-n-drop.directive';
 import {FileUploadComponent} from './components/file-upload/file-upload.component';
-import {GradingComponent} from './components/client-area/grading/grading.component';
+import {GradingComponent, ImageBrowserComponent} from './components/client-area/grading/grading.component';
 import {MouseWheelDirective} from './directives/mousewheel.directive';
 import {LazyLoadDirective} from './directives/lazy-load.directive';
 import {BrowseComponent} from './components/client-area/browse/browse.component';
@@ -57,7 +57,8 @@ import {DatePipe} from '@angular/common';
     MouseWheelDirective,
     LazyLoadDirective,
     BrowseComponent,
-    BrowseItemComponent
+    BrowseItemComponent,
+    ImageBrowserComponent
   ],
   imports: [
     BrowserModule,
@@ -80,7 +81,7 @@ import {DatePipe} from '@angular/common';
     DatePipe,
     {provide: HAMMER_GESTURE_CONFIG, useClass: GestureConfig}],
   bootstrap: [AppComponent],
-  entryComponents: [SocialSharingSheetComponent, DeleteDialogComponent]
+  entryComponents: [SocialSharingSheetComponent, DeleteDialogComponent, ImageBrowserComponent]
 })
 export class AppModule {
 }
