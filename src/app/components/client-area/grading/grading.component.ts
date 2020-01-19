@@ -270,6 +270,7 @@ export class GradingComponent implements OnInit {
       if (event instanceof NavigationStart) {
         // Show loading indicator
         this.websocketService.ws.close();
+        this.dialog.closeAll();
       }
 
       if (event instanceof NavigationEnd) {
@@ -288,7 +289,7 @@ export class GradingComponent implements OnInit {
   ngOnInit() {
     this.dataservice.collapseEmitter.emit(true);
     this.websocketService.connect(environment.socketBaseUrl + 'grade', this.dataservice.user.authToken);
-    if (this.dataservice.gradingImage.path !== '') {
+    if (this.dataservice.gradingImage && this.dataservice.gradingImage.path !== '') {
       this.websocketService.connectionEmitter.subscribe((connected: boolean) => {
         if (connected) {
           this.websocketService.importImage(this.dataservice.gradingImage);
@@ -416,8 +417,9 @@ export class GradingComponent implements OnInit {
         dialogRef.afterClosed().subscribe(result => {
           this.dataservice.gradingImage = result;
           this.websocketService.importImage(this.dataservice.gradingImage);
-
-          document.getElementById('prevIMG').setAttribute('src', this.loadPreviewImage());
+          if (document.getElementById('prevIMG')) {
+            document.getElementById('prevIMG').setAttribute('src', this.loadPreviewImage());
+          }
         });
       }
     });
@@ -425,7 +427,9 @@ export class GradingComponent implements OnInit {
   }
 
   loadPreviewImage() {
-    return this.dataservice.settings.domain + this.dataservice.gradingImage.path;
+    if (this.dataservice.gradingImage) {
+      return this.dataservice.settings.domain + this.dataservice.gradingImage.path;
+    }
   }
 }
 
@@ -454,6 +458,8 @@ export class ImageBrowserComponent {
 
 
   setImage(img: Image) {
-    this.dialogRef.close(img);
+    if (img) {
+      this.dialogRef.close(img);
+    }
   }
 }

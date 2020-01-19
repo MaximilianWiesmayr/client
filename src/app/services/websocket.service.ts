@@ -46,10 +46,12 @@ export class WebsocketService {
   }
 
   importImage(image: Image) {
-    const obj: object = {
-      type: 'import',
-      path: image.path
-    };
-    this.ws.send(JSON.stringify(obj));
+    if (image) {
+      const obj: object = {
+        type: 'import',
+        path: image.path
+      };
+      this.ws.send(JSON.stringify(obj));
+    }
   }
 }
