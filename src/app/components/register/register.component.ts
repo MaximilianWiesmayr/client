@@ -62,7 +62,7 @@ export class RegisterComponent implements OnInit {
   ngOnInit() {
   }
 
-  // Sends the register Request to our C++ Backend
+  // Sends the register Request to our JAVA Backend
   register() {
     // Check if the form is valid before sending to the Server
     if (this.registerform.valid) {
