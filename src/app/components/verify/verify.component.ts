@@ -10,7 +10,7 @@ import {HttpService} from '../../services/http.service';
 })
 export class VerifyComponent implements OnInit {
 
-    private title = '';
+    public title = '';
 
     constructor(private activatedRoute: ActivatedRoute, public dataservice: DataService, private http: HttpService) {
     }

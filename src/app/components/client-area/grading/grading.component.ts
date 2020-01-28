@@ -35,7 +35,8 @@ export class GradingComponent implements OnInit {
           value: 0,
           editValue: false
         },
-      ]
+      ],
+      locked: true
     },
     {
       category: 'Levels',
@@ -88,7 +89,38 @@ export class GradingComponent implements OnInit {
           value: 0,
           editValue: false
         }
-      ]
+      ],
+      locked: false
+    },
+    {
+      category: 'Colors',
+      children: [
+        {
+          title: 'Red',
+          min: -1,
+          max: 10,
+          step: 0.1,
+          value: 0,
+          editValue: false
+        },
+        {
+          title: 'Green',
+          min: -1,
+          max: 10,
+          step: 0.1,
+          value: 0,
+          editValue: false
+        },
+        {
+          title: 'Blue',
+          min: -1,
+          max: 10,
+          step: 0.1,
+          value: 0,
+          editValue: false
+        }
+      ],
+      locked: true
     },
     {
       category: 'Presence',
@@ -125,11 +157,13 @@ export class GradingComponent implements OnInit {
           value: 0,
           editValue: false
         }
-      ]
+      ],
+      locked: true
     },
     {
       category: 'Curve',
-      children: []
+      children: [],
+      locked: true
     },
     {
       category: 'Sharpness',
@@ -166,7 +200,8 @@ export class GradingComponent implements OnInit {
           value: 0,
           editValue: false
         }
-      ]
+      ],
+      locked: true
     },
     {
       category: 'Noise Reduction',
@@ -195,7 +230,8 @@ export class GradingComponent implements OnInit {
           value: 0,
           editValue: false
         }
-      ]
+      ],
+      locked: true
     },
     {
       category: 'Vignette',
@@ -240,17 +276,19 @@ export class GradingComponent implements OnInit {
           value: 0,
           editValue: false
         },
-      ]
+      ],
+      locked: true
     },
     {
       category: 'Presets',
-      children: []
+      children: [],
+      locked: true
     },
   ];
   // Self explanatory (Setting)
   private current_editable_child;
   // Zoom Preview Image via mousewheel
-  private default_image_scale = 1;
+  public default_image_scale = 1;
   // Indicator if Image is clicked (ready to move)
   public preview_clicked: boolean = false;
   // Preview Image DOM Element

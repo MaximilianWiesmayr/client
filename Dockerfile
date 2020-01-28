@@ -1,5 +1,9 @@
-FROM nginx
+FROM nginx:1.17.8-alpine
 
-EXPOSE 80
+MAINTAINER Sebastian Schiefermayr <sebastian.schiefermayr@gmx.at>
 
-COPY ?? /usr/share/nginx/html
+EXPOSE 80 443
+
+COPY dist/InstantGrade-Client/ /usr/share/nginx/html
+
+CMD ["nginx", "-g", "daemon off;"]
