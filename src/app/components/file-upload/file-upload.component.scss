@@ -30,14 +30,29 @@ $container_height: 25vh;
 }
 
 .files-list {
+  position: relative;
   float: right;
   display: flex;
   justify-content: space-between;
   width: calc(80% - 15px);
   margin: 10px auto;
   background-color: rgba(0, 0, 0, 0.3);
-  padding: 5px 5px 5px 20px;
   color: $gradient_start;
+}
+
+.files-list .text-Box {
+  padding: 20px 5px 20px 20px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+
+.files-list .info {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: calc(100% - 30px);
+  text-align: left;
 }
 
 .files-list.uploaded {
@@ -52,8 +67,16 @@ $container_height: 25vh;
   background: transparent;
   border: none;
   cursor: pointer;
+  display: flex;
+  align-self: flex-end;
 }
 
 .files-list .delete-file img {
   width: 30px;
+}
+
+.files-list mat-progress-bar {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
 }

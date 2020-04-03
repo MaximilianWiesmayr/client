@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {User} from '../entities/User';
 import {environment} from '../../environments/environment';
+import {Image} from '../entities/Image';
 
 @Injectable({
   providedIn: 'root'
@@ -49,5 +50,9 @@ export class HttpService {
 
   recoverPhoto(imageName: string, owner: string) {
     return this.http.post(environment.apiUrl + 'image/recover', {imageName, owner});
+  }
+
+  downloadImage(image: Image) {
+    return this.http.get(environment.apiUrl + 'clientarea/download/' + image.owner + '/' + image.factoryTitle);
   }
 }

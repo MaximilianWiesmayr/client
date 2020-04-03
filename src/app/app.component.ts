@@ -35,4 +35,5 @@ export class AppComponent implements OnInit, AfterViewInit {
             this.viewLoadingCompleted = true;
         }, 5000);
     }
+
 }

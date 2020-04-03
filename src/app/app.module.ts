@@ -84,4 +84,5 @@ import {DatePipe} from '@angular/common';
   entryComponents: [SocialSharingSheetComponent, DeleteDialogComponent, ImageBrowserComponent]
 })
 export class AppModule {
+
 }

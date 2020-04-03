@@ -57,9 +57,10 @@ export class MyMediaComponent implements OnInit {
         this.httpService.loadPhotos(this.dataservice.user.username).subscribe((res: Array<object>) => {
             if (res !== null) {
                 for (const img of res) {
-                    /* tslint:disable:no-string-literal */
-                    this.images.push(new Image(img['customName'], img['factoryName'], img['filepath'], img['metadata'], img['owner']));
-                    /* tslint:enable:no-string-literal */
+                  /* tslint:disable:no-string-literal */
+                  // tslint:disable-next-line:max-line-length
+                  this.images.push(new Image(img['customName'], img['factoryName'], img['filepath'], img['thumbnailPath'], img['metadata'], img['owner']));
+                  /* tslint:enable:no-string-literal */
                 }
             }
         });
@@ -72,11 +73,11 @@ export class MyMediaComponent implements OnInit {
         // Resets the MetaMaps
         this.metaList = [];
         const meta: object = JSON.parse(image.metadata);
-        this.metaList.push({key: 'Filename', value: this.selectedImage.factoryTitle});
+      this.metaList.push({key: 'Filename', value: this.selectedImage.factoryTitle});
       this.metaList.push({key: 'Owner', value: this.selectedImage.owner});
-        Object.keys(meta).filter(key => !key.includes('Unknown') && !key.includes('TRC')).forEach(key => {
-            this.metaList.push({key: key.trim(), value: meta[key].trim()});
-        });
+      Object.keys(meta).filter(key => !key.includes('Unknown') && !key.includes('TRC')).forEach(key => {
+        this.metaList.push({key: key.trim(), value: meta[key].trim()});
+      });
         this.datasource = new MatTableDataSource(this.metaList);
         // filters the general meta of an image
         // this.setOverviewMeta();

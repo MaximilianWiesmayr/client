@@ -94,7 +94,7 @@ export class DataService {
       active: true
     },
     {
-      title: 'My Photos',
+      title: 'Workspace', // My Photos
       icon: 'folder', // photo_library
       route: '/dashboard/photos',
       active: false
@@ -126,6 +126,8 @@ export class DataService {
   public imageStatusEmitter: EventEmitter<Image> = new EventEmitter(true);
   // GradingImage
   public gradingImage: Image = new Image();
+  // Prevent Routing while uploading
+  public isUploading = false;
 
   constructor() {
   }

@@ -469,6 +469,12 @@ export class GradingComponent implements OnInit {
       return this.dataservice.settings.domain + this.dataservice.gradingImage.path;
     }
   }
+
+  prepareDownload() {
+    this.httpService.downloadImage(this.dataservice.gradingImage).subscribe(res => {
+      // TODO
+    });
+  }
 }
 
 export interface ImageBrowserData {

@@ -17,19 +17,19 @@
                                 [max]="child.max" [min]="child.min"
                                 [step]="child.step" [value]="child.value" color="primary" mouseWheel></mat-slider>
                     <div (click)="makeEditable(child);" class="sliderValue">
-                        <span *ngIf="!child.editValue">{{slider.value}}</span>
-                        <mat-form-field *ngIf="child.editValue" class="editValue">
-                            <input #sliderInput
-                                   (keydown.enter)="saveNewValue(slider, child, sliderInput, setting.category)"
-                                   [value]="slider.value" matInput type="number">
-                        </mat-form-field>
+                      <span *ngIf="!child.editValue">{{slider.value}}</span>
+                      <mat-form-field *ngIf="child.editValue" class="editValue">
+                        <input #sliderInput
+                               (keydown.enter)="saveNewValue(slider, child, sliderInput, setting.category)"
+                               [value]="slider.value" matInput type="number">
+                      </mat-form-field>
                     </div>
-                </div>
-
-
+              </div>
             </mat-expansion-panel>
         </mat-accordion>
-
+      <div id="imageActions">
+        <button (click)="prepareDownload()" mat-flat-button>Download</button>
+      </div>
     </div>
     <div (mouseWheelDown)="zoomImage('DOWN')" (mouseWheelUp)="zoomImage('UP')" id="imageArea" mouseWheel>
         <div id="previewIMG"><img LazyLoad [src]="loadPreviewImage()"

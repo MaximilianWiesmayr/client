@@ -125,6 +125,10 @@ body, html {
   // border-color: white !important;
 }
 
+.dark .mat-progress-bar-buffer {
+  background-color: #1C1C1C !important;
+}
+
 /* My Photos Section */
 .dark .mediaItem:hover img {
   border: 2px solid white;
