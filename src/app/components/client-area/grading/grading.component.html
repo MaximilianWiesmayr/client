@@ -1,0 +1,45 @@
+<div [class.dark]="this.dataservice.user.settings.darkmode" id="wrapper">
+    <div id="toolSettings">
+        <mat-accordion>
+            <mat-expansion-panel *ngFor="let setting of this.settings" [disabled]="settings['locked']">
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  {{setting.category}}
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <!-- SLIDER SECTION -->
+              <div *ngFor="let child of setting.children" class="sliderBox">
+                <div (click)="slider.value = child.value; makeChanges(setting.category, child.title, slider.value)"
+                     class="optionText">{{child.title}}</div>
+                <mat-slider #slider (input)="makeChanges(setting.category, child.title, slider.value)"
+                                (mouseWheelDown)="mousewheelAction('DOWN', child, slider, setting.category)"
+                                (mouseWheelUp)="mousewheelAction('UP', child, slider, setting.category)"
+                                [max]="child.max" [min]="child.min"
+                                [step]="child.step" [value]="child.value" color="primary" mouseWheel></mat-slider>
+                    <div (click)="makeEditable(child);" class="sliderValue">
+                      <span *ngIf="!child.editValue">{{slider.value}}</span>
+                      <mat-form-field *ngIf="child.editValue" class="editValue">
+                        <input #sliderInput
+                               (keydown.enter)="saveNewValue(slider, child, sliderInput, setting.category)"
+                               [value]="slider.value" matInput type="number">
+                      </mat-form-field>
+                    </div>
+              </div>
+            </mat-expansion-panel>
+        </mat-accordion>
+      <div id="imageActions">
+        <button (click)="prepareDownload()" mat-flat-button>Download</button>
+      </div>
+    </div>
+    <div (mouseWheelDown)="zoomImage('DOWN')" (mouseWheelUp)="zoomImage('UP')" id="imageArea" mouseWheel>
+        <div id="previewIMG"><img LazyLoad [src]="loadPreviewImage()"
+                                  (mousedown)="this.preview_clicked = true;"
+                                  (mousemove)="movePrevImage($event)"
+                                  (mouseup)="this.preview_clicked = false;"
+                                  alt="Preview-Image"
+                                  draggable="false" id="prevIMG"></div>
+      <div *ngIf="this.default_image_scale != 1" id="zoomReset">
+        <button (click)="resetZoom()" mat-raised-button>Reset Zoom</button>
+      </div>
+    </div>
+</div>

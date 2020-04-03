@@ -1,0 +1,5 @@
+<div [class.dark]="this.dataservice.user.settings.darkmode" id="wrapper">
+  <div id="itemContainer">
+    <browse-item *ngFor="let image of this.images" [image]="image"></browse-item>
+  </div>
+</div>

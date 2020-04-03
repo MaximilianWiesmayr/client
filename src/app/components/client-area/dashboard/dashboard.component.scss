@@ -8,7 +8,7 @@
   margin: 0 !important;
 }
 
-#overviewContainer {
+.fluidContainer {
   display: flex;
   flex-flow: row wrap;
   @include sm {
@@ -28,4 +28,13 @@ overview-item {
   @include sm {
     margin: 1vh 0;
   }
+}
+
+file-upload {
+  flex-grow: 1;
+  margin: 0 1vw 1vh 1vw;
+  @include sm {
+    margin: 1vh 0;
+  }
+  max-height: 25vh;
 }

@@ -1,0 +1,26 @@
+<div class="browseItem body">
+  <div class="browseItem image"><img [src]="this.uploadDomain + '/' + this.image.path"></div>
+  <div class="browseItem infoContainer">
+    <div class="authorInfo">
+      <div class="avatar"></div>
+      <div class="name">{{this.image.owner}}</div>
+    </div>
+    <div class="textInfo">
+      <div class="tags">#nice #clean</div>
+      Voi nices Büdl
+    </div>
+
+  </div>
+  <div class="actionButtons">
+    <div class="button">
+      <div class="buttonContent">
+        <mat-icon>favorite_border</mat-icon>
+      </div>
+    </div>
+    <div class="button">
+      <div class="buttonContent">
+        <mat-icon>share</mat-icon>
+      </div>
+    </div>
+  </div>
+</div>
