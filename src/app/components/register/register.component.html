@@ -6,19 +6,19 @@
         </div>
         <form [formGroup]="registerform">
             <mat-form-field>
-                <input formControlName="username" matInput placeholder="Username" required type="text">
+                <input formControlName="username" matInput name="username" placeholder="Username" required type="text">
             </mat-form-field>
             <mat-form-field>
-                <input matInput placeholder="Firstname" type="text">
+                <input formControlName="firstname" matInput name="firstname" placeholder="Firstname" type="text">
             </mat-form-field>
             <mat-form-field>
-                <input matInput placeholder="Lastname" type="text">
+                <input formControlName="lastname" matInput name="lastname" placeholder="Lastname" type="text">
             </mat-form-field>
             <mat-form-field>
-                <input formControlName="email" matInput placeholder="Email" required type="email">
+                <input formControlName="email" matInput name="email" placeholder="Email" required type="email">
             </mat-form-field>
             <mat-form-field>
-                <input [type]="hide ? 'password' : 'text'" formControlName="password" matInput
+                <input [type]="hide ? 'password' : 'text'" formControlName="password" matInput name="password"
                        placeholder="Password" required>
                 <button (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide"
                         mat-icon-button
@@ -30,31 +30,32 @@
                 </mat-error>
             </mat-form-field>
             <mat-form-field>
-                <input [errorStateMatcher]="matcher" formControlName="confirmPassword" matInput
+                <input [errorStateMatcher]="matcher" formControlName="confirmPassword" matInput name="passwordConfirm"
                        placeholder="Confirm Password"
                        type="password">
                 <mat-error *ngIf="registerform.hasError('notmatching')">
-                    Passwords do not match
+                  Passwords do not match
                 </mat-error>
             </mat-form-field>
 
-            <mat-spinner-button (click)="register()" [options]="this.btnOpts" class="regBtn"></mat-spinner-button>
-            <br>
-            <button color="warn" mat-button routerLink="/login">Back</button>
+          <mat-spinner-button (click)="register()" [options]="this.btnOpts" class="regBtn"
+                              type="button"></mat-spinner-button>
+          <br>
+          <button color="warn" mat-button routerLink="/login">Back</button>
         </form>
     </div>
-    <particles [height]="this.dataservice.particles.height" [params]="this.dataservice.particles.params"
-               [style]="this.dataservice.particles.style" [width]="this.dataservice.particles.width"></particles>
-    <svg fill="none" height="280" id="deco_leftBot" viewBox="0 0 329 280" width="329"
-         xmlns="http://www.w3.org/2000/svg">
-        <path d="M140.5 133C111.337 55.2325 42.9639 23.7908 0 0V280H329C261.629 276.007 169 209 140.5 133Z"
-              fill="url(#paint0_linear)"/>
-        <defs>
-            <linearGradient gradientUnits="userSpaceOnUse" id="paint0_linear" x1="-11.5351" x2="251.825" y1="0.499103"
-                            y2="302.223">
-                <stop class="gradient stop1"/>
-                <stop class="gradient stop2" offset="1"/>
-            </linearGradient>
+  <particles [height]="this.dataservice.particles['height']" [params]="this.dataservice.particles['params']"
+             [style]="this.dataservice.particles['style']" [width]="this.dataservice.particles['width']"></particles>
+  <svg fill="none" height="280" id="deco_leftBot" viewBox="0 0 329 280" width="329"
+       xmlns="http://www.w3.org/2000/svg">
+    <path d="M140.5 133C111.337 55.2325 42.9639 23.7908 0 0V280H329C261.629 276.007 169 209 140.5 133Z"
+          fill="url(#paint0_linear)"/>
+    <defs>
+      <linearGradient gradientUnits="userSpaceOnUse" id="paint0_linear" x1="-11.5351" x2="251.825" y1="0.499103"
+                      y2="302.223">
+        <stop class="gradient stop1"/>
+        <stop class="gradient stop2" offset="1"/>
+      </linearGradient>
         </defs>
     </svg>
     <svg fill="none" height="364" id="deco_rightTop" viewBox="0 0 423 364" width="423"

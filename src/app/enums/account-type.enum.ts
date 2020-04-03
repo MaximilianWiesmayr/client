@@ -1,5 +1,5 @@
 export enum AccountType {
-    BASIC = 'BASIC',
-    PRO = 'PRO',
-    EXPERT = 'EXPERT'
+    DELETED = 'DELETED',
+    NOT_VERIFIED = 'NOT_VERIFIED',
+    VERIFIED = 'VERIFIED'
 }
