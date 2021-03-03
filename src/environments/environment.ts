@@ -4,10 +4,10 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'https://instantgrade.bastiarts.com/api/',
+  // apiUrl: 'http://instantgrade.bastiarts.com/api/',
   // apiUrl: 'http://instantgrade.bastiarts.com:8080/api/',
-  // apiUrl: 'http://127.0.0.1:8080/api/',
-  publicDomain: 'https://instantgrade.bastiarts.com',
+   apiUrl: 'http://localhost:8080/api/',
+  publicDomain: 'http://localhost:8080',
   socketBaseUrl: 'ws://localhost:8025/instantgrade/'
 };
 

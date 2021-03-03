@@ -37,6 +37,7 @@ export class MyMediaComponent implements OnInit {
     // Table Datasource
     public datasource;
     public displayedColumns: Array<string> = ['key', 'value'];
+    public img;
 
     constructor(
         public dataservice: DataService,
@@ -59,7 +60,7 @@ export class MyMediaComponent implements OnInit {
                 for (const img of res) {
                   /* tslint:disable:no-string-literal */
                   // tslint:disable-next-line:max-line-length
-                  this.images.push(new Image(img['customName'], img['factoryName'], img['filepath'], img['thumbnailPath'], img['metadata'], img['owner']));
+                  this.images.push(new Image(img['customName'], img['factoryName'], img['filepath'], img['thumbnailPath'] ,img['metadata'], img['owner']));
                   /* tslint:enable:no-string-literal */
                 }
             }
@@ -80,12 +81,13 @@ export class MyMediaComponent implements OnInit {
       });
         this.datasource = new MatTableDataSource(this.metaList);
         // filters the general meta of an image
-        // this.setOverviewMeta();
+        // this.setOverviewMeta();t
         // Sets the opening indicator to true
         this.isInfoOpen = true;
         // Sets the background-image of the preview
+      console.log(this.uploadDomain + ' ' + image.thumbnailPath);
         document.getElementById('imagePreview').style.backgroundImage =
-            'url("' + this.uploadDomain + '/' + image.path + '")';
+            'url("' + this.uploadDomain + '/' + image.thumbnailPath + '")';
     }
 
     // Opens the Bottom sheet to share the image on Social Media
@@ -151,6 +153,26 @@ export class MyMediaComponent implements OnInit {
     applyFilter(filterValue: string) {
         this.datasource.filter = filterValue.trim().toLowerCase();
     }
+
+  previewimages(image) {
+    return this.loadImage()
+  }
+  loadImage() {
+      this.httpService.getThumbnail().subscribe(result => {
+        this.createImageFromBlob(result);
+      });
+  }
+
+  createImageFromBlob(image: Blob) {
+    let reader = new FileReader();
+    this.img = reader.addEventListener('load', () => {
+      this.img = reader.result;
+    }, false);
+
+    if (image) {
+      reader.readAsDataURL(image);
+    }
+  }
 }
 
 @Component({

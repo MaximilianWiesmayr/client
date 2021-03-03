@@ -3,13 +3,14 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {User} from '../entities/User';
 import {environment} from '../../environments/environment';
 import {Image} from '../entities/Image';
+import {DataService} from './data.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HttpService {
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, public dataService: DataService) {
   }
 
   // Sends a REST-Request to our Auth-Backend
@@ -52,7 +53,18 @@ export class HttpService {
     return this.http.post(environment.apiUrl + 'image/recover', {imageName, owner});
   }
 
-  downloadImage(image: Image) {
-    return this.http.get(environment.apiUrl + 'clientarea/download/' + image.owner + '/' + image.factoryTitle);
+  getThumbnail() {
+    console.log(this.dataService.settings.domain + this.dataService.gradingImage.thumbnailPath);
+    return this.http.get(this.dataService.settings.domain + this.dataService.gradingImage.thumbnailPath, { responseType: 'blob' });
   }
+
+  getLoadImg() {
+    console.log(this.dataService.settings.domain + 'uploads/loading.jpg');
+    return this.http.get(this.dataService.settings.domain + 'uploads/loading.jpg', { responseType: 'blob' });
+  }
+
+  /*downloadImage(image: Image) {
+    return this.http.get(environment.apiUrl + 'clientarea/download/' + image.owner + '/' + image.factoryTitle);
+  }*/
+
 }

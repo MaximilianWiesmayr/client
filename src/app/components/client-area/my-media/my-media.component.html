@@ -14,7 +14,7 @@
              class="mediaItem ">
           <div class="img_name_overlay">{{image.factoryTitle}}</div>
           <img
-            [src]="this.uploadDomain + '/' + image.path"
+            [src]="dataservice.settings.domain + image.thumbnailPath"
             ondragstart="return false;">
           <div *ngIf="!dataservice.user.settings.myPhotosGridView" class="listSpecs">
             <span class="listSpecsTitle">{{image.title != '' ? image.title : image.factoryTitle}}</span>

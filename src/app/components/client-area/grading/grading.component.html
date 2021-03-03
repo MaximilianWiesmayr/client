@@ -28,11 +28,11 @@
             </mat-expansion-panel>
         </mat-accordion>
       <div id="imageActions">
-        <button (click)="prepareDownload()" mat-flat-button>Download</button>
+        <button (click)="prepareDownload()" mat-flat-button>Save</button>
       </div>
     </div>
-    <div (mouseWheelDown)="zoomImage('DOWN')" (mouseWheelUp)="zoomImage('UP')" id="imageArea" mouseWheel>
-        <div id="previewIMG"><img LazyLoad [src]="loadPreviewImage()"
+    <div (mouseWheelDown)="zoomImage('DOWN')" (mouseWheelUp)="zoomImage('UP')" id="imageArea" mouseWheel >
+        <div id="previewIMG"><img [src]="img"
                                   (mousedown)="this.preview_clicked = true;"
                                   (mousemove)="movePrevImage($event)"
                                   (mouseup)="this.preview_clicked = false;"

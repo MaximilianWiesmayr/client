@@ -83,7 +83,7 @@ export class DataService {
     version: '1.0',
     virtualCurrency: 'Credits',
     snackBarTimeout: 3000, // 3 sek
-    domain: 'http://instantgrade.bastiarts.com/'
+    domain: 'http://localhost:8080/',
   };
   // Sidebar Items
   public navItems: Array<object> = [
@@ -128,6 +128,8 @@ export class DataService {
   public gradingImage: Image = new Image();
   // Prevent Routing while uploading
   public isUploading = false;
+  public isChanged = false;
+  public thumbnailEmitter: EventEmitter<string> = new EventEmitter(false);
 
   constructor() {
   }
