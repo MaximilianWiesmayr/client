@@ -1,4 +1,4 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, Inject, OnInit} from '@angular/core';
 import {DataService} from '../../../services/data.service';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef, MatSnackBar} from '@angular/material';
 import {WebsocketService} from 'src/app/services/websocket.service';
@@ -293,6 +293,7 @@ export class GradingComponent implements OnInit {
   public preview_clicked: boolean = false;
   // Preview Image DOM Element
   public PREVIMG = document.getElementsByTagName('img')[0];
+  public img;
 
   constructor(
     public dataservice: DataService,
@@ -300,7 +301,8 @@ export class GradingComponent implements OnInit {
     private httpService: HttpService,
     private snackBar: MatSnackBar,
     private router: Router,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    public cd: ChangeDetectorRef
   ) {
     // @ts-ignore
     this.router.events.subscribe((event: Event) => {
@@ -324,33 +326,42 @@ export class GradingComponent implements OnInit {
     });
   }
 
+
   ngOnInit() {
     this.dataservice.collapseEmitter.emit(true);
     this.websocketService.connect(environment.socketBaseUrl + 'grade', this.dataservice.user.authToken);
-    if (this.dataservice.gradingImage && this.dataservice.gradingImage.path !== '') {
+    if (this.dataservice.gradingImage && this.dataservice.gradingImage.filepath !== '') {
       this.websocketService.connectionEmitter.subscribe((connected: boolean) => {
         if (connected) {
           this.websocketService.importImage(this.dataservice.gradingImage);
+          this.loadImage();
         }
       });
     } else {
       this.openBrowser();
     }
+    this.dataservice.thumbnailEmitter.subscribe(res => {
+      this.loadImage();
+    });
   }
 
   // Method for sending the changes to the backend
   makeChanges(category: string, setting: string, value: number) {
     console.log(category + '_' + setting + ' > ' + value);
-    value += 1; // Default value for css filter
+    /*value += 1; // Default value for css filter
     if (setting === 'Exposure') {
       document.getElementsByTagName('img')[0].style.filter =
         'brightness(' + value + ')';
     } else if (setting === 'Contrast') {
       document.getElementsByTagName('img')[0].style.filter =
         'contrast(' + value + ')';
-    }
+    }*/
+    this.dataservice.isChanged = true;
+    this.loadImage();
     this.websocketService.gradingEmitter.emit(new GradingSetting('setting', setting, value));
   }
+
+
 
   // If the user wants to enter a custom value
   makeEditable(child) {
@@ -445,7 +456,8 @@ export class GradingComponent implements OnInit {
         for (const img of res) {
 
           /* tslint:disable:no-string-literal */
-          images.push(new Image(img['customName'], img['factoryName'], img['filepath'], img['metadata'], img['owner']));
+          images.push(new Image(img['customName'], img['factoryName'], img['filepath'], img['thumbnailPath'],
+            img['metadata'], img['owner']));
           /* tslint:enable:no-string-literal */
         }
         const dialogRef = this.dialog.open(ImageBrowserComponent, {
@@ -455,9 +467,10 @@ export class GradingComponent implements OnInit {
         dialogRef.afterClosed().subscribe(result => {
           this.dataservice.gradingImage = result;
           this.websocketService.importImage(this.dataservice.gradingImage);
-          if (document.getElementById('prevIMG')) {
-            document.getElementById('prevIMG').setAttribute('src', this.loadPreviewImage());
-          }
+          /*if (document.getElementById('prevIMG')) {
+            document.getElementById('prevIMG').setAttribute('src', this.loadImage());
+          }*/
+          this.loadImage();
         });
       }
     });
@@ -465,15 +478,43 @@ export class GradingComponent implements OnInit {
   }
 
   loadPreviewImage() {
+    // console.log(this.dataservice.settings.stoploading);
     if (this.dataservice.gradingImage) {
-      return this.dataservice.settings.domain + this.dataservice.gradingImage.path;
+      console.log(this.dataservice.settings.domain + this.dataservice.gradingImage.thumbnailPath);
+      return this.dataservice.settings.domain + this.dataservice.gradingImage.thumbnailPath;
+    } else {
+      console.log(this.dataservice.settings.domain + 'uploads/loading.jpg');
+      return this.dataservice.settings.domain + 'uploads/loading.jpg';
+    }
+  }
+
+  loadImage() {
+    if (!this.dataservice.isChanged) {
+      this.httpService.getThumbnail().subscribe(result => {
+        this.createImageFromBlob(result);
+      });
+    } else {
+      this.httpService.getLoadImg().subscribe(result => {
+        this.createImageFromBlob(result);
+      });
+      this.dataservice.isChanged = false;
+    }
+  }
+
+  createImageFromBlob(image: Blob) {
+    let reader = new FileReader();
+    reader.addEventListener('load', () => {
+      this.img = reader.result;
+    }, false);
+
+    if (image) {
+      reader.readAsDataURL(image);
     }
   }
 
   prepareDownload() {
-    this.httpService.downloadImage(this.dataservice.gradingImage).subscribe(res => {
-      // TODO
-    });
+    this.loadImage();
+    this.websocketService.exportImage(this.dataservice.gradingImage);
   }
 }
 
@@ -490,7 +531,7 @@ export interface ImageBrowserData {
   templateUrl: './image-browser/image-browser.component.html',
   styleUrls: ['./image-browser/image-browser.component.scss']
 })
-export class ImageBrowserComponent {
+export class ImageBrowserComponent implements OnInit {
 // UploadDomain
   public uploadDomain: string = environment.publicDomain;
 
@@ -500,6 +541,8 @@ export class ImageBrowserComponent {
     @Inject(MAT_DIALOG_DATA) public data: ImageBrowserData) {
   }
 
+  ngOnInit(): void {
+  }
 
   setImage(img: Image) {
     if (img) {

@@ -3,6 +3,6 @@
   <div *ngFor="let img of data.images" class="imgItem">
     <img
       (click)="setImage(img)"
-      [src]="this.uploadDomain + '/' + img.path" ondragstart="return false;">
+      [src]="this.uploadDomain + '/' + img.thumbnailPath" ondragstart="return false;">
   </div>
 </div>

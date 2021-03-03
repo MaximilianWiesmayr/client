@@ -1,7 +1,5 @@
 # Base Image
 FROM nginx:1.17.8-alpine
-# Maintainer
-MAINTAINER Sebastian Schiefermayr <sebastian.schiefermayr@gmx.at>
 # Expose http & https ports to the public
 EXPOSE 80 443
 # Data Directory for our HTML Files

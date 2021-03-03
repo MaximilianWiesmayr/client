@@ -1,7 +1,10 @@
 import {EventEmitter, Injectable} from '@angular/core';
 import {GradingSetting} from '../entities/grading-setting';
 import {Image} from '../entities/Image';
-
+import {DataService} from './data.service';
+import {GradingComponent} from '../components/client-area/grading/grading.component';
+import {environment} from '../../environments/environment';
+import {HttpService} from './http.service';
 @Injectable({
   providedIn: 'root'
 })
@@ -12,8 +15,10 @@ export class WebsocketService {
   connectionEmitter: EventEmitter<boolean> = new EventEmitter<boolean>(false);
   gradingEmitter: EventEmitter<GradingSetting> = new EventEmitter<GradingSetting>(true);
   errorEmitter: EventEmitter<string> = new EventEmitter(false);
+  image: Image;
+  private download;
 
-  constructor() {
+  constructor(public dataservice: DataService) {
     this.gradingEmitter.subscribe(
       (setting: GradingSetting) => this.ws.send(JSON.stringify(setting)));
   }
@@ -32,8 +37,9 @@ export class WebsocketService {
   }
 
   onMessage(event: MessageEvent) {
-    // const request: GradingSetting = JSON.parse(event.data);
-
+    if (event.data === 'settings') {
+      this.dataservice.thumbnailEmitter.emit('hi');
+    }
   }
 
   // Sends the toke to the server
@@ -47,9 +53,21 @@ export class WebsocketService {
 
   importImage(image: Image) {
     if (image) {
+      console.log(image.filepath);
       const obj: object = {
         type: 'import',
-        path: image.path
+        path: image.filepath
+      };
+      this.ws.send(JSON.stringify(obj));
+    }
+  }
+  exportImage(image: Image) {
+    if (image) {
+      console.log(image.filepath);
+      this.download = image.filepath.split('/');
+      const obj: object = {
+        type: 'export',
+        path: image.filepath
       };
       this.ws.send(JSON.stringify(obj));
     }

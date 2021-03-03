@@ -33,6 +33,7 @@ import {LazyLoadDirective} from './directives/lazy-load.directive';
 import {BrowseComponent} from './components/client-area/browse/browse.component';
 import {BrowseItemComponent} from './components/client-area/browse/browse-item/browse-item.component';
 import {DatePipe} from '@angular/common';
+import {WebsocketService} from "./services/websocket.service";
 
 @NgModule({
   declarations: [
@@ -73,7 +74,7 @@ import {DatePipe} from '@angular/common';
     MatDialogModule,
     HttpClientModule
   ],
-  providers: [AuthGuard, HttpService, {
+  providers: [AuthGuard, HttpService, WebsocketService, {
     provide: HTTP_INTERCEPTORS,
     useClass: AuthInterceptor,
     multi: true
