@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {DataService} from '../../../services/data.service';
 import {DashboardInfoItem} from '../../../entities/dashboard-info-item';
 import {HttpService} from '../../../services/http.service';
@@ -24,6 +24,7 @@ export class DashboardComponent implements OnInit {
   }
 
   updateOverview() {
+
     this.httpService.getOverview(this.dataservice.user.username).subscribe(res => {
         this.dashboardOverviewItems = [
           /* tslint:disable:no-string-literal */

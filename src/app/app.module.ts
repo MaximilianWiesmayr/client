@@ -18,7 +18,7 @@ import {MailFailedComponent} from './components/register/mail-failed/mail-failed
 import {MatPasswordStrengthModule} from '@angular-material-extensions/password-strength';
 import {LoadingScreenComponent} from './components/loading-screen/loading-screen.component';
 import {OverviewItemComponent} from './components/client-area/dashboard/overview-item/overview-item.component';
-import {DeleteDialogComponent, MyMediaComponent, SocialSharingSheetComponent} from './components/client-area/my-media/my-media.component';
+import {DeleteDialogComponent, MyMediaComponent, SocialSharingSheetComponent, DownloadDialogComponent} from './components/client-area/my-media/my-media.component';
 import {GestureConfig, MatBottomSheetModule, MatDialogModule} from '@angular/material';
 import {CreditsComponent} from './components/credits/credits.component';
 import {VerifyComponent} from './components/verify/verify.component';
@@ -50,6 +50,7 @@ import {WebsocketService} from "./services/websocket.service";
     MyMediaComponent,
     SocialSharingSheetComponent,
     DeleteDialogComponent,
+    DownloadDialogComponent,
     CreditsComponent,
     VerifyComponent,
     FileUploadComponent,
@@ -82,7 +83,7 @@ import {WebsocketService} from "./services/websocket.service";
     DatePipe,
     {provide: HAMMER_GESTURE_CONFIG, useClass: GestureConfig}],
   bootstrap: [AppComponent],
-  entryComponents: [SocialSharingSheetComponent, DeleteDialogComponent, ImageBrowserComponent]
+  entryComponents: [SocialSharingSheetComponent, DeleteDialogComponent, ImageBrowserComponent, DownloadDialogComponent]
 })
 export class AppModule {
 

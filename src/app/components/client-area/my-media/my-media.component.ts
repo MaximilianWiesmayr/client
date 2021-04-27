@@ -14,6 +14,11 @@ export interface ImageDelete {
     image: Image;
 }
 
+export interface ImageDownload {
+    type: string;
+    image: Image;
+}
+
 export interface MetaElement {
     key: string;
     value: any;
@@ -91,10 +96,30 @@ export class MyMediaComponent implements OnInit {
     }
 
     // Opens the Bottom sheet to share the image on Social Media
-    openSharingFeed(): void {
-        this.socialSheet.open(SocialSharingSheetComponent, {
-            panelClass: this.dataservice.user.settings.darkmode ? 'dark' : ''
-        });
+    openDownload(): void {
+      const dialogRef = this.dialog.open(DownloadDialogComponent, {
+          width: '300px',
+          panelClass: this.dataservice.user.settings.darkmode ? 'dark' : '',
+          data: {image: this.selectedImage, type: 'tiff'}
+      });
+      dialogRef.afterClosed().subscribe(result => {
+              this.httpService.preparedownloadImage(this.selectedImage.filepath, result).subscribe(res => {
+                if (res['status'] === 'success') {
+                  alert(res['path']);
+                  this.httpService.downloadImage(res['path']).subscribe(res => {
+                    let blob:any = new Blob([res], { type: 'image/' + result});
+			              const url = window.URL.createObjectURL(blob);
+              			//window.open(url);
+              			//window.location.href = response.url;
+              			FileSaver.saveAs(blob, 'downloadedImage.' + result);
+              		}), error => console.log('Error downloading the file'),
+                          () => console.info('File downloaded successfully');
+                }
+              });
+      });
+        //this.socialSheet.open(SocialSharingSheetComponent, {
+        //    panelClass: this.dataservice.user.settings.darkmode ? 'dark' : ''
+        //});
     }
 
     // Opens the popup for deleting the image
@@ -204,6 +229,25 @@ export class DeleteDialogComponent {
     }
 
     onNoClick(): void {
+        this.dialogRef.close();
+    }
+
+}
+
+@Component({
+    // tslint:disable-next-line:component-selector
+    selector: 'download-dialog',
+    templateUrl: 'download-dialog.html',
+})
+export class DownloadDialogComponent {
+
+    constructor(
+        public dialogRef: MatDialogRef<DownloadDialogComponent>,
+        @Inject(MAT_DIALOG_DATA) public data: ImageDownload) {
+    }
+
+
+    onCancel(): void {
         this.dialogRef.close();
     }
 
