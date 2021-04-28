@@ -63,6 +63,14 @@ export class HttpService {
     return this.http.get(this.dataService.settings.domain + 'uploads/loading.jpg', { responseType: 'blob' });
   }
 
+  preparedownloadImage(filepath: string, type: string) {
+      return this.http.post(environment.apiUrl + 'image/preparedownloadImage/', {filepath, type});
+  }
+
+  downloadImage(downloadPath: string) {
+    return this.http.get(this.dataService.settings.domain + downloadPath, { responseType: 'blob' });
+  }
+
   /*downloadImage(image: Image) {
     return this.http.get(environment.apiUrl + 'clientarea/download/' + image.owner + '/' + image.factoryTitle);
   }*/

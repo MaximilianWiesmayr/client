@@ -18,7 +18,7 @@ import {MailFailedComponent} from './components/register/mail-failed/mail-failed
 import {MatPasswordStrengthModule} from '@angular-material-extensions/password-strength';
 import {LoadingScreenComponent} from './components/loading-screen/loading-screen.component';
 import {OverviewItemComponent} from './components/client-area/dashboard/overview-item/overview-item.component';
-import {DeleteDialogComponent, MyMediaComponent, SocialSharingSheetComponent} from './components/client-area/my-media/my-media.component';
+import {DeleteDialogComponent, MyMediaComponent, SocialSharingSheetComponent, DownloadDialogComponent} from './components/client-area/my-media/my-media.component';
 import {GestureConfig, MatBottomSheetModule, MatDialogModule} from '@angular/material';
 import {CreditsComponent} from './components/credits/credits.component';
 import {VerifyComponent} from './components/verify/verify.component';
@@ -33,7 +33,7 @@ import {LazyLoadDirective} from './directives/lazy-load.directive';
 import {BrowseComponent} from './components/client-area/browse/browse.component';
 import {BrowseItemComponent} from './components/client-area/browse/browse-item/browse-item.component';
 import {DatePipe} from '@angular/common';
-import {WebsocketService} from "./services/websocket.service";
+import {WebsocketService} from './services/websocket.service';
 
 @NgModule({
   declarations: [
@@ -51,6 +51,7 @@ import {WebsocketService} from "./services/websocket.service";
     SocialSharingSheetComponent,
     DeleteDialogComponent,
     CreditsComponent,
+    DownloadDialogComponent,
     VerifyComponent,
     FileUploadComponent,
     GradingComponent,
@@ -82,7 +83,7 @@ import {WebsocketService} from "./services/websocket.service";
     DatePipe,
     {provide: HAMMER_GESTURE_CONFIG, useClass: GestureConfig}],
   bootstrap: [AppComponent],
-  entryComponents: [SocialSharingSheetComponent, DeleteDialogComponent, ImageBrowserComponent]
+  entryComponents: [SocialSharingSheetComponent, DeleteDialogComponent, ImageBrowserComponent, DownloadDialogComponent]
 })
 export class AppModule {
 
