@@ -70,6 +70,10 @@ export class HttpService {
   downloadImage(downloadPath: string) {
     return this.http.get(this.dataService.settings.domain + downloadPath, { responseType: 'blob' });
   }
+  
+  resetImageChanges(imageName: string, owner: string) {
+      return this.http.post(environment.apiUrl + 'image/reset', {imageName, owner});
+  }
 
   /*downloadImage(image: Image) {
     return this.http.get(environment.apiUrl + 'clientarea/download/' + image.owner + '/' + image.factoryTitle);

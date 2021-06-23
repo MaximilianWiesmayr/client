@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, Inject, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, Inject, OnInit, HostListener, Directive, ViewChild, ElementRef} from '@angular/core';
 import {DataService} from '../../../services/data.service';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef, MatSnackBar} from '@angular/material';
 import {WebsocketService} from 'src/app/services/websocket.service';
@@ -13,36 +13,15 @@ import {HttpService} from '../../../services/http.service';
   templateUrl: './grading.component.html',
   styleUrls: ['./grading.component.scss']
 })
+
 export class GradingComponent implements OnInit {
   // Array of available Grading options
   settings: Array<object> = [
     {
-      category: 'Temperature',
+      category: 'Adjustments',
       children: [
         {
-          title: 'Temp.',
-          min: 2000,
-          max: 50000,
-          step: 1,
-          value: 26614,
-          editValue: false
-        },
-        {
-          title: 'Tint',
-          min: -150,
-          max: 150,
-          step: 1,
-          value: 0,
-          editValue: false
-        },
-      ],
-      locked: true
-    },
-    {
-      category: 'Levels',
-      children: [
-        {
-          title: 'Exposure',
+          title: 'Saturation',
           min: -5,
           max: 5,
           step: 0.1,
@@ -51,40 +30,32 @@ export class GradingComponent implements OnInit {
         },
         {
           title: 'Contrast',
-          min: -100,
-          max: 100,
+          min: -5,
+          max: 5,
+          step: 0.1,
+          value: 0,
+          editValue: false
+        },
+        {
+          title: 'Brightness',
+          min: -5,
+          max: 5,
+          step: 0.1,
+          value: 0,
+          editValue: false
+        },
+        {
+          title: 'Sharpness',
+          min: -50,
+          max: 50,
           step: 1,
           value: 0,
           editValue: false
         },
         {
-          title: 'Lights',
-          min: -100,
-          max: 100,
-          step: 1,
-          value: 0,
-          editValue: false
-        },
-        {
-          title: 'Depths',
-          min: -100,
-          max: 100,
-          step: 1,
-          value: 0,
-          editValue: false
-        },
-        {
-          title: 'White',
-          min: -100,
-          max: 100,
-          step: 1,
-          value: 0,
-          editValue: false
-        },
-        {
-          title: 'Black',
-          min: -100,
-          max: 100,
+          title: 'Blur',
+          min: 0,
+          max: 20,
           step: 1,
           value: 0,
           editValue: false
@@ -123,167 +94,81 @@ export class GradingComponent implements OnInit {
       locked: true
     },
     {
-      category: 'Presence',
+      category: 'Filters',
       children: [
-        {
-          title: 'Clarity',
-          min: -100,
-          max: 100,
-          step: 1,
-          value: 0,
-          editValue: false
-        },
         {
           title: 'Dehaze',
-          min: -100,
-          max: 100,
+          min: 0,
+          max: 1,
           step: 1,
           value: 0,
           editValue: false
         },
         {
-          title: 'Dynamics',
-          min: -100,
-          max: 100,
+          title: 'Equalize',
+          min: 0,
+          max: 1,
           step: 1,
           value: 0,
           editValue: false
         },
         {
-          title: 'Saturation',
-          min: -100,
-          max: 100,
+          title: 'Posterize',
+          min: 0,
+          max: 7,
           step: 1,
-          value: 0,
+          value: 7,
+          editValue: false
+        },
+        {
+          title: 'Solarize',
+          min: 0,
+          max: 256,
+          step: 1,
+          value: 256,
           editValue: false
         }
       ],
       locked: true
     },
     {
-      category: 'Curve',
-      children: [],
-      locked: true
-    },
-    {
-      category: 'Sharpness',
+      category: 'Transform and Resize',
       children: [
         {
-          title: 'Amount',
+          title: 'Crop',
           min: 0,
-          max: 150,
-          step: 1,
-          value: 40,
-          editValue: false
-        },
-        {
-          title: 'Radius',
-          min: 0,
-          max: 3,
-          step: .1,
-          value: 1,
-          editValue: false
-        },
-        {
-          title: 'Details',
-          min: 0,
-          max: 100,
-          step: 1,
-          value: 25,
-          editValue: false
-        },
-        {
-          title: 'Mask',
-          min: 0,
-          max: 100,
-          step: 1,
-          value: 0,
-          editValue: false
-        }
-      ],
-      locked: true
-    },
-    {
-      category: 'Noise Reduction',
-      children: [
-        {
-          title: 'Luminance',
-          min: 0,
-          max: 100,
+          max: 1000,
           step: 1,
           value: 0,
           editValue: false
         },
         {
-          title: 'Details',
-          min: 0,
-          max: 100,
-          step: 1,
-          value: 50,
-          editValue: false
-        },
-        {
-          title: 'Contrast',
-          min: 0,
-          max: 100,
-          step: 1,
-          value: 0,
-          editValue: false
-        }
-      ],
-      locked: true
-    },
-    {
-      category: 'Vignette',
-      children: [
-        {
-          title: 'Amount',
-          min: -100,
-          max: 100,
+          title: 'Pad',
+          min: -1000,
+          max: 1000,
           step: 1,
           value: 0,
           editValue: false
         },
         {
-          title: 'Center',
+          title: 'Mirror',
           min: 0,
-          max: 100,
-          step: 1,
-          value: 50,
-          editValue: false
-        },
-        {
-          title: 'Roundness',
-          min: -100,
-          max: 100,
+          max: 1,
           step: 1,
           value: 0,
           editValue: false
         },
         {
-          title: 'Smooth Edge',
+          title: 'Flip',
           min: 0,
-          max: 100,
-          step: 1,
-          value: 50,
-          editValue: false
-        },
-        {
-          title: 'Lights',
-          min: 0,
-          max: 100,
+          max: 1,
           step: 1,
           value: 0,
           editValue: false
         },
       ],
       locked: true
-    },
-    {
-      category: 'Presets',
-      children: [],
-      locked: true
-    },
+    }
   ];
   // Self explanatory (Setting)
   private current_editable_child;
@@ -294,6 +179,10 @@ export class GradingComponent implements OnInit {
   // Preview Image DOM Element
   public PREVIMG = document.getElementsByTagName('img')[0];
   public img;
+
+  loadingdisplay = 'none';
+
+  private previous = null;
 
   constructor(
     public dataservice: DataService,
@@ -326,8 +215,21 @@ export class GradingComponent implements OnInit {
     });
   }
 
+  @HostListener('window:keydown', ['$event'])
+    onKeyDown(e) {
+        // optionally use preventDefault() if your combination
+        // triggers other events (moving focus in case of Shift+Tab)
+        // e.preventDefault();
+        if(this.previous == 'Control' && e.key == 's'){
+          e.preventDefault();
+          this.prepareDownload();
+        }
+        this.previous = e.key;
+    }
+
 
   ngOnInit() {
+    this.dataservice.isUnsaved = true;
     this.dataservice.collapseEmitter.emit(true);
     this.websocketService.connect(environment.socketBaseUrl + 'grade', this.dataservice.user.authToken);
     if (this.dataservice.gradingImage && this.dataservice.gradingImage.filepath !== '') {
@@ -347,6 +249,7 @@ export class GradingComponent implements OnInit {
 
   // Method for sending the changes to the backend
   makeChanges(category: string, setting: string, value: number) {
+
     console.log(category + '_' + setting + ' > ' + value);
     /*value += 1; // Default value for css filter
     if (setting === 'Exposure') {
@@ -361,7 +264,21 @@ export class GradingComponent implements OnInit {
     this.websocketService.gradingEmitter.emit(new GradingSetting('setting', setting, value));
   }
 
+  interval;
+  activeInterval = false;
 
+  possibleChanges(category: string, setting: string, value: number) {
+    if(this.activeInterval){
+      clearInterval(this.interval);
+      this.activeInterval = false;
+    }
+    this.interval = setInterval(() => {
+      this.makeChanges(category, setting, value);
+      clearInterval(this.interval);
+      this.activeInterval = false;
+    },300);
+    this.activeInterval = true;
+  }
 
   // If the user wants to enter a custom value
   makeEditable(child) {
@@ -383,7 +300,7 @@ export class GradingComponent implements OnInit {
       slider.value = child.min;
       this.snackBar.open('The entered value cannot be lower than ' + child.min);
     } else {
-      slider.value = parseInt(newValue.value);
+      slider.value = parseFloat(newValue.value);
     }
     this.makeChanges(category, child.title, slider.value);
     child.editValue = false;
@@ -489,6 +406,7 @@ export class GradingComponent implements OnInit {
   }
 
   loadImage() {
+    this.loadingdisplay = 'block';
     if (!this.dataservice.isChanged) {
       this.httpService.getThumbnail().subscribe(result => {
         this.createImageFromBlob(result);
@@ -510,12 +428,17 @@ export class GradingComponent implements OnInit {
     if (image) {
       reader.readAsDataURL(image);
     }
+    this.loadingdisplay = 'none';
   }
 
   prepareDownload() {
+    this.loadingdisplay = 'block';
     this.loadImage();
     this.websocketService.exportImage(this.dataservice.gradingImage);
+    this.dataservice.isUnsaved = false;
+    this.loadingdisplay = 'none';
   }
+
 }
 
 export interface ImageBrowserData {

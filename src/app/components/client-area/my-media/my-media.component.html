@@ -1,91 +1,105 @@
-<div [class.dark]="this.dataservice.user.settings.darkmode" [class.infoOpen]="isInfoOpen" id="mediaBox">
-    <div class="headline gradientText">Workspace</div>
-    <div id="controlBar">
+<div id="connector">
+    <div [class.infoOpen]="isInfoOpen" id="fluidContainer">
+        <overview-item *ngFor="let item of dashboardOverviewItems" [item]="item"></overview-item>
+    </div>
+    <div [class.infoOpen]="isInfoOpen" id="controlBar">
         <mat-icon (click)="this.dataservice.user.settings.myPhotosGridView = false"
                   [class.active]="!dataservice.user.settings.myPhotosGridView">format_list_bulleted
         </mat-icon>
         <mat-icon (click)="this.dataservice.user.settings.myPhotosGridView = true"
-                  [class.active]="dataservice.user.settings.myPhotosGridView">grid_on
+                  [class.active]="dataservice.user.settings.myPhotosGridView">apps
         </mat-icon>
     </div>
-    <div [class.dark]="this.dataservice.user.settings.darkmode" id="mediaContainer">
-        <div (click)="openInfo(image)" *ngFor="let image of this.images"
-             [class.list]="!this.dataservice.user.settings.myPhotosGridView"
-             class="mediaItem ">
-          <div class="img_name_overlay">{{image.factoryTitle}}</div>
-          <img
-            [src]="dataservice.settings.domain + image.thumbnailPath"
-            ondragstart="return false;">
-          <div *ngIf="!dataservice.user.settings.myPhotosGridView" class="listSpecs">
-            <span class="listSpecsTitle">{{image.title != '' ? image.title : image.factoryTitle}}</span>
-            <span class="listSpecsFileSize">{{image.fileSize}}</span>
+  </div>
+  <div [class.dark]="this.dataservice.user.settings.darkmode" [class.infoOpen]="isInfoOpen" id="mediaBox">
+      <div [class.dark]="this.dataservice.user.settings.darkmode" class="mediaContainer" [class.list]="!this.dataservice.user.settings.myPhotosGridView">
+          <div (click)="openInfo(image)" *ngFor="let image of this.images"
+               [class.list]="!this.dataservice.user.settings.myPhotosGridView"
+               class="mediaItem">
+            <div *ngIf = this.dataservice.user.settings.myPhotosGridView
+            class="img_name_overlay"><div class="imageTitleBox">{{image.factoryTitle}}</div>
+            <button (click)="openDeleteDialog()" class="deleteButtonGridView" mat-button>
+                <mat-icon>delete</mat-icon>
+            </button></div>
+            <img [src]="dataservice.settings.domain + image.thumbnailPath"
+              ondragstart="return false;">
+            <div *ngIf="!dataservice.user.settings.myPhotosGridView" class="listSpecs">
+              <span class="listSpecsTitle">{{image.title != '' ? image.title : image.factoryTitle}}</span>
+              <button (click)="openDeleteDialog()" class="deleteButton" mat-button>
+                  <mat-icon>delete</mat-icon>
+              </button>
+              <span class="listSpecsFileSize">{{image.fileSize}}</span>
+            </div>
           </div>
-        </div>
+      </div>
+      <div [class.dark]="this.dataservice.user.settings.darkmode" id="detailMenu">
+          <div id="detailWrapper">
+              <mat-icon (click)="isInfoOpen = false" id="closeDetail">close</mat-icon>
+              <div id="imagePreview"></div>
+              <div id="actionMenu">
+                <button (click)="openDownload()" color="primary" mat-button>
+                    <mat-icon style="font-size: 190%;">download</mat-icon>
+                    <span class="buttonTitle"></span></button>
+                <button (click)="openResetChanges()" color="primary" mat-button>
+                    <mat-icon>cached</mat-icon>
+                    <span class="buttonTitle">Reset</span></button>
+                  <button (click)="gradeImage()" color="accent" mat-button>
+                      <mat-icon>edit</mat-icon>
+                      <span class="buttonTitle">Edit</span></button>
+                  <button (click)="openDeleteDialog()" color="warn" mat-button>
+                      <mat-icon>delete</mat-icon></button>
+              </div>
+              <div id="specsBox">
+                  <mat-form-field class="searchForm">
+                      <input (keyup)="applyFilter($event.target.value)" matInput placeholder="Filter">
+                  </mat-form-field>
 
-    </div>
-    <div [class.dark]="this.dataservice.user.settings.darkmode" id="detailMenu">
-        <div id="detailWrapper">
-            <mat-icon (click)="isInfoOpen = false" id="closeDetail">close</mat-icon>
-            <div id="imagePreview"></div>
-            <div id="actionMenu">
-              <button (click)="openDownload()" color="primary" mat-button>
-                  <mat-icon>download</mat-icon>
-                  <span class="buttonTitle">Download</span></button>
-                <button (click)="gradeImage()" color="accent" mat-button>
-                    <mat-icon>edit</mat-icon>
-                    <span class="buttonTitle">Edit</span></button>
-                <button (click)="openDeleteDialog()" color="warn" mat-stroked-button>
-                    <mat-icon>delete</mat-icon>
-                    <span class="buttonTitle">Delete</span></button>
-            </div>
-            <div id="specsBox">
-                <mat-form-field class="searchForm">
-                    <input (keyup)="applyFilter($event.target.value)" matInput placeholder="Filter">
-                </mat-form-field>
+                  <table [dataSource]="this.datasource" class="metaTable" mat-table>
 
-                <table [dataSource]="this.datasource" class="metaTable" mat-table>
+                      <!-- Key Column -->
+                      <ng-container matColumnDef="key">
+                          <th *matHeaderCellDef mat-header-cell> Key</th>
+                          <td *matCellDef="let element" mat-cell> {{element.key}} </td>
+                      </ng-container>
 
-                    <!-- Key Column -->
-                    <ng-container matColumnDef="key">
-                        <th *matHeaderCellDef mat-header-cell> Key</th>
-                        <td *matCellDef="let element" mat-cell> {{element.key}} </td>
-                    </ng-container>
+                      <!-- Value Column -->
+                      <ng-container matColumnDef="value">
+                          <th *matHeaderCellDef mat-header-cell> Value</th>
+                          <td *matCellDef="let element" mat-cell> {{element.value}} </td>
+                      </ng-container>
 
-                    <!-- Value Column -->
-                    <ng-container matColumnDef="value">
-                        <th *matHeaderCellDef mat-header-cell> Value</th>
-                        <td *matCellDef="let element" mat-cell> {{element.value}} </td>
-                    </ng-container>
+                      <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
+                      <tr *matRowDef="let row; columns: displayedColumns;" mat-row></tr>
+                  </table>
 
-                    <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
-                    <tr *matRowDef="let row; columns: displayedColumns;" mat-row></tr>
-                </table>
+                  <!--
+                      <form class="searchForm">
+                          <mat-form-field class="searchField">
+                              <input type="text" matInput placeholder="Filter" (input)="searchMeta($event.target.value)">
+                              <mat-icon matSuffix>search</mat-icon>
+                          </mat-form-field>
 
-                <!--
-                    <form class="searchForm">
-                        <mat-form-field class="searchField">
-                            <input type="text" matInput placeholder="Filter" (input)="searchMeta($event.target.value)">
-                            <mat-icon matSuffix>search</mat-icon>
-                        </mat-form-field>
-
-                    </form>
-                <table>
-                    <tr>
-                        <td>
-                            <mat-icon>perm_identity</mat-icon>
-                        </td>
-                        <td>User</td>
-                        <td>{{this.selectedImage.owner}}</td>
-                    </tr>
-                    <tr *ngFor=" let res of metaMap | keyvalue">
-                        <td>
-                            <mat-icon>perm_identity</mat-icon>
-                        </td>
-                        <td>{{res.key}}</td>
-                        <td>{{res.value}}</td>
-                    </tr>
-                </table> -->
-            </div>
-        </div>
-    </div>
-</div>
+                      </form>
+                  <table>
+                      <tr>
+                          <td>
+                              <mat-icon>perm_identity</mat-icon>
+                          </td>
+                          <td>User</td>
+                          <td>{{this.selectedImage.owner}}</td>
+                      </tr>
+                      <tr *ngFor=" let res of metaMap | keyvalue">
+                          <td>
+                              <mat-icon>perm_identity</mat-icon>
+                          </td>
+                          <td>{{res.key}}</td>
+                          <td>{{res.value}}</td>
+                      </tr>
+                  </table> -->
+              </div>
+          </div>
+      </div>
+  </div>
+  <div [class.list]="!this.dataservice.user.settings.myPhotosGridView" [class.infoOpen]="isInfoOpen" class="uploadContainer">
+      <file-upload></file-upload>
+  </div>

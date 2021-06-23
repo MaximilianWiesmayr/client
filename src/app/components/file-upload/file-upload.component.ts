@@ -21,40 +21,43 @@ export class FileUploadComponent implements OnInit {
   }
 
   uploadFile(event) {
-    const formData = new FormData();
+    var formData = new FormData();
     // tslint:disable-next-line:prefer-for-of
     for (let index = 0; index < event.length; index++) {
-      this.dataservice.isUploading = true;
-      const element = event[index];
-      formData.append('owner', this.dataservice.user.username);
-      formData.append('file', element, element.name);
-      this.files.push({name: element.name, status: 'pending'});
-      this.httpService.uploadImage(formData).subscribe(res => {
-          /* tslint:disable:no-string-literal */
-          if (res['status'] === 'success') {
-            this.dataservice.isUploading = false;
-            this.dataservice.imageStatusEmitter.emit(null); // Just to refresh the Overview Items
-            this.snackBar.open('Image: ' + res['fileName'] + ' successfully uploaded.', '✔');
-            this.files.forEach(f => {
-              if (f['name'] === element.name) {
-                f['status'] = 'uploaded';
-              }
-            });
-          } else {
-            this.snackBar.open('ERROR: ' + res['exception'], 'Try again');
-            this.files.forEach(f => {
-              if (f['name'] === element.name) {
-                f['status'] = 'cancelled';
-              }
-            });
-          }
-          setTimeout(() => this.snackBar.dismiss(), this.dataservice.settings.snackBarTimeout);
-        },
-        err => {
-          console.log(err);
-        });
-      /* tslint:enable:no-string-literal */
-    }
+        this.dataservice.isUploading = true;
+        const element = event[index];
+        console.log(index);
+        formData.append('owner', this.dataservice.user.username);
+        formData.append('file', element, element.name);
+        this.files.push({name: element.name, status: 'pending'});
+        this.httpService.uploadImage(formData).subscribe(res => {
+            /* tslint:disable:no-string-literal */
+            if (res['status'] === 'success') {
+              this.dataservice.isUploading = false;
+              this.dataservice.imageStatusEmitter.emit(null);
+              this.snackBar.open('Image: ' + res['fileName'] + ' successfully uploaded.', '✔');
+              this.files.forEach(f => {
+                if (f['name'] === element.name) {
+                  f['status'] = 'uploaded';
+                }
+              });
+            } else {
+              this.snackBar.open('ERROR: ' + res['exception'], 'Try again');
+              this.files.forEach(f => {
+                if (f['name'] === element.name) {
+                  f['status'] = 'cancelled';
+                }
+              });
+            }
+            setTimeout(() => this.snackBar.dismiss(), this.dataservice.settings.snackBarTimeout);
+
+          },
+          err => {
+            console.log(err);
+          });
+          formData = new FormData();
+        /* tslint:enable:no-string-literal */
+      }
   }
 
   deleteAttachment(index) {

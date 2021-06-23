@@ -61,10 +61,11 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.dataservice.isUnsaved = false;
     // Reset login status
     this.dataservice.logout();
     /* tslint:disable:no-string-literal */
-    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/dashboard';
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/dashboard/photos';
     /* tslint:enable:no-string-literal */
     this.route.queryParams.subscribe(params => {
       if (params.errorMSG) {

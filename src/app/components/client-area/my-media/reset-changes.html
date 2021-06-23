@@ -1,0 +1,8 @@
+<h1 mat-dialog-title>Reset Image changes</h1>
+<div mat-dialog-content>
+    <p>Are you sure you want to reset Changes <b>permanently</b>?</p>
+</div>
+<div mat-dialog-actions>
+    <button (click)="onNoClick()" mat-button>No</button>
+    <button [mat-dialog-close]="!data.reset" cdkFocusInitial color="warn" mat-raised-button>Yes</button>
+</div>

@@ -7,6 +7,8 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 import {HttpService} from '../../../services/http.service';
 import {environment} from '../../../../environments/environment';
 import {Router} from '@angular/router';
+import { saveAs } from '@progress/kendo-file-saver';
+import {DashboardInfoItem} from '../../../entities/dashboard-info-item';
 
 // Interface for our deletion - popup
 export interface ImageDelete {
@@ -16,6 +18,11 @@ export interface ImageDelete {
 
 export interface ImageDownload {
     type: string;
+    image: Image;
+}
+
+export interface ImageReset {
+    reset: boolean;
     image: Image;
 }
 
@@ -44,6 +51,8 @@ export class MyMediaComponent implements OnInit {
     public displayedColumns: Array<string> = ['key', 'value'];
     public img;
 
+    dashboardOverviewItems: Array<DashboardInfoItem>;
+
     constructor(
         public dataservice: DataService,
         private httpService: HttpService,
@@ -56,6 +65,41 @@ export class MyMediaComponent implements OnInit {
 
     ngOnInit() {
         this.loadMedia();
+        this.updateOverview();
+        this.dataservice.imageStatusEmitter.subscribe(() =>
+        {
+          this.updateOverview();
+          this.images = [];
+          this.loadMedia();
+        });
+    }
+
+    updateOverview() {
+      this.httpService.getOverview(this.dataservice.user.username).subscribe(res => {
+          this.dashboardOverviewItems = [
+            /* tslint:disable:no-string-literal */
+            new DashboardInfoItem(
+              'storage',
+              'Space used',
+              res['disc_space']
+            ),
+            new DashboardInfoItem(
+              'photo',
+              'Photos',
+              res['photos']
+            )
+            ,
+            /*new DashboardInfoItem(
+              'account_box',
+              'Current Subscription',
+              '<span class = "' + res['subscription'] + '">'
+              + res['subscription'] + '</span>'
+            )*/
+
+            /* tslint:enable:no-string-literal */
+          ];
+        },
+        error => this.router.navigate(['login'], {queryParams: {errorMSG: error}}));
     }
 
     // Receive Media from our Back-End via REST
@@ -65,7 +109,9 @@ export class MyMediaComponent implements OnInit {
                 for (const img of res) {
                   /* tslint:disable:no-string-literal */
                   // tslint:disable-next-line:max-line-length
-                  this.images.push(new Image(img['customName'], img['factoryName'], img['filepath'], img['thumbnailPath'] ,img['metadata'], img['owner']));
+                  const meta: object = JSON.parse(img['metadata']);
+                  const forFileSize = (meta["File Size"].replace('bytes','')/1000000).toFixed(2);
+                  this.images.push(new Image(img['customName'], img['factoryName'], img['filepath'], img['thumbnailPath'] ,img['metadata'], img['owner'], forFileSize + ' MB'));
                   /* tslint:enable:no-string-literal */
                 }
             }
@@ -108,9 +154,7 @@ export class MyMediaComponent implements OnInit {
           this.httpService.downloadImage(res['path']).subscribe(res => {
             let blob:any = new Blob([res], { type: 'image/' + result});
             const url = window.URL.createObjectURL(blob);
-            //window.open(url);
-            //window.location.href = response.url;
-            //FileSaver.saveAs(blob, 'downloadedImage.' + result);
+            saveAs(blob, 'downloadedImage.' + result);
           }), error => console.log('Error downloading the file'),
             () => console.info('File downloaded successfully');
         }
@@ -158,6 +202,27 @@ export class MyMediaComponent implements OnInit {
 
             }
         });
+    }
+
+    openResetChanges() {
+      const dialogRef = this.dialog.open(ResetChangesComponent, {
+          width: '250px',
+          panelClass: this.dataservice.user.settings.darkmode ? 'dark' : '',
+          data: {image: this.selectedImage, reset: false}
+      });
+      // After the popup is closed, this Method will be triggered
+      dialogRef.afterClosed().subscribe(result => {
+          if (result) {
+              this.httpService.resetImageChanges(this.selectedImage.factoryTitle, this.selectedImage.owner).subscribe(res => {
+                  if (res['status'] === 'success') {
+                      this.isInfoOpen = false;
+                      this.snackBar.open('Changes from ' + res['fileName'] + ' resetet');
+                      setTimeout(() => this.snackBar.dismiss(), this.dataservice.settings.snackBarTimeout);
+                  }
+              });
+
+          }
+      });
     }
 
     // Moves the image to the trash
@@ -231,6 +296,24 @@ export class DeleteDialogComponent {
     constructor(
         public dialogRef: MatDialogRef<DeleteDialogComponent>,
         @Inject(MAT_DIALOG_DATA) public data: ImageDelete) {
+    }
+
+    onNoClick(): void {
+        this.dialogRef.close();
+    }
+
+}
+
+@Component({
+    // tslint:disable-next-line:component-selector
+    selector: 'reset-changes',
+    templateUrl: 'reset-changes.html',
+})
+export class ResetChangesComponent {
+
+    constructor(
+        public dialogRef: MatDialogRef<ResetChangesComponent>,
+        @Inject(MAT_DIALOG_DATA) public data: ImageReset) {
     }
 
     onNoClick(): void {

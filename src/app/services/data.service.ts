@@ -87,12 +87,12 @@ export class DataService {
   };
   // Sidebar Items
   public navItems: Array<object> = [
-    {
+    /*{
       title: 'Dashboard',
       icon: 'dashboard',
       route: '/dashboard',
       active: true
-    },
+    },*/
     {
       title: 'Workspace', // My Photos
       icon: 'folder', // photo_library
@@ -105,12 +105,12 @@ export class DataService {
       route: '/dashboard/grading',
       active: false
     },
-    {
+    /*{
       title: 'Browse',
       icon: 'cloud_circle',
       route: '/browse',
       active: false
-    },
+    },*/
     {
       title: 'Logout',
       icon: 'logout',
@@ -130,6 +130,8 @@ export class DataService {
   public isUploading = false;
   public isChanged = false;
   public thumbnailEmitter: EventEmitter<string> = new EventEmitter(false);
+
+  public isUnsaved = false;
 
   constructor() {
   }

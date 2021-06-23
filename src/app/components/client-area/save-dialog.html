@@ -1,0 +1,9 @@
+<h1 mat-dialog-title>Usaved changes</h1>
+<div mat-dialog-content>
+    <p>You haven't saved the changes of the image
+        Are you sure you want to leave without saving?</p>
+</div>
+<div mat-dialog-actions>
+    <button (click)="onNoClick()" mat-button>No</button>
+    <button [mat-dialog-close]="!data.save" cdkFocusInitial color="warn" mat-raised-button>Yes</button>
+</div>

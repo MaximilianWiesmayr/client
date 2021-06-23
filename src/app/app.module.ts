@@ -17,8 +17,9 @@ import {RegisterWrapperComponent} from './components/register/register-wrapper/r
 import {MailFailedComponent} from './components/register/mail-failed/mail-failed.component';
 import {MatPasswordStrengthModule} from '@angular-material-extensions/password-strength';
 import {LoadingScreenComponent} from './components/loading-screen/loading-screen.component';
-import {OverviewItemComponent} from './components/client-area/dashboard/overview-item/overview-item.component';
-import {DeleteDialogComponent, MyMediaComponent, SocialSharingSheetComponent, DownloadDialogComponent} from './components/client-area/my-media/my-media.component';
+import {OverviewItemComponent} from './components/client-area/my-media/overview-item/overview-item.component';
+import {DeleteDialogComponent, MyMediaComponent, SocialSharingSheetComponent, DownloadDialogComponent, ResetChangesComponent} from './components/client-area/my-media/my-media.component';
+import {LogoutDialogComponent, SaveDialogComponent} from './components/client-area/client-area.component';
 import {GestureConfig, MatBottomSheetModule, MatDialogModule} from '@angular/material';
 import {CreditsComponent} from './components/credits/credits.component';
 import {VerifyComponent} from './components/verify/verify.component';
@@ -52,6 +53,7 @@ import {WebsocketService} from './services/websocket.service';
     DeleteDialogComponent,
     CreditsComponent,
     DownloadDialogComponent,
+    ResetChangesComponent,
     VerifyComponent,
     FileUploadComponent,
     GradingComponent,
@@ -60,7 +62,9 @@ import {WebsocketService} from './services/websocket.service';
     LazyLoadDirective,
     BrowseComponent,
     BrowseItemComponent,
-    ImageBrowserComponent
+    ImageBrowserComponent,
+    LogoutDialogComponent,
+    SaveDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -83,7 +87,7 @@ import {WebsocketService} from './services/websocket.service';
     DatePipe,
     {provide: HAMMER_GESTURE_CONFIG, useClass: GestureConfig}],
   bootstrap: [AppComponent],
-  entryComponents: [SocialSharingSheetComponent, DeleteDialogComponent, ImageBrowserComponent, DownloadDialogComponent]
+  entryComponents: [SocialSharingSheetComponent, DeleteDialogComponent, ImageBrowserComponent, DownloadDialogComponent, ResetChangesComponent, LogoutDialogComponent, SaveDialogComponent]
 })
 export class AppModule {
 

@@ -1,28 +1,68 @@
 @import "~src/themes/default";
 
-$container_height: 25vh;
+$container_height: 18vh;
 
 .uploadfilecontainer {
-  height: $container_height;
-  width: 30vw;
+  /*height: $container_height;
+  width: 10vw;
   float: left;
   border: 1px dashed black;
   overflow-y: hidden;
-}
-
-.uploadfilecontainer #placeholder {
-  line-height: $container_height;
+  margin: 0 0 0 9%;*/
+  flex-flow: row wrap;
+  margin: 0 0 0 9%;
+  width: 14vw;
   height: $container_height;
-  width: 100%;
-  font-size: large;
-  color: gray;
-  text-align: center;
+  border-radius: 7px;
+  border: 2px dashed rgba(0, 0, 0, 0.2);
+  -webkit-transition: all .3s;
+  -moz-transition: all .3s;
+  -ms-transition: all .3s;
+  -o-transition: all .3s;
+  transition: all .3s;
+  @include sm {
+    width: inherit !important;
+  }
+}
+.uploadfilecontainer.list {
+  position: relative;
+  margin: 0 0 0 9%;
+  width: 10vw;
+  height: $container_height;
+  border-radius: 5px;
+  border: 2px dashed rgba(0, 0, 0, 0.2);
+  -webkit-transition: all .3s;
+  -moz-transition: all .3s;
+  -ms-transition: all .3s;
+  -o-transition: all .3s;
+  transition: all .3s;
+  @include sm {
+    width: inherit !important;
+  }
 }
 
-.uploadfilecontainer:hover {
+#placeholder {
+  line-height: $container_height - 8vh;
+  font-size: 250%;
+  color: black;
+  margin-left: 6vw;
+}
+
+#placeholderFiller {
+  display: none;
+  z-index: -1;
+  position: absolute;
+  margin: 3.9vh 0 0 6.2vw;
+  font-size: 200%;
+  background-image: linear-gradient(90deg, $gradient_start, $gradient_end);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/*.uploadfilecontainer:hover {
   cursor: pointer;
   background-color: rgba(0, 0, 0, 0.3);
-}
+}*/
 
 .queue {
   overflow-y: auto;
@@ -79,4 +119,41 @@ $container_height: 25vh;
   position: absolute;
   bottom: 0;
   width: 100%;
+}
+
+.uploadText {
+  height: 5vh;
+  text-align: center;
+}
+
+.uploadButton {
+  color: $gradient_start;
+  text-align: center;
+}
+
+.uploadButton:hover {
+  color: $gradient_end;
+  font-weight: bold;
+  transition: all 0.1s;
+}
+
+.wrapButton {
+  border: 2px solid black;
+  margin-left: 30%;
+  height: 20px;
+  width: 100px;
+  background-color: black;
+  border-radius: 5px;
+  padding-top: 0.2vh;
+}
+
+.wrapButton:hover {
+  cursor: pointer;
+  background-color: white;
+  transition: all 0.1s;
+}
+
+.wrapButton:active {
+  cursor: default;
+  background-color: black;
 }

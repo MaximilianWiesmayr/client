@@ -6,6 +6,7 @@ export class Image {
       public thumbnailPath: string = '',
       public metadata: string = '',
       public owner: string = '',
+      public fileSize: string = ''
     ) {
     }
 }

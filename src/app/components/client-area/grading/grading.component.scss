@@ -6,6 +6,17 @@ $settings_width: 20vw;
   height: 100%;
 }
 
+.sliderBox ng-star-inserted {
+  align-content: center;
+}
+
+.mat-slider.mat-primary.mat-slider-horizontal {
+  position: relative;
+  vertical-align: middle;
+  align-items: stretch;
+  margin-left: 5%;
+}
+
 #toolSettings {
   height: 100%;
   width: $settings_width;
@@ -16,22 +27,27 @@ $settings_width: 20vw;
 #toolSettings mat-expansion-panel {
   border-top-left-radius: 0;
   border-top-right-radius: 0;
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: rgba(0, 0, 0, 0.2);
 }
 
 #toolSettings .sliderBox {
+  margin-left: 1%;
+  position: sticky;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 #toolSettings .optionText {
+  min-width: 25%;
   align-content: flex-start;
   cursor: pointer;
 }
 #toolSettings mat-slider {
-  width: 50%;
-  margin: 0 1vw;
+  position: sticky;
+  width: 5%;
+  margin: 0 0 0 10%;
+  align-items: center;
 }
 
 #toolSettings mat-slider + .sliderValue {
@@ -46,7 +62,7 @@ $settings_width: 20vw;
 
 #imageArea {
   position: relative;
-  background-color: #c5c5c5;
+  background-color: #e3e3e3;
   width: calc(100% - #{$settings_width});
   height: 100%;
   float: left;
@@ -86,5 +102,13 @@ $settings_width: 20vw;
 }
 
 #imageActions {
-  margin-left: 1vw;
+  margin: 1vw 60% 0 1vw;
+}
+
+#savebutton {
+  background-color: #e3e3e3;
+}
+
+#loadingthing {
+  float: right;
 }

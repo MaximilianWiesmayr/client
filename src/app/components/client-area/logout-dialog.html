@@ -1,0 +1,8 @@
+<h1 mat-dialog-title>Logout?</h1>
+<div mat-dialog-content>
+    <p>Are you sure you want to return to the login screen?</p>
+</div>
+<div mat-dialog-actions>
+    <button (click)="onNoClick()" mat-button>No</button>
+    <button [mat-dialog-close]="!data.logout" cdkFocusInitial color="warn" mat-raised-button>Yes</button>
+</div>

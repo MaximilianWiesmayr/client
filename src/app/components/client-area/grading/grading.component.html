@@ -11,7 +11,7 @@
               <div *ngFor="let child of setting.children" class="sliderBox">
                 <div (click)="slider.value = child.value; makeChanges(setting.category, child.title, slider.value)"
                      class="optionText">{{child.title}}</div>
-                <mat-slider #slider (input)="makeChanges(setting.category, child.title, slider.value)"
+                <mat-slider #slider (input)="possibleChanges(setting.category, child.title, slider.value)"
                                 (mouseWheelDown)="mousewheelAction('DOWN', child, slider, setting.category)"
                                 (mouseWheelUp)="mousewheelAction('UP', child, slider, setting.category)"
                                 [max]="child.max" [min]="child.min"
@@ -28,7 +28,8 @@
             </mat-expansion-panel>
         </mat-accordion>
       <div id="imageActions">
-        <button (click)="prepareDownload()" mat-flat-button>Save</button>
+        <button (click)="prepareDownload()" mat-button id="savebutton">Save</button>
+        <mat-spinner diameter="35" id="loadingthing" [ngStyle]="{'display': loadingdisplay}"></mat-spinner>
       </div>
     </div>
     <div (mouseWheelDown)="zoomImage('DOWN')" (mouseWheelUp)="zoomImage('UP')" id="imageArea" mouseWheel >
