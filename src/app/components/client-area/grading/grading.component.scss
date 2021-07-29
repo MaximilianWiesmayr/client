@@ -10,6 +10,69 @@ $settings_width: 20vw;
   align-content: center;
 }
 
+::ng-deep .mat-slider-thumb {
+	background-color: #7f7f7f !important;
+  border-color: #7f7f7f !important;
+}
+
+::ng-deep .sliderThing.savedValue .mat-slider-thumb {
+	background-color: #4f4f4f !important;
+  border-color: #4f4f4f !important;
+}
+
+::ng-deep .mat-slider-thumb-label {
+	background-color: #7f7f7f !important;
+}
+
+::ng-deep .mat-slider-track-fill {
+	background-color: #7f7f7f !important;
+}
+
+::ng-deep .sliderToggleThing.savedValue .mat-slider-track-fill {
+	background-color: #4f4f4f !important;
+}
+
+::ng-deep .mat-slide-toggle-thumb {
+	background-color: #7f7f7f !important;
+  border-color: #7f7f7f !important;
+  height: 13px !important;
+  width: 13px !important;
+}
+
+::ng-deep .mat-slide-toggle-thumb:hover {
+  border-color: green !important;
+}
+
+::ng-deep .sliderToggleThing.savedValue .mat-slide-toggle-thumb {
+	background-color: #4f4f4f !important;
+  border-color: #4f4f4f !important;
+}
+
+::ng-deep .mat-slide-toggle-bar {
+	background-color: #9f9f9f !important;
+  height: 7px !important;
+  width: 28px !important;
+}
+
+::ng-deep .mat-slide-toggle.mat-checked .mat-slide-toggle-bar {
+	background-color: #6f6f6f !important;
+}
+
+
+
+.sliderThing.toggleSlider {
+  display: none;
+}
+
+.sliderToggleThing {
+  margin: 1vh 3.5vw 1vh -4vw;
+  font-size: 20px;
+}
+
+.optionText.toggleSlider {
+  margin: 0 8vw 0 -2vw;
+}
+
 .mat-slider.mat-primary.mat-slider-horizontal {
   position: relative;
   vertical-align: middle;
@@ -43,6 +106,7 @@ $settings_width: 20vw;
   align-content: flex-start;
   cursor: pointer;
 }
+
 #toolSettings mat-slider {
   position: sticky;
   width: 5%;

@@ -127,13 +127,13 @@ $container_height: 18vh;
 }
 
 .uploadButton {
-  color: $gradient_start;
+  color: #f8772c;
   text-align: center;
 }
 
 .uploadButton:hover {
   color: $gradient_end;
-  font-weight: bold;
+  font-weight: 550;
   transition: all 0.1s;
 }
 
@@ -150,7 +150,7 @@ $container_height: 18vh;
 .wrapButton:hover {
   cursor: pointer;
   background-color: white;
-  transition: all 0.1s;
+  transition: all 0.2s;
 }
 
 .wrapButton:active {

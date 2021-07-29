@@ -32,7 +32,10 @@ export class WebsocketService {
       }
       this.connectionEmitter.emit(true);
     };
-    this.ws.onclose = (evt: Event) => this.connectionEmitter.emit(false);
+    this.ws.onclose = (evt: Event) => {
+      console.log("hi lol");
+      this.connectionEmitter.emit(false);
+    };
     this.ws.onmessage = (evt: MessageEvent) => this.onMessage(evt);
   }
 

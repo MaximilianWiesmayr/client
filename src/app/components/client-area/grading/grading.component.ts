@@ -1,6 +1,6 @@
 import {ChangeDetectorRef, Component, Inject, OnInit, HostListener, Directive, ViewChild, ElementRef} from '@angular/core';
 import {DataService} from '../../../services/data.service';
-import {MAT_DIALOG_DATA, MatDialog, MatDialogRef, MatSnackBar} from '@angular/material';
+import {MAT_DIALOG_DATA, MatDialog, MatDialogRef, MatSnackBar, MatSlideToggleChange} from '@angular/material';
 import {WebsocketService} from 'src/app/services/websocket.service';
 import {GradingSetting} from 'src/app/entities/grading-setting';
 import {environment} from '../../../../environments/environment';
@@ -26,7 +26,8 @@ export class GradingComponent implements OnInit {
           max: 5,
           step: 0.1,
           value: 0,
-          editValue: false
+          editValue: false,
+          savedValue: true
         },
         {
           title: 'Contrast',
@@ -34,7 +35,8 @@ export class GradingComponent implements OnInit {
           max: 5,
           step: 0.1,
           value: 0,
-          editValue: false
+          editValue: false,
+          savedValue: true
         },
         {
           title: 'Brightness',
@@ -42,7 +44,8 @@ export class GradingComponent implements OnInit {
           max: 5,
           step: 0.1,
           value: 0,
-          editValue: false
+          editValue: false,
+          savedValue: true
         },
         {
           title: 'Sharpness',
@@ -50,7 +53,8 @@ export class GradingComponent implements OnInit {
           max: 50,
           step: 1,
           value: 0,
-          editValue: false
+          editValue: false,
+          savedValue: true
         },
         {
           title: 'Blur',
@@ -58,7 +62,8 @@ export class GradingComponent implements OnInit {
           max: 20,
           step: 1,
           value: 0,
-          editValue: false
+          editValue: false,
+          savedValue: true
         }
       ],
       locked: false
@@ -72,7 +77,8 @@ export class GradingComponent implements OnInit {
           max: 10,
           step: 0.1,
           value: 0,
-          editValue: false
+          editValue: false,
+          savedValue: true
         },
         {
           title: 'Green',
@@ -80,7 +86,8 @@ export class GradingComponent implements OnInit {
           max: 10,
           step: 0.1,
           value: 0,
-          editValue: false
+          editValue: false,
+          savedValue: true
         },
         {
           title: 'Blue',
@@ -88,7 +95,8 @@ export class GradingComponent implements OnInit {
           max: 10,
           step: 0.1,
           value: 0,
-          editValue: false
+          editValue: false,
+          savedValue: true
         }
       ],
       locked: true
@@ -102,7 +110,8 @@ export class GradingComponent implements OnInit {
           max: 1,
           step: 1,
           value: 0,
-          editValue: false
+          editValue: false,
+          savedValue: true
         },
         {
           title: 'Equalize',
@@ -110,7 +119,8 @@ export class GradingComponent implements OnInit {
           max: 1,
           step: 1,
           value: 0,
-          editValue: false
+          editValue: false,
+          savedValue: true
         },
         {
           title: 'Posterize',
@@ -118,7 +128,8 @@ export class GradingComponent implements OnInit {
           max: 7,
           step: 1,
           value: 7,
-          editValue: false
+          editValue: false,
+          savedValue: true
         },
         {
           title: 'Solarize',
@@ -126,7 +137,8 @@ export class GradingComponent implements OnInit {
           max: 256,
           step: 1,
           value: 256,
-          editValue: false
+          editValue: false,
+          savedValue: true
         }
       ],
       locked: true
@@ -140,7 +152,8 @@ export class GradingComponent implements OnInit {
           max: 1000,
           step: 1,
           value: 0,
-          editValue: false
+          editValue: false,
+          savedValue: true
         },
         {
           title: 'Pad',
@@ -148,7 +161,8 @@ export class GradingComponent implements OnInit {
           max: 1000,
           step: 1,
           value: 0,
-          editValue: false
+          editValue: false,
+          savedValue: true
         },
         {
           title: 'Mirror',
@@ -156,7 +170,8 @@ export class GradingComponent implements OnInit {
           max: 1,
           step: 1,
           value: 0,
-          editValue: false
+          editValue: false,
+          savedValue: true
         },
         {
           title: 'Flip',
@@ -164,7 +179,8 @@ export class GradingComponent implements OnInit {
           max: 1,
           step: 1,
           value: 0,
-          editValue: false
+          editValue: false,
+          savedValue: true
         },
       ],
       locked: true
@@ -227,7 +243,6 @@ export class GradingComponent implements OnInit {
         this.previous = e.key;
     }
 
-
   ngOnInit() {
     this.dataservice.isUnsaved = true;
     this.dataservice.collapseEmitter.emit(true);
@@ -247,10 +262,24 @@ export class GradingComponent implements OnInit {
     });
   }
 
+  toggleSliderChecked = false;
+
+  toggleSliderChange(category: string, setting: string) {
+    this.toggleSliderChecked = !this.toggleSliderChecked;
+    console.log(this.toggleSliderChecked);
+    if(this.toggleSliderChecked == false) {
+      this.makeChanges(category, setting, 0);
+    } else {
+      this.makeChanges(category, setting, 1);
+    }
+
+  }
+
   // Method for sending the changes to the backend
   makeChanges(category: string, setting: string, value: number) {
-
+    this.settings.find(e => e.category === category).children.find(f => f.title === setting).savedValue = false;
     console.log(category + '_' + setting + ' > ' + value);
+    var values = [value];
     /*value += 1; // Default value for css filter
     if (setting === 'Exposure') {
       document.getElementsByTagName('img')[0].style.filter =
@@ -261,7 +290,7 @@ export class GradingComponent implements OnInit {
     }*/
     this.dataservice.isChanged = true;
     this.loadImage();
-    this.websocketService.gradingEmitter.emit(new GradingSetting('setting', setting, value));
+    this.websocketService.gradingEmitter.emit(new GradingSetting('setting', setting, values));
   }
 
   interval;
@@ -437,6 +466,7 @@ export class GradingComponent implements OnInit {
     this.websocketService.exportImage(this.dataservice.gradingImage);
     this.dataservice.isUnsaved = false;
     this.loadingdisplay = 'none';
+    this.settings.forEach(setting => setting.children.forEach(child => child.savedValue = true));
   }
 
 }

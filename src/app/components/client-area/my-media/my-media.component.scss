@@ -109,23 +109,30 @@
   width: $imageItem_W;
   height: $imageItem_H;
   line-height: $imageItem_H;
-  color: white;
   background-color: rgba(0, 0, 0, 0);
   transition: all .2s;
-  font-size: small;
-  text-align: center;
   opacity: 0;
+  flex-flow: column;
 }
 
-.imageTitleBox {
-  position: absolute;
-  height: 4vh;
-  width: max-content;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: rgba(0, 0, 0, 0.5);
+.imageTitle {
+  color: white;
+  font-size: small;
   text-align: center;
+  text-shadow: 0.5px 0.5px 7px black,
+               -0.5px -0.5px 7px black;
+  margin: 0 0 -3.5vh 0;
+}
+
+.deleteButtonGridView {
+  opacity: 1;
+  position: absolute;
+  color: white;
+  text-align: center;
+  font-size: small;
+  text-shadow: 0.2px 0.2px 1px black,
+               -0.2px -0.2px 1px black;
+  margin: 0 0 0 5.9vw;
 }
 
 .img_name_overlay.list {
@@ -234,6 +241,8 @@
   }
 }
 
+#mediaBox.list
+
 #detailMenu #detailWrapper {
   position: relative;
 }
@@ -317,7 +326,7 @@
 /* LIST VIEW */
 .mediaItem.list {
   flex-flow: column !important;
-  width: 80% !important;
+  width: 60% !important;
   height: 1vh !important;
   align-items: flex-end;
   margin: 0 0 0 3%;
@@ -327,6 +336,10 @@
     width: 90% !important;
     padding: 0 5%;
   }
+}
+
+.mediaItem.list.infoOpen {
+  width: 80% !important;
 }
 
 .mediaItem.list:hover {
@@ -353,7 +366,9 @@
 }
 
 .mediaItem.list .listSpecsTitle {
-  margin: 0 10vw 0 -5vw;
+  margin: 0 5vw 0 5vw;
+  text-align: left;
+  float: left;
 }
 
 .mediaItem.list .listSpecsFileSize {
@@ -369,14 +384,6 @@
 .deleteButton {
   margin: -1.25vh 0 0 0;
   float: right;
-}
-
-.deleteButtonGridView {
-  position: absolute;
-  opacity: 1;
-  color: white;
-  float: right;
-  margin-left: 0.5vw;
 }
 
 /* Social Sheet */

@@ -1,22 +1,24 @@
 <div [class.dark]="this.dataservice.user.settings.darkmode" id="wrapper">
     <div id="toolSettings">
         <mat-accordion>
-            <mat-expansion-panel *ngFor="let setting of this.settings" [disabled]="settings['locked']">
+            <mat-expansion-panel *ngFor="let setting of this.settings; let i = index" [disabled]="settings['locked']">
               <mat-expansion-panel-header>
                 <mat-panel-title>
                   {{setting.category}}
                 </mat-panel-title>
               </mat-expansion-panel-header>
               <!-- SLIDER SECTION -->
-              <div *ngFor="let child of setting.children" class="sliderBox">
-                <div (click)="slider.value = child.value; makeChanges(setting.category, child.title, slider.value)"
+              <div *ngFor="let child of setting.children; let j = index" class="sliderBox">
+                <div (click)="slider.value = child.value; makeChanges(setting.category, child.title, slider.value)" [class.toggleSlider]="child.max - child.min == 1"
                      class="optionText">{{child.title}}</div>
                 <mat-slider #slider (input)="possibleChanges(setting.category, child.title, slider.value)"
                                 (mouseWheelDown)="mousewheelAction('DOWN', child, slider, setting.category)"
                                 (mouseWheelUp)="mousewheelAction('UP', child, slider, setting.category)"
                                 [max]="child.max" [min]="child.min"
-                                [step]="child.step" [value]="child.value" color="primary" mouseWheel></mat-slider>
-                    <div (click)="makeEditable(child);" class="sliderValue">
+                                [step]="child.step" [value]="child.value" color="primary" [class.savedValue]="!child.savedValue" class="sliderThing" [class.toggleSlider]="child.max - child.min == 1" mouseWheel></mat-slider>
+                <mat-slide-toggle *ngIf="child.max - child.min == 1" (input)="toggleSliderChange(setting.category, child.title)"
+                                  color="primary" [class.savedValue]="!child.savedValue" class="sliderToggleThing" mouseWheel></mat-slide-toggle>
+                    <div (click)="makeEditable(child);" class="sliderValue" *ngIf="child.max - child.min != 1">
                       <span *ngIf="!child.editValue">{{slider.value}}</span>
                       <mat-form-field *ngIf="child.editValue" class="editValue">
                         <input #sliderInput

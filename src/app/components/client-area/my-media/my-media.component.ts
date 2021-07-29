@@ -1,4 +1,4 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {Component, Inject, OnInit, ViewChild, AfterViewInit} from '@angular/core';
 import {Image} from '../../../entities/Image';
 import {DataService} from '../../../services/data.service';
 import {MatBottomSheet, MatBottomSheetRef, MatTableDataSource} from '@angular/material';

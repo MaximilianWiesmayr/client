@@ -13,16 +13,19 @@
   </div>
   <div [class.dark]="this.dataservice.user.settings.darkmode" [class.infoOpen]="isInfoOpen" id="mediaBox">
       <div [class.dark]="this.dataservice.user.settings.darkmode" class="mediaContainer" [class.list]="!this.dataservice.user.settings.myPhotosGridView">
-          <div (click)="openInfo(image)" *ngFor="let image of this.images"
+          <div (click)="openInfo(image)" *ngFor="let image of this.images; let i = index"
+               [class.infoOpen]="isInfoOpen"
                [class.list]="!this.dataservice.user.settings.myPhotosGridView"
                class="mediaItem">
             <div *ngIf = this.dataservice.user.settings.myPhotosGridView
-            class="img_name_overlay"><div class="imageTitleBox">{{image.factoryTitle}}</div>
+            class="img_name_overlay">
+            <p class="imageTitle">{{image.factoryTitle}}</p>
             <button (click)="openDeleteDialog()" class="deleteButtonGridView" mat-button>
                 <mat-icon>delete</mat-icon>
-            </button></div>
+            </button>
+            </div>
             <img [src]="dataservice.settings.domain + image.thumbnailPath"
-              ondragstart="return false;">
+              ondragstart="return false;" id="{{ 'image' + i }}">
             <div *ngIf="!dataservice.user.settings.myPhotosGridView" class="listSpecs">
               <span class="listSpecsTitle">{{image.title != '' ? image.title : image.factoryTitle}}</span>
               <button (click)="openDeleteDialog()" class="deleteButton" mat-button>
