@@ -184,6 +184,30 @@ export class GradingComponent implements OnInit {
         },
       ],
       locked: true
+    },
+    {
+      category: 'Black and White',
+      children: [
+        {
+          title: 'BW',
+          min: 0,
+          max: 1,
+          step: 1,
+          value: 0,
+          editValue: false,
+          savedValue: true
+        },
+        {
+          title: 'BWinvert',
+          min: 0,
+          max: 1,
+          step: 1,
+          value: 0,
+          editValue: false,
+          savedValue: true
+        }
+      ],
+      locked: true
     }
   ];
   // Self explanatory (Setting)
@@ -265,18 +289,22 @@ export class GradingComponent implements OnInit {
   toggleSliderChecked = false;
 
   toggleSliderChange(category: string, setting: string) {
-    this.toggleSliderChecked = !this.toggleSliderChecked;
-    console.log(this.toggleSliderChecked);
-    if(this.toggleSliderChecked == false) {
-      this.makeChanges(category, setting, 0);
-    } else {
+    // @ts-ignore
+    if(this.settings.find(e => e.category === category).children.find(f => f.title === setting).value == 0) {
+      // @ts-ignore
+      this.settings.find(e => e.category === category).children.find(f => f.title === setting).value = 1
       this.makeChanges(category, setting, 1);
+    } else {
+      // @ts-ignore
+      this.settings.find(e => e.category === category).children.find(f => f.title === setting).value = 0
+      this.makeChanges(category, setting, 0);
     }
 
   }
 
   // Method for sending the changes to the backend
   makeChanges(category: string, setting: string, value: number) {
+    // @ts-ignore
     this.settings.find(e => e.category === category).children.find(f => f.title === setting).savedValue = false;
     console.log(category + '_' + setting + ' > ' + value);
     var values = [value];
@@ -466,6 +494,7 @@ export class GradingComponent implements OnInit {
     this.websocketService.exportImage(this.dataservice.gradingImage);
     this.dataservice.isUnsaved = false;
     this.loadingdisplay = 'none';
+    // @ts-ignore
     this.settings.forEach(setting => setting.children.forEach(child => child.savedValue = true));
   }
 
