@@ -1,6 +1,6 @@
 # InstantGradeClient
 
-Frontend by [Sebastian Schiefermayr](https://bastiarts.com)
+Frontend by [Sebastian Schiefermayr](https://bastiarts.com) and [Maximilian Wiesmayr](https://github.com/MaximilianWiesmayr)
 
 ## Entities
 
